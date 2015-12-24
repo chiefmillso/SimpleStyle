@@ -16,6 +16,7 @@ var gulp = require('gulp'),
 
 const reload = browserSync.reload;
 
+/// Cleaning up tmp folder
 // Clean forlder strucuture and temp folders
 gulp.task('clean', function(done) {
 
@@ -27,27 +28,37 @@ gulp.task('clean', function(done) {
 
 });
 
-
+///// Style Configuration
 // Styles Sheet compilation
 gulp.task('styles', function() {
 
-    return gulp.src('app/styles/*.scss')
-        .pipe($.plumber())
-        .pipe($.sourcemaps.init())
-        .pipe($.sass.sync({
-            outputStyle: 'expanded',
-            precision: 10,
-            includePaths: ['.']
-        }).on('error', $.sass.logError))
-        .pipe($.autoprefixer({
-            browsers: ['last 1 version']
-        }))
-        .pipe($.sourcemaps.write())
-        .pipe(gulp.dest('.tmp/styles'))
-        .pipe(browserSync.stream());
+    // logging compiling styles
+    helper.logMessage('Compiling Styles', helper.logType.info);
+
+    var baseStyleOptions = {
+            src: 'app/styles/*.scss',
+            base: './app/styles/',
+        }
+        // piping through sass
+    return compileStyles(baseStyleOptions);
 
 });
 
+// Styles Sheet compilation
+gulp.task('styles:core', function() {
+
+    // logging compiling styles
+    helper.logMessage('Compiling Styles', helper.logType.info);
+
+    var baseStyleOptions = {
+            src: 'app/_core/styles/*.scss',
+            base: './app/_core/styles/',
+        }
+        // piping through sass
+    return compileStyles(baseStyleOptions);
+
+});
+///// Style Configuration End
 
 // Generate index file for all pattern
 gulp.task('gen-config', function() {
@@ -95,7 +106,8 @@ gulp.task('serve', ['styles', 'ssgCore'], function() {
     gulp.watch('app/_pattern/*.hbs', ['precompile']);
 });
 
-gulp.task('ssgCore', ['inject'], function() {
+
+gulp.task('ssgCore', ['styles:core'], function() {
 
     return gulp.src('app/_core/**/*.js')
         .pipe(gulp.dest('.tmp/'));
@@ -127,13 +139,43 @@ gulp.task('wiredep', function() {
 });
 
 // inject javascript into file
-gulp.task('inject', function() {
+gulp.task('inject:scripts', function() {
+
+    var options = {
+        source: [config.tempFiles + '**/*.js'],
+    }
+
+    return inject(options);
+
+});
+
+gulp.task('inject:styles', function() {
+
+    var options = {
+        source: [config.tempFiles + '**/*.css'],
+    };
+
+    helper.log('Inject Style Sheets', helper.logType.info);
+
+    return inject(options);
+
+});
+
+gulp.task('test', function() {
+
+    helper.logMessage('hello world', helper.logType.log);
+    helper.logMessage('hello world', helper.logType.error);
+    helper.logMessage('hello world', helper.logType.warning);
+
+});
+
+var inject = function(options) {
 
     // pages to inject files
     var target = gulp.src(config.landingPages);
 
     // source that needs to be injected
-    var sources = gulp.src([config.tempFiles + '**/*.js'], {
+    var sources = gulp.src(options.source, {
         read: false
     });
 
@@ -143,15 +185,32 @@ gulp.task('inject', function() {
             ignorePath: '.tmp'
         }))
         .pipe(gulp.dest(config.basepath));
+}
 
-})
+var compileStyles = function(config) {
 
-gulp.task('test', function() {
+    // base remove all except sub folder
+    var cssPath = '';
 
-    helper.logMessage('hello world', helper.logType.log);
-    helper.logMessage('hello world', helper.logType.error);
-    helper.logMessage('hello world', helper.logType.warning);
-
-});
+    return gulp.src(config.src, {
+            base: config.base
+        })
+        .pipe($.plumber())
+        .pipe($.sourcemaps.init())
+        .pipe($.sass.sync({
+            outputStyle: 'expanded',
+            precision: 10,
+            includePaths: ['.']
+        }).on('error', $.sass.logError))
+        .pipe($.autoprefixer({
+            browsers: ['last 1 version']
+        }))
+        .pipe($.sourcemaps.write())
+        .pipe($.rename({
+            dirname: cssPath
+        }))
+        .pipe(gulp.dest('.tmp/styles'))
+        .pipe(browserSync.stream());
+}
 
 // compile handlebar patterns

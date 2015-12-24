@@ -1,6 +1,11 @@
 // bower:scss
+@import "bower_components/susy/sass/_susy.scss";
 // endbower
-
 body{
 	background-color: whitesmoke;
+	color: black;
+	font-size: 3em;
+	font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
+	font-weight: bold;
+	text-align: center;
 }

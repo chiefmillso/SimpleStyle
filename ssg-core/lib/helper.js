@@ -6,7 +6,7 @@ var gulp = require('gulp'),
 module.exports = function() {
 
     var logType = {
-        log: 0,
+        info: 0,
         warning: 1,
         error: 2
     };
@@ -14,24 +14,24 @@ module.exports = function() {
     var logMessage = function(msg, level) {
 
         switch (level) {
-            case logType.log:
+            case logType.info:
                 {
                     $.util.log(
-                        $.util.colors.green('Hello World')
+                        $.util.colors.green(msg)
                     );
                     break;
                 }
             case logType.error:
                 {
                     $.util.log(
-                        $.util.colors.red('Hello Error')
+                        $.util.colors.red(msg)
                     );
                     break;
                 }
             case logType.warning:
                 {
                     $.util.log(
-                        $.util.colors.yellow('Hello Error')
+                        $.util.colors.yellow(msg)
                     );
                     break;
                 }
