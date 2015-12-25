@@ -7,6 +7,7 @@ var gulp = require('gulp'),
     del = require('del'),
     wiredep = require('wiredep').stream,
     browserSync = require('browser-sync'),
+    args = require('yargs').argv,
 
     // custom plugins for simple style guide
     helper = require('./ssg-core/lib/helper'),
@@ -14,7 +15,8 @@ var gulp = require('gulp'),
     ssgCoreConfig = require('./ssg-core/lib/gen-config'),
     ssgCoreCompile = require('./ssg-core/lib/precomp-pattern');
 
-const reload = browserSync.reload;
+// Contants
+var reload = browserSync.reload;
 
 /// Cleaning up tmp folder
 // Clean forlder strucuture and temp folders
@@ -32,14 +34,12 @@ gulp.task('clean', function(done) {
 // Styles Sheet compilation
 gulp.task('styles', function() {
 
-    // logging compiling styles
-    helper.logMessage('Compiling Styles', helper.logType.info);
-
     var baseStyleOptions = {
-            src: 'app/styles/*.scss',
-            base: './app/styles/',
-        }
-        // piping through sass
+        src: 'app/styles/*.scss',
+        base: './app/styles/',
+    };
+
+    // piping through sass
     return compileStyles(baseStyleOptions);
 
 });
@@ -48,13 +48,14 @@ gulp.task('styles', function() {
 gulp.task('styles:core', function() {
 
     // logging compiling styles
-    helper.logMessage('Compiling Styles', helper.logType.info);
+    helper.logMessage('Compile Core Styles', helper.logType.info);
 
     var baseStyleOptions = {
-            src: 'app/_core/styles/*.scss',
-            base: './app/_core/styles/',
-        }
-        // piping through sass
+        src: 'app/_core/styles/*.scss',
+        base: './app/_core/styles/',
+    };
+
+    // piping through sass
     return compileStyles(baseStyleOptions);
 
 });
@@ -76,9 +77,19 @@ gulp.task('gen-config', function() {
 });
 
 // Precompile handle bar templates
-gulp.task('precompile', ssgCoreCompile);
+gulp.task('precompile:ssg', function() {
 
-gulp.task('serve', ['styles', 'ssgCore'], function() {
+    return ssgCoreCompile(config.ssg);
+
+});
+
+gulp.task('precompile:core', function() {
+
+    return ssgCoreCompile(config.core);
+
+});
+
+gulp.task('serve', ['ssgCore', 'styles', 'vet'], function() {
 
     browserSync({
         notify: false,
@@ -100,10 +111,16 @@ gulp.task('serve', ['styles', 'ssgCore'], function() {
         '.tmp/fonts/**/*'
     ]).on('change', reload);
 
+    // Compile Style Sheets
     gulp.watch('app/styles/**/*.scss', ['styles']);
+    // handle fonts
     gulp.watch('app/fonts/**/*', ['fonts']);
     gulp.watch('bower.json', ['wiredep']);
+    // compile templates
     gulp.watch('app/_pattern/*.hbs', ['precompile']);
+    gulp.watch(config.js, function() {
+        checkJSStyle(config.js);
+    });
 });
 
 
@@ -143,7 +160,7 @@ gulp.task('inject:scripts', function() {
 
     var options = {
         source: [config.tempFiles + '**/*.js'],
-    }
+    };
 
     return inject(options);
 
@@ -161,14 +178,48 @@ gulp.task('inject:styles', function() {
 
 });
 
-gulp.task('test', function() {
+gulp.task('vet', function() {
 
-    helper.logMessage('hello world', helper.logType.log);
-    helper.logMessage('hello world', helper.logType.error);
-    helper.logMessage('hello world', helper.logType.warning);
+    log.Msg('Analyzing source :: Style Guide Mode');
+
+    gulp.watch(config.devjs)
+        .on('change', function() {
+            checkJSStyle(config.js);
+        });
 
 });
 
+gulp.task('vet-dev', function() {
+
+    log.Msg('Analyzing source :: Dev Mode');
+    gulp.watch(config.devjs)
+        .on('change', function() {
+            checkJSStyle(config.devjs);
+        });
+
+});
+/////////// Reused functions
+// check javascript styling conventions
+var checkJSStyle = function(files) {
+
+    if (files === undefined || files === null) {
+        log.Error('Files is not defined');
+        return;
+    }
+
+    // pass correct file array in
+    gulp.src(files)
+        .pipe($.plumber())
+        .pipe($.if(args.verbose, $.print()))
+        .pipe($.jscs())
+        .pipe($.jshint())
+        .pipe($.jshint.reporter('jshint-stylish'), {
+            verbose: true
+        });
+
+};
+
+// Used for inject 
 var inject = function(options) {
 
     // pages to inject files
@@ -185,8 +236,8 @@ var inject = function(options) {
             ignorePath: '.tmp'
         }))
         .pipe(gulp.dest(config.basepath));
-}
-
+};
+// compile styles and use path
 var compileStyles = function(config) {
 
     // base remove all except sub folder
@@ -211,6 +262,18 @@ var compileStyles = function(config) {
         }))
         .pipe(gulp.dest('.tmp/styles'))
         .pipe(browserSync.stream());
-}
+};
+
+var log = {
+    Msg: function(msg) {
+        helper.logMessage(msg, helper.logType.info);
+    },
+    Error: function(msg) {
+        helper().logMessage(msg, helper.logType.error);
+    },
+    Warn: function(msg) {
+        helper().logMessage(msg, helper.logType.warning);
+    }
+};
 
 // compile handlebar patterns

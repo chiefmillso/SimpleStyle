@@ -92,7 +92,7 @@ module.exports = function(options) {
 
         var curConfigPath = options.configFile;
 
-        var exits;
+        var exists;
 
         try {
 
@@ -111,7 +111,7 @@ module.exports = function(options) {
             var config = fs.readFileSync(options.configFile);
 
             // parse json config
-            configData = JSON.parse(config);
+            var configData = JSON.parse(config);
 
             // check if configuration data exits
             patternsData = configData !== undefined &&

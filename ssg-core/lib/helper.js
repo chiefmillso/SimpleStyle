@@ -5,13 +5,15 @@ var gulp = require('gulp'),
 
 module.exports = function() {
 
+    'use strict';
+
     var logType = {
         info: 0,
         warning: 1,
         error: 2
     };
 
-    var logMessage = function(msg, level) {
+    var writeMessage = function(msg, level) {
 
         switch (level) {
             case logType.info:
@@ -43,7 +45,9 @@ module.exports = function() {
 
     return {
         logType: logType,
-        logMessage: logMessage
+        logMessage: function(msg, level){
+            writeMessage(msg, level);
+        }
     };
 
 }();
