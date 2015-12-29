@@ -51,6 +51,7 @@
     "gulp-wiredep": "0.0.0",
     "gulp-wrap": "^0.11.0",
     "handlebars": "^4.0.5",
+    "jshint": "^2.8.0",
     "jshint-stylish": "^2.1.0",
     "merge-stream": "^1.0.0",
     "rename": "^1.0.3",

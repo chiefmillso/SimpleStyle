@@ -36,7 +36,7 @@ gulp.task('styles', function() {
 
     var baseStyleOptions = {
         src: 'app/styles/*.scss',
-        base: './app/styles/',
+        base: './app/styles/'
     };
 
     // piping through sass
@@ -46,9 +46,6 @@ gulp.task('styles', function() {
 
 // Styles Sheet compilation
 gulp.task('styles:core', function() {
-
-    // logging compiling styles
-    helper.logMessage('Compile Core Styles', helper.logType.info);
 
     var baseStyleOptions = {
         src: 'app/_core/styles/*.scss',
@@ -89,45 +86,44 @@ gulp.task('precompile:core', function() {
 
 });
 
-gulp.task('serve', ['ssgCore', 'styles', 'vet'], function() {
+gulp.task('serve', ['ssgCore-update', 'styles', 'styles:core', 'precompile:core', 'precompile:ssg', 'vet'], function() {
 
     browserSync({
-        notify: false,
+        notify: true,
         port: 9000,
         server: {
             baseDir: ['.tmp', 'app'],
             routes: {
                 '/bower_components': 'bower_components',
-                '/tmp': 'app/.tmp'
+                '/tmp': '/'
             }
         },
         https: true
     });
 
-    gulp.watch([
-        'app/*.html',
-        'app/scripts/**/*.js',
-        'app/images/**/*',
-        '.tmp/fonts/**/*'
-    ]).on('change', reload);
+    // Style Compilation
+    gulp.watch('app/styles/*.scss', ['styles']);
+    gulp.watch('app/_core/**/*.scss', ['styles:core']);
 
-    // Compile Style Sheets
-    gulp.watch('app/styles/**/*.scss', ['styles']);
-    // handle fonts
-    gulp.watch('app/fonts/**/*', ['fonts']);
-    gulp.watch('bower.json', ['wiredep']);
-    // compile templates
-    gulp.watch('app/_pattern/*.hbs', ['precompile']);
-    gulp.watch(config.js, function() {
-        checkJSStyle(config.js);
-    });
+    // Script Compilation
+    gulp.watch('app/**/*.js', ['ssgCore-update', reload]);
+    gulp.watch('app/**/*.hbs', ['precompile:ssg', 'precompile:core', reload]);
+
 });
 
 
-gulp.task('ssgCore', ['styles:core'], function() {
+gulp.task('ssgCore-update', function() {
 
     return gulp.src('app/_core/**/*.js')
-        .pipe(gulp.dest('.tmp/'));
+        .pipe($.sourcemaps.init())
+        .pipe($.concat('ssgCoreLib.js'))
+        .pipe($.wrap('var jQuery = jQuery.noConflict();\n(function($){\n\'use strict\';\n<%= contents %>\n})(jQuery);'))
+        .pipe($.sourcemaps.write('./', {
+            includeContent: false,
+            sourceRoot: '/_core/'
+        }))
+        .pipe(gulp.dest('.tmp/scripts'))
+        .pipe(browserSync.stream({match: '**/*.js'}));
 
 });
 
@@ -169,7 +165,7 @@ gulp.task('inject:scripts', function() {
 gulp.task('inject:styles', function() {
 
     var options = {
-        source: [config.tempFiles + '**/*.css'],
+        source: [config.js],
     };
 
     helper.log('Inject Style Sheets', helper.logType.info);
@@ -192,12 +188,14 @@ gulp.task('vet', function() {
 gulp.task('vet-dev', function() {
 
     log.Msg('Analyzing source :: Dev Mode');
+    console.log(config.devjs);
     gulp.watch(config.devjs)
         .on('change', function() {
             checkJSStyle(config.devjs);
         });
 
 });
+
 /////////// Reused functions
 // check javascript styling conventions
 var checkJSStyle = function(files) {

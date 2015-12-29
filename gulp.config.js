@@ -52,9 +52,8 @@ module.exports = (function() {
             basepath + '_core/**/*.js'
         ],
         devjs: [
-            'gulpfile.js',
             basepath + 'scripts/**.js',
-            './ssg-core/**.js'
+            './app/_core/scripts/*.js'
         ],
         html: [
             basepath + '**/*.html',

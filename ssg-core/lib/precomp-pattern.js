@@ -19,6 +19,8 @@ module.exports = function(patternConfig) {
 
     var config = require('../../gulp.config.js');
 
+    console.log(patternConfig);
+
     // partials stream
     var partials = gulp.src(patternConfig.partials)
         .pipe(plumber())
@@ -45,7 +47,7 @@ module.exports = function(patternConfig) {
         .pipe(wrap('Handlebars.template(<%= contents %>)'))
         // namespace
         .pipe(declare({
-            namespace: patternConfig.namespaces,
+            namespace: patternConfig.namespace,
             noRedeclare: true
         }));
 
