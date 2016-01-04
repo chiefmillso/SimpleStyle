@@ -61,7 +61,9 @@ gulp.task('styles:core', function() {
 // Generate index file for all pattern
 gulp.task('gen-config', function() {
 
-    var patternPath = config.pattern + '**/*.hbs';
+    // var patternPath = config.patterns[0];
+    var patternPath = './app/_pattern/**/*.hbs';
+
     var curConfig = {
         patterns: patternPath,
         configFile: config.patternConfig
@@ -69,7 +71,7 @@ gulp.task('gen-config', function() {
 
     // parse configuration and log
     gulp.src(patternPath)
-        .pipe(ssgCoreConfig(curConfig));
+        .pipe(ssgCoreConfig.createConfig(curConfig));
 
 });
 
@@ -84,6 +86,10 @@ gulp.task('precompile:core', function() {
 
     return ssgCoreCompile(config.core);
 
+});
+
+gulp.task('test', function() {
+    ssgCoreConfig.handleDelete();
 });
 
 gulp.task('serve', ['ssgCore-update', 'styles', 'styles:core', 'precompile:core', 'precompile:ssg', 'vet'], function() {
@@ -107,7 +113,9 @@ gulp.task('serve', ['ssgCore-update', 'styles', 'styles:core', 'precompile:core'
 
     // Script Compilation
     gulp.watch('app/**/*.js', ['ssgCore-update', reload]);
-    gulp.watch('app/**/*.hbs', ['precompile:ssg', 'precompile:core', reload]);
+    gulp.watch('app/**/*.hbs')
+        .on('change', ssgCoreConfig.fsEvents);
+    // gulp.watch('app/**/*.hbs', ['precompile:ssg', 'precompile:core', reload]);
 
 });
 
@@ -123,7 +131,9 @@ gulp.task('ssgCore-update', function() {
             sourceRoot: '/_core/'
         }))
         .pipe(gulp.dest('.tmp/scripts'))
-        .pipe(browserSync.stream({match: '**/*.js'}));
+        .pipe(browserSync.stream({
+            match: '**/*.js'
+        }));
 
 });
 
