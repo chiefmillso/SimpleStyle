@@ -82,6 +82,7 @@ gulp.task('precompile:ssg', function() {
 
 });
 
+// Precompile core templates
 gulp.task('precompile:core', function() {
 
     return ssgCoreCompile(config.core);
@@ -112,9 +113,11 @@ gulp.task('serve', ['ssgCore-update', 'styles', 'styles:core', 'precompile:core'
     gulp.watch('app/_core/**/*.scss', ['styles:core']);
 
     // Script Compilation
-    gulp.watch('app/**/*.js', ['ssgCore-update', reload]);
+    // gulp.watch('app/**/*.js', ['ssgCore-update', reload]);
     gulp.watch('app/**/*.hbs')
         .on('change', ssgCoreConfig.fsEvents);
+
+    gulp.watch('app/_config/pattern.conf.json', ['precompile:ssg'], reload);
     // gulp.watch('app/**/*.hbs', ['precompile:ssg', 'precompile:core', reload]);
 
 });

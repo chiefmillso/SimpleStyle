@@ -199,8 +199,6 @@ module.exports = {
 
             var patterns = JSON.stringify(newConfig, null, 4);
 
-            console.log(config.patternConfig);
-
             fs.writeFile(config.patternConfig, patterns, function(err) {
 
                 if (err) {
@@ -209,7 +207,7 @@ module.exports = {
                     );
                 }
 
-                plugins.util.log('Configuration update',
+                plugins.util.log('Configuration updated:',
                     plugins.util.colors.green(cause)
                 );
 
@@ -221,7 +219,6 @@ module.exports = {
 
             var file = getRelativePath(pathToFile);
 
-            console.log(file);
             // push pattern into config
 
             var path = require('path');
