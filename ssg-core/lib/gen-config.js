@@ -170,9 +170,10 @@ module.exports = {
 
         var updateCause = {
             deleted: 'marked patterns for deletion',
-            rename: 'renamed pattern',
-            added: 'new pattern added'
-        }
+            renamed: 'pattern was renamed',
+            added: 'new pattern added',
+            cleanup: 'some legacy patterns was removed'
+        };
 
         // include path for file handling
         var path = require('path');
@@ -192,7 +193,13 @@ module.exports = {
                 cause = '';
             }
 
+            newConfig.patterns.sort(function(a, b) {
+                return a.filepath > b.filepath ? 0 : -1;
+            });
+
             var patterns = JSON.stringify(newConfig, null, 4);
+
+            console.log(config.patternConfig);
 
             fs.writeFile(config.patternConfig, patterns, function(err) {
 
@@ -217,6 +224,36 @@ module.exports = {
             console.log(file);
             // push pattern into config
 
+            var path = require('path');
+
+            // init pattern configs
+            var extension = path.extname(file),
+                patternpath = path.dirname(file),
+                basename = file.replace(extension, '').replace(patternpath + '/', ''),
+                title = basename.indexOf('_') === 0 ? basename.substr(1) : basename;
+
+            // create pattern object
+            var item = {
+                title: title,
+                description: '',
+                filename: basename,
+                filepath: file
+            };
+
+            // check if item exists
+            var itemExits = currentConfig.patterns.filter(function(obj) {
+                return obj.filepath === file;
+            });
+
+            if (itemExits.length === 0) {
+
+                currentConfig.patterns.push(item);
+                currentConfig.patterns = cleanup(currentConfig.patterns);
+
+                updateConfigFile(currentConfig, updateCause.added);
+
+            }
+
         };
 
         // Rename Event
@@ -224,9 +261,6 @@ module.exports = {
 
             var curFile = getRelativePath(pathToFile);
             var oldFile = getRelativePath(oldPathToFile);
-
-            console.log(curFile);
-            console.log(oldFile);
 
             var oldItem = currentConfig.patterns.filter(function(obj) {
                 return obj.filepath === oldFile;
@@ -241,20 +275,27 @@ module.exports = {
                 // unmark delete property
                 delete(oldItem[0].delete);
 
-                newPatterns.push(oldItem);
+                // Update file path properties
+                var filename = path.basename(file),
+                    extension = path.extname(file),
+                    basename = filename.replace(extension, ''),
+                    patternpath = path.dirname(file);
 
-                currentConfig.patterns = newPatterns;
+                // set new file path properties
+                oldItem[0].filename = basename;
+                oldItem[0].filepath = file;
+
+                newPatterns.push(oldItem[0]);
+
+                currentConfig.patterns = cleanup(newPatterns);
 
                 updateConfigFile(currentConfig, updateCause.renamed);
 
             }
-
         };
 
         // Delete Event
         var deleted = function(pathToFile) {
-
-            console.log('***** delete fired *****');
 
             var file = getRelativePath(pathToFile);
 
@@ -262,10 +303,11 @@ module.exports = {
             var itemToDelete = currentConfig.patterns.filter(function(obj) {
                 return obj.filepath === file;
             });
+
             // get new patterns without affected pattern entry
             var newPatterns = currentConfig.patterns.filter(function(obj) {
                 return obj.filepath !== file;
-            })
+            });
 
             if (itemToDelete.length !== 0) {
 
@@ -282,6 +324,15 @@ module.exports = {
                 updateConfigFile(currentConfig, updateCause.deleted);
 
             }
+        };
+
+        var cleanup = function(patterns) {
+
+            var cleanedPattern = patterns.filter(function(obj) {
+                return obj['delete'] === undefined;
+            });
+
+            return cleanedPattern;
 
         };
 
