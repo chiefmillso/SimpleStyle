@@ -4,7 +4,8 @@ var gulp = require('gulp'),
     plugins = require('gulp-load-plugins')({
         lazy: true
     }),
-    config = require('../../gulp.config.js');
+    config = require('../../gulp.config.js'),
+    precompile = require('./precomp-pattern.js');
 
 module.exports = {
 
@@ -100,6 +101,8 @@ module.exports = {
                     plugins.util.colors.green('The file was saved!')
                 );
 
+                precompile(config.ssg);
+
             });
         };
 
@@ -168,6 +171,8 @@ module.exports = {
 
     fsEvents: function(event) {
 
+        console.log(event);
+
         var updateCause = {
             deleted: 'marked patterns for deletion',
             renamed: 'pattern was renamed',
@@ -211,7 +216,13 @@ module.exports = {
                     plugins.util.colors.green(cause)
                 );
 
+                precompile(config.ssg);
+                plugins.util.log(
+                    plugins.util.colors.cyan('Pattern precompiled')
+                );
+
             });
+
         };
 
         // Added Event
@@ -264,8 +275,10 @@ module.exports = {
             });
 
             var newPatterns = currentConfig.patterns.filter(function(obj) {
-                return obj.filepath === oldFile;
+                return obj.filepath !== oldFile;
             });
+
+            console.log(oldPathToFile);
 
             if (oldItem.length !== 0) {
 
@@ -273,14 +286,14 @@ module.exports = {
                 delete(oldItem[0].delete);
 
                 // Update file path properties
-                var filename = path.basename(file),
-                    extension = path.extname(file),
+                var filename = path.basename(curFile),
+                    extension = path.extname(curFile),
                     basename = filename.replace(extension, ''),
-                    patternpath = path.dirname(file);
+                    patternpath = path.dirname(curFile);
 
                 // set new file path properties
                 oldItem[0].filename = basename;
-                oldItem[0].filepath = file;
+                oldItem[0].filepath = curFile;
 
                 newPatterns.push(oldItem[0]);
 
@@ -288,7 +301,10 @@ module.exports = {
 
                 updateConfigFile(currentConfig, updateCause.renamed);
 
+            } else {
+                added(pathToFile);
             }
+
         };
 
         // Delete Event
@@ -388,6 +404,24 @@ module.exports = {
 
         }
 
+        // Cleanup old items
+        if (event.type === 'changed') {
+            
+            var patternCount = currentConfig.patterns.length;
+            var newPattern = cleanup(currentConfig.patterns);
+            
+            console.log('Pattern count before:'+patternCount);
+            console.log('Pattern count after:'+newPattern.length);
+
+            if (patternCount !== newPattern.length) {
+                
+                currentConfig.patterns = newPattern;
+
+                updateConfigFile(currentConfig, updateCause.deleted);
+            
+            }
+        
+        }
 
     }
 

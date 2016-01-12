@@ -8,27 +8,29 @@
     <!-- endbower -->
     <link href="/styles/main.css" type="text/stylesheet" rel="stylesheet">
     <link href="/styles/ssgCore.css" type="text/stylesheet" rel="stylesheet">
+    <link href="/_core/styles/prism.css" type="text/stylesheet" rel="stylesheet">
     <!-- build:js scripts/vendor/modernizr.js -->
     <!-- endbuild -->
     <!-- inject:css -->
     <!-- endinject -->
 </head>
 
-<body>
+<body class='ssg-body'>
     <div id="ssg-toolbar">
+        <div id="ssg-toc" class="ssg-toc-list"></div>
         <div id="ssg-filter"></div>
     </div>
-    <div id='ssg-preview'>
-        <div id="ssg-content"></div>
+    <div id="ssg-wrapper">
+        <div id='ssg-patterns'>
+        </div>
     </div>
-    Ello World
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/jQuery.dotdotdot/src/js/jquery.dotdotdot.js"></script>
     <script src="/bower_components/handlebars/handlebars.js"></script>
     <!-- endbower -->
     <script src="/scripts/main.js"></script>
     <!-- inject:js -->
+    <script src="/_core/scripts/prism.js"></script>
     <script src="/scripts/ssg.templates.js"></script>
     <script src="/scripts/ssgCore.templates.js"></script>
     <script src="/scripts/ssgCoreLib.js"></script>

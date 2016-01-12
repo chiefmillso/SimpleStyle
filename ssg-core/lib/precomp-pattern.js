@@ -19,7 +19,7 @@ module.exports = function(patternConfig) {
 
     var config = require('../../gulp.config.js');
 
-    console.log(patternConfig);
+    
 
     // partials stream
     var partials = gulp.src(patternConfig.partials)
@@ -31,7 +31,7 @@ module.exports = function(patternConfig) {
             'Handlebars.template(<%= contents %>));', {}, {
                 imports: {
                     processPartialName: function(fileName) {
-
+                        console.log(fileName);
                         return JSON.stringify(path.basename(fileName, '.js').substr(1));
 
                     }

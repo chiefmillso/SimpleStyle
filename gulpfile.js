@@ -18,6 +18,84 @@ var gulp = require('gulp'),
 // Contants
 var reload = browserSync.reload;
 
+/////////// Reused functions
+// check javascript styling conventions
+var checkJSStyle = function(files) {
+
+    if (files === undefined || files === null) {
+        log.Error('Files is not defined');
+        return;
+    }
+
+    // pass correct file array in
+    gulp.src(files)
+        .pipe($.plumber())
+        .pipe($.if(args.verbose, $.print()))
+        .pipe($.jscs())
+        .pipe($.jshint())
+        .pipe($.jshint.reporter('jshint-stylish'), {
+            verbose: true
+        })
+};
+
+// Used for inject 
+var inject = function(options) {
+
+    // pages to inject files
+    var target = gulp.src(config.landingPages);
+
+    // source that needs to be injected
+    var sources = gulp.src(options.source, {
+        read: false
+    });
+
+    return target
+        .pipe($.plumber())
+        .pipe($.inject(sources, {
+            ignorePath: '.tmp'
+        }))
+        .pipe(gulp.dest(config.basepath));
+};
+
+// compile styles and use path
+var compileStyles = function(config) {
+
+    // base remove all except sub folder
+    var cssPath = '';
+
+    return gulp.src(config.src, {
+            base: config.base
+        })
+        .pipe($.plumber())
+        .pipe($.sourcemaps.init())
+        .pipe($.sass.sync({
+            outputStyle: 'expanded',
+            precision: 10,
+            includePaths: ['.']
+        }).on('error', $.sass.logError))
+        .pipe($.autoprefixer({
+            browsers: ['last 1 version']
+        }))
+        .pipe($.sourcemaps.write())
+        .pipe($.rename({
+            dirname: cssPath
+        }))
+        .pipe(gulp.dest('.tmp/styles'))
+        .pipe(browserSync.stream());
+};
+// Gulp taks
+var log = {
+    Msg: function(msg) {
+        helper.logMessage(msg, helper.logType.info);
+    },
+    Error: function(msg) {
+        helper().logMessage(msg, helper.logType.error);
+    },
+    Warn: function(msg) {
+        helper().logMessage(msg, helper.logType.warning);
+    }
+};
+
 /// Cleaning up tmp folder
 // Clean forlder strucuture and temp folders
 gulp.task('clean', function(done) {
@@ -90,38 +168,10 @@ gulp.task('precompile:core', function() {
 });
 
 gulp.task('test', function() {
+
     ssgCoreConfig.handleDelete();
-});
-
-gulp.task('serve', ['ssgCore-update', 'styles', 'styles:core', 'precompile:core', 'precompile:ssg', 'vet'], function() {
-
-    browserSync({
-        notify: true,
-        port: 9000,
-        server: {
-            baseDir: ['.tmp', 'app'],
-            routes: {
-                '/bower_components': 'bower_components',
-                '/tmp': '/'
-            }
-        },
-        https: true
-    });
-
-    // Style Compilation
-    gulp.watch('app/styles/*.scss', ['styles']);
-    gulp.watch('app/_core/**/*.scss', ['styles:core']);
-
-    // Script Compilation
-    // gulp.watch('app/**/*.js', ['ssgCore-update', reload]);
-    gulp.watch('app/**/*.hbs')
-        .on('change', ssgCoreConfig.fsEvents);
-
-    gulp.watch('app/_config/pattern.conf.json', ['precompile:ssg'], reload);
-    // gulp.watch('app/**/*.hbs', ['precompile:ssg', 'precompile:core', reload]);
 
 });
-
 
 gulp.task('ssgCore-update', function() {
 
@@ -209,82 +259,38 @@ gulp.task('vet-dev', function() {
 
 });
 
-/////////// Reused functions
-// check javascript styling conventions
-var checkJSStyle = function(files) {
+// compile handlebar patterns
+gulp.task('serve', ['ssgCore-update', 'styles', 'styles:core', 'precompile:core', 'precompile:ssg', 'vet'], function() {
 
-    if (files === undefined || files === null) {
-        log.Error('Files is not defined');
-        return;
-    }
-
-    // pass correct file array in
-    gulp.src(files)
-        .pipe($.plumber())
-        .pipe($.if(args.verbose, $.print()))
-        .pipe($.jscs())
-        .pipe($.jshint())
-        .pipe($.jshint.reporter('jshint-stylish'), {
-            verbose: true
-        });
-
-};
-
-// Used for inject 
-var inject = function(options) {
-
-    // pages to inject files
-    var target = gulp.src(config.landingPages);
-
-    // source that needs to be injected
-    var sources = gulp.src(options.source, {
-        read: false
+    browserSync({
+        notify: true,
+        port: 9000,
+        server: {
+            baseDir: ['.tmp', 'app'],
+            routes: {
+                '/bower_components': 'bower_components',
+                '/tmp': '/'
+            }
+        },
+        https: true
     });
 
-    return target
-        .pipe($.plumber())
-        .pipe($.inject(sources, {
-            ignorePath: '.tmp'
-        }))
-        .pipe(gulp.dest(config.basepath));
-};
-// compile styles and use path
-var compileStyles = function(config) {
 
-    // base remove all except sub folder
-    var cssPath = '';
+    // Update configuration
+    gulp.watch('app/_pattern/**/*.hbs')
+        // item was changed
+        .on('change', ssgCoreConfig.fsEvents);
 
-    return gulp.src(config.src, {
-            base: config.base
-        })
-        .pipe($.plumber())
-        .pipe($.sourcemaps.init())
-        .pipe($.sass.sync({
-            outputStyle: 'expanded',
-            precision: 10,
-            includePaths: ['.']
-        }).on('error', $.sass.logError))
-        .pipe($.autoprefixer({
-            browsers: ['last 1 version']
-        }))
-        .pipe($.sourcemaps.write())
-        .pipe($.rename({
-            dirname: cssPath
-        }))
-        .pipe(gulp.dest('.tmp/styles'))
-        .pipe(browserSync.stream());
-};
+    // Recompile pattern
+    gulp.watch([
+        'app/*.html',
+        'app/scripts/**/*.js',
+        'app/images/**/*',
+        'app/_config/*.json',
+    ]).on('change', reload);
 
-var log = {
-    Msg: function(msg) {
-        helper.logMessage(msg, helper.logType.info);
-    },
-    Error: function(msg) {
-        helper().logMessage(msg, helper.logType.error);
-    },
-    Warn: function(msg) {
-        helper().logMessage(msg, helper.logType.warning);
-    }
-};
+    gulp.watch('app/_core/**/*.js', ['ssgCore-update'], reload);
 
-// compile handlebar patterns
+    gulp.watch('app/_core/styles/*.scss', ['styles:core'], reload);
+
+});
