@@ -35,7 +35,7 @@ var checkJSStyle = function(files) {
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish'), {
             verbose: true
-        })
+        });
 };
 
 // Used for inject 
@@ -263,7 +263,7 @@ gulp.task('vet-dev', function() {
 gulp.task('serve', ['ssgCore-update', 'styles', 'styles:core', 'precompile:core', 'precompile:ssg', 'vet'], function() {
 
     browserSync({
-        notify: true,
+        notify: false,
         port: 9000,
         server: {
             baseDir: ['.tmp', 'app'],
