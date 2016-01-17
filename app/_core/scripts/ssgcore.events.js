@@ -160,6 +160,7 @@ ssgCore.Events.enableAnnotation = function(event) {
         affectedElement = $('.ssg-item-description');
 
     ssgCore.Events.sectionEnabler(curButton, affectedElement);
+    $('#ssg-btnisolate').removeClass('active');
 
 };
 
@@ -170,6 +171,8 @@ ssgCore.Events.enableCode = function(event) {
         affectedElement = $('.ssg-item-code');
 
     ssgCore.Events.sectionEnabler(curButton, affectedElement);
+    $('.ssg-item').removeClass('isolate');
+    $('#ssg-btnisolate').removeClass('active');
 
 };
 
@@ -180,9 +183,9 @@ ssgCore.Events.isolate = function(event) {
 
     if (curButton.hasClass('active')) {
 
-        curButton.removeClass('active');        
+        curButton.removeClass('active');
         $('.ssg-item').removeClass('isolate');
-    
+
     } else {
 
         curButton.addClass('active');

@@ -1,0 +1,8 @@
+// States
+.active{
+    border-color: $red;
+    color: $red;
+}
+.show{
+    @include show;
+}
