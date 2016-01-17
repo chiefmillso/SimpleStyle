@@ -292,5 +292,6 @@ gulp.task('serve', ['ssgCore-update', 'styles', 'styles:core', 'precompile:core'
     gulp.watch('app/_core/**/*.js', ['ssgCore-update'], reload);
 
     gulp.watch('app/_core/styles/*.scss', ['styles:core'], reload);
+    gulp.watch('app/styles/**/*.scss', ['styles'], reload);
 
 });
