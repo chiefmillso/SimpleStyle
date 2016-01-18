@@ -7,12 +7,6 @@
             "filepath": "atoms/00-headings.hbs"
         },
         {
-            "title": "01-paragraph",
-            "description": "",
-            "filename": "01-paragraph",
-            "filepath": "atoms/01-paragraph.hbs"
-        },
-        {
             "title": "04-time",
             "description": "",
             "filename": "04-time",
@@ -37,10 +31,16 @@
             "filepath": "atoms/06-hr.hbs"
         },
         {
-            "title": "00-molecule",
+            "title": "01-paragraph",
             "description": "",
-            "filename": "00-molecule",
-            "filepath": "molecules/00-molecule.hbs"
+            "filename": "01-paragraph",
+            "filepath": "atoms/01-paragraph.hbs"
+        },
+        {
+            "title": "02-blockquote",
+            "description": "",
+            "filename": "02-blockquote",
+            "filepath": "atoms/02-blockquote.hbs"
         },
         {
             "title": "01-molecule",
@@ -61,10 +61,16 @@
             "filepath": "templates/01-templates.hbs"
         },
         {
-            "title": "02-blockquote",
+            "title": "07-test",
             "description": "",
-            "filename": "02-blockquote",
-            "filepath": "atoms/02-blockquote.hbs"
+            "filename": "07-test",
+            "filepath": "atoms/07-test.hbs"
+        },
+        {
+            "title": "00-molecule",
+            "description": "",
+            "filename": "00-molecule",
+            "filepath": "molecules/00-molecule.hbs"
         }
     ],
     "folder": [

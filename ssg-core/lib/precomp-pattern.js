@@ -19,8 +19,6 @@ module.exports = function(patternConfig) {
 
     var config = require('../../gulp.config.js');
 
-    
-
     // partials stream
     var partials = gulp.src(patternConfig.partials)
         .pipe(plumber())

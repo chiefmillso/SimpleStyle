@@ -5,12 +5,15 @@ var gulp = require('gulp'),
         lazy: true
     }),
     config = require('../../gulp.config.js'),
+    browserSync = require('browser-sync'),
     precompile = require('./precomp-pattern.js');
+
+var reload = browserSync.reload;
 
 module.exports = {
 
-
     createConfig: function(options) {
+
         var patternsData = [];
         var folder = [];
 
@@ -171,8 +174,6 @@ module.exports = {
 
     fsEvents: function(event) {
 
-        console.log(event);
-
         var updateCause = {
             deleted: 'marked patterns for deletion',
             renamed: 'pattern was renamed',
@@ -189,6 +190,36 @@ module.exports = {
 
         var getRelativePath = function(filePath) {
             return path.relative(path.resolve(config.basepath + '_pattern/'), filePath);
+        };
+
+        var patternPrecompile = function() {
+
+            plugins.util.log(
+                plugins.util.colors.green('Precompile Patterns')
+            );
+
+            precompile(config.ssg)
+                .on('error', function(a,b,c) {
+                    
+                    console.log(a);
+                    console.log(b);
+                    console.log(c);
+
+                    plugins.util.log(
+                        plugins.util.colors.green('Precompilation failed.')
+                    );
+
+                })
+                .on('end', function() {
+
+                    plugins.util.log(
+                        plugins.util.colors.green('Precompilation finished.')
+                    );
+
+                    reload();
+
+                });
+
         };
 
         // write configuration to file
@@ -406,123 +437,27 @@ module.exports = {
 
         // Cleanup old items
         if (event.type === 'changed') {
-            
+
             var patternCount = currentConfig.patterns.length;
             var newPattern = cleanup(currentConfig.patterns);
-            
-            console.log('Pattern count before:'+patternCount);
-            console.log('Pattern count after:'+newPattern.length);
+
+            console.log('Pattern count before:' + patternCount);
+            console.log('Pattern count after:' + newPattern.length);
 
             if (patternCount !== newPattern.length) {
-                
+
                 currentConfig.patterns = newPattern;
 
                 updateConfigFile(currentConfig, updateCause.deleted);
-            
+
+            } else {
+
+                patternPrecompile();
+
             }
-        
+
         }
 
     }
 
 };
-
-
-// var buildConfig = function(file, enc, callback) {
-
-//     try {
-
-//         // console.log(file.relative);
-
-//         var path = require('path');
-
-//         // init pattern configs
-//         var filename = path.basename(file.relative),
-//             extension = path.extname(file.relative),
-//             basename = filename.replace(extension, ''),
-//             patternpath = path.dirname(file.relative),
-//             title = basename.indexOf('_') === 0 ? basename.substr(1) : basename;
-
-//         // create pattern object
-//         var item = {
-//             title: title,
-//             description: '',
-//             name: basename,
-//             filename: filename,
-//             path: file.relative
-//         };
-
-//         // check if pattern currently exists in patterns
-//         var found = patternsData.filter(function(obj) {
-//             return obj.path === item.path;
-//         });
-
-
-
-//         // add pattern to patterns
-//         if (found.length === 0) {
-//             patternsData.push(item);
-//             statistics += 1;
-//         }
-
-//         // console.log(patternsData);
-
-//     } catch (ex) {
-//         console.log(ex);
-//     }
-
-//     callback(null, file);
-// };
-
-
-
-// var loadCurrentConfig = function() {
-
-//     $.util.log('... Loading current configuration');
-
-//     var curConfigPath = options.configFile;
-
-//     var exists;
-
-//     try {
-
-//         exists = fs.statSync(curConfigPath);
-
-//     } catch (erro) {
-
-//         exists = null;
-//         return;
-
-//     }
-
-//     try {
-
-//         // Loading old configuration
-//         var config = fs.readFileSync(options.configFile);
-
-//         // parse json config
-//         var configData = JSON.parse(config);
-
-//         // check if configuration data exits
-//         patternsData = configData !== undefined &&
-//             configData.patterns !== undefined ? configData.patterns : [];
-
-//         $.util.log(
-//             'Found',
-//             patternsData.length,
-//             'pattern(s) in configuration.');
-
-//     } catch (err) {
-
-//         $.util.log($.util.colors.red(err));
-
-//     }
-
-// };
-
-// var logStatistics = function() {
-//     $.util.log(
-//         'Found',
-//         statistics === 0 ? 'no new pattern' : $.util.colors.green(statistics) + ' new pattern'
-//     );
-// };

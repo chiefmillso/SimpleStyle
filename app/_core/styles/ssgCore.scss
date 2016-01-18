@@ -42,8 +42,8 @@ body {
     border: 1px silver solid;
     background-color: white;
     &.active {
-        color: black;
-        border-color: $red;
+        color: $blue;
+        border-color: $blue;
     }
 }
 
