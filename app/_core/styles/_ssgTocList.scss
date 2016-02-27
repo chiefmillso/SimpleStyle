@@ -6,6 +6,8 @@
         margin: 1em auto;
         padding: 1em;
         @include show;
+        max-height: 500px;
+        overflow: auto;
     }
     ul {
         display: inline-block;

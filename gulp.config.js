@@ -14,7 +14,8 @@ module.exports = (function() {
         ],
         ssg: {
             partials: [
-                basepath + '_pattern/**/_*.hbs'
+                basepath + '_pattern/**/*.hbs',
+                basepath + '_core/**/_*.hbs'
             ],
             templates: [
                 basepath + '_pattern/**/[^_]*.hbs'

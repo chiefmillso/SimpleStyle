@@ -1,76 +1,88 @@
 {
     "patterns": [
         {
-            "title": "Headings",
-            "description": "Default Headlines",
-            "filename": "00-headings",
-            "filepath": "atoms/00-headings.hbs"
+            "title": "Image Rendition 1",
+            "description": "Display image renditions with ID 1",
+            "filename": "ms-rendition-id-1",
+            "filepath": "atoms/images/ms-rendition-id-1.hbs"
         },
         {
-            "title": "04-time",
+            "title": "Image Rendition 2",
+            "description": "Display image renditions with ID 2",
+            "filename": "ms-rendition-id-2",
+            "filepath": "atoms/images/ms-rendition-id-2.hbs"
+        },
+        {
+            "title": "Image Rendition 3",
+            "description": "Display image renditions with ID 3",
+            "filename": "ms-rendition-id-3",
+            "filepath": "atoms/images/ms-rendition-id-3.hbs"
+        },
+        {
+            "title": "Image Rendition 4",
+            "description": "Display image renditions with ID 4",
+            "filename": "ms-rendition-id-4",
+            "filepath": "atoms/images/ms-rendition-id-4.hbs"
+        },
+        {
+            "title": "Clear table style",
             "description": "",
-            "filename": "04-time",
-            "filepath": "atoms/04-time.hbs"
+            "filename": "ms-clear-table",
+            "filepath": "atoms/tables/ms-clear-table.hbs"
         },
         {
-            "title": "Preformated text",
+            "title": "Default table style",
             "description": "",
-            "filename": "05-preformatted-text",
-            "filepath": "atoms/05-preformatted-text.hbs"
+            "filename": "ms-default-table-0",
+            "filepath": "atoms/tables/ms-default-table-0.hbs"
         },
         {
-            "title": "03-inline-elements",
+            "title": "Table Style 10",
             "description": "",
-            "filename": "03-inline-elements",
-            "filepath": "atoms/03-inline-elements.hbs"
+            "filename": "ms-default-table-10",
+            "filepath": "atoms/tables/ms-default-table-10.hbs"
         },
         {
-            "title": "Horizontal Ruler",
-            "description": "Used for Horrizontal ruler",
-            "filename": "06-hr",
-            "filepath": "atoms/06-hr.hbs"
-        },
-        {
-            "title": "01-paragraph",
+            "title": "Table Style 4",
             "description": "",
-            "filename": "01-paragraph",
-            "filepath": "atoms/01-paragraph.hbs"
+            "filename": "ms-default-table-4",
+            "filepath": "atoms/tables/ms-default-table-4.hbs"
         },
         {
-            "title": "02-blockquote",
+            "title": "Table Style 5",
             "description": "",
-            "filename": "02-blockquote",
-            "filepath": "atoms/02-blockquote.hbs"
+            "filename": "ms-default-table-5",
+            "filepath": "atoms/tables/ms-default-table-5.hbs"
         },
         {
-            "title": "01-molecule",
+            "title": "Table Style 6",
             "description": "",
-            "filename": "01-molecule",
-            "filepath": "molecules/01-molecule.hbs"
+            "filename": "ms-default-table-6",
+            "filepath": "atoms/tables/ms-default-table-6.hbs"
         },
         {
-            "title": "00-first-organism",
+            "title": "Table Style 7",
             "description": "",
-            "filename": "00-first-organism",
-            "filepath": "organism/00-first-organism.hbs"
+            "filename": "ms-default-table-7",
+            "filepath": "atoms/tables/ms-default-table-7.hbs"
         },
         {
-            "title": "01-templates",
+            "title": "Table Style 8",
             "description": "",
-            "filename": "01-templates",
-            "filepath": "templates/01-templates.hbs"
+            "filename": "ms-default-table-8",
+            "filepath": "atoms/tables/ms-default-table-8.hbs"
         },
         {
-            "title": "07-test",
+            "title": "Table Style 9",
             "description": "",
-            "filename": "07-test",
-            "filepath": "atoms/07-test.hbs"
+            "filename": "ms-default-table-9",
+            "filepath": "atoms/tables/ms-default-table-9.hbs"
         },
         {
-            "title": "00-molecule",
+            "title": "test",
             "description": "",
-            "filename": "00-molecule",
-            "filepath": "molecules/00-molecule.hbs"
+            "filename": "test",
+            "filepath": "molecules/test.hbs"
         }
     ],
     "folder": [
