@@ -3,11 +3,10 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-
     color: black;
 }
 
-#ssg-font{
+#ssg-font {
     font-size: 16px;
 }
 
@@ -15,13 +14,11 @@ body {
 @mixin hide {
     visibility: hidden;
     overflow: hidden;
-
     height: 0;
 }
 
 @mixin show {
     visibility: visible;
-
     height: auto;
 }
 
@@ -29,7 +26,6 @@ body {
     &:after {
         display: block;
         clear: both;
-
         content: ' ';
     }
 }
@@ -41,7 +37,6 @@ body {
 
 %base-button {
     margin: .25em !important;
-
     color: #333;
     border: 1px silver solid;
     background-color: white;
@@ -54,7 +49,6 @@ body {
 // Base modes
 .animate {
     max-width: 100% !important;
-
     transition: 1s;
     &-start {
         width: 100%;
@@ -66,34 +60,28 @@ body {
     position: fixed;
     z-index: 100;
     top: 0;
-
     width: 100%;
     padding: 0 .25em;
-
     border-bottom: 1px black solid;
     background-color: white;
-
     @extend %ssg-base-font;
 }
 
 .ssg-patterns {
-
     box-sizing: border-box;
     z-index: 0;
-
     min-width: 320px;
     margin: 0 auto;
     padding: 3em 0 10em 0;
-
     background-color: white;
     min-height: 100%;
-
     &-inner {
         width: auto;
         max-width: 1280px;
         margin: 0 auto;
     }
 }
+
 #ssg-wrapper {
     position: absolute;
     top: auto;
@@ -101,39 +89,36 @@ body {
     background-color: whitesmoke;
 }
 
-
 // Base Section
 /// Default Button
 .ssg-btn {
     margin: .25em !important;
     border: 1px black solid;
     background-color: white;
-    &.active{
+    &.active {
         @extend .active;
     }
 }
+
 .ssg-input {
     margin: 2px;
     padding: 2px 6px 3px 6px;
-
     border: 1px black solid;
-
     veritcal-algin: baseline;
     // Small button
-    &:focus{
+    &:focus {
         outline: $blue;
         border: 1px $red solid;
     }
     &-s {
         width: 4em;
-
         @extend .ssg-input;
     }
 }
+
 /// Command Section
 .ssg-cmd-section {
     display: inline-block;
-
     padding: .25em;
     &:hover,
     &:focus * {
@@ -141,12 +126,23 @@ body {
         color: white;
         // handle button style on hover
         .ssg-btn:hover,
-        .ssg-btn.active{
+        .ssg-btn.active {
             background-color: $blue;
             border-color: white;
             color: white;
         }
     }
+}
+
+.ssg-pattern-label,
+.ssg-pattern-name {
+    color: gray;
+    &:hover{
+        color: black;
+    }
+}
+.ssg-pattern-label{
+    padding-right: 10px;
 }
 
 // // Generic section

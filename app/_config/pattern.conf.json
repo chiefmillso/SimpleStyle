@@ -1,28 +1,46 @@
 {
     "patterns": [
         {
-            "title": "Image Rendition 1",
-            "description": "Display image renditions with ID 1",
-            "filename": "ms-rendition-id-1",
-            "filepath": "atoms/images/ms-rendition-id-1.hbs"
+            "title": "Rich Text Editor - Headlines",
+            "description": "",
+            "filename": "ms-rte-headlines",
+            "filepath": "atoms/rtestyles/ms-rte-headlines.hbs"
         },
         {
-            "title": "Image Rendition 2",
-            "description": "Display image renditions with ID 2",
-            "filename": "ms-rendition-id-2",
-            "filepath": "atoms/images/ms-rendition-id-2.hbs"
+            "title": "Rich Text Editor - Linked Headlines",
+            "description": "",
+            "filename": "ms-rte-headlines-linked",
+            "filepath": "atoms/rtestyles/ms-rte-headlines-linked.hbs"
         },
         {
-            "title": "Image Rendition 3",
-            "description": "Display image renditions with ID 3",
-            "filename": "ms-rendition-id-3",
-            "filepath": "atoms/images/ms-rendition-id-3.hbs"
+            "title": "Rich Text Editor - Linked Headlines alternate",
+            "description": "",
+            "filename": "ms-rte-headlines-alt-linked",
+            "filepath": "atoms/rtestyles/ms-rte-headlines-alt-linked.hbs"
         },
         {
-            "title": "Image Rendition 4",
-            "description": "Display image renditions with ID 4",
-            "filename": "ms-rendition-id-4",
-            "filepath": "atoms/images/ms-rendition-id-4.hbs"
+            "title": "Rich Text Editor - Headlines alternated",
+            "description": "",
+            "filename": "ms-rte-headlines-alt",
+            "filepath": "atoms/rtestyles/ms-rte-headlines-alt.hbs"
+        },
+        {
+            "title": "Rich Text Editor - Ordered List",
+            "description": "",
+            "filename": "ms-rte-ordered-list",
+            "filepath": "atoms/rtestyles/ms-rte-ordered-list.hbs"
+        },
+        {
+            "title": "Rich Text Editor - Unordered List",
+            "description": "",
+            "filename": "ms-rte-unordered-list",
+            "filepath": "atoms/rtestyles/ms-rte-unordered-list.hbs"
+        },
+        {
+            "title": "Rich Text Editor - Styles ",
+            "description": "",
+            "filename": "ms-rte-text-styles",
+            "filepath": "atoms/rtestyles/ms-rte-text-styles.hbs"
         },
         {
             "title": "Clear table style",
@@ -77,6 +95,30 @@
             "description": "",
             "filename": "ms-default-table-9",
             "filepath": "atoms/tables/ms-default-table-9.hbs"
+        },
+        {
+            "title": "Image Rendition 1",
+            "description": "Display image renditions with ID 1",
+            "filename": "ms-rendition-id-1",
+            "filepath": "atoms/images/ms-rendition-id-1.hbs"
+        },
+        {
+            "title": "Image Rendition 2",
+            "description": "Display image renditions with ID 2",
+            "filename": "ms-rendition-id-2",
+            "filepath": "atoms/images/ms-rendition-id-2.hbs"
+        },
+        {
+            "title": "Image Rendition 3",
+            "description": "Display image renditions with ID 3",
+            "filename": "ms-rendition-id-3",
+            "filepath": "atoms/images/ms-rendition-id-3.hbs"
+        },
+        {
+            "title": "Image Rendition 4",
+            "description": "Display image renditions with ID 4",
+            "filename": "ms-rendition-id-4",
+            "filepath": "atoms/images/ms-rendition-id-4.hbs"
         },
         {
             "title": "test",
