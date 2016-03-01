@@ -1,0 +1,51 @@
+.ssg-item {
+    margin: 4em 0;
+    &-header {
+        font-size: .8em;
+
+        @extend %ssg-base-font;
+    }
+    &-title {
+        font-weight: bold;
+        line-height: 150%;
+
+        text-transform: uppercase;
+
+        border-bottom: 1px silver solid;
+    }
+    &-description {
+        line-height: 150%;
+
+        margin: .5em 0;
+        padding: .5em 0.5em;
+
+        background-color: whitesmoke;
+        @include hide;
+
+    }
+    &-code {
+        font-size: .8em;
+
+        border-radius: 0 !important;
+        @include hide;
+    }
+    .sample {
+        margin: 2em 0;
+    }
+    &.hide {
+        margin: 0;
+
+        @include hide;
+    }
+    &.isolate {
+        .ssg-item-header {
+            @include hide;
+        }
+        .ssg-item-code {
+            @include hide;
+        }
+        .sample {
+            border: 1px #dcdcdc solid;
+        }
+    }
+}
