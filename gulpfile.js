@@ -82,6 +82,7 @@ var compileStyles = function(config) {
         }))
         .pipe(gulp.dest('.tmp/styles'))
         .pipe(browserSync.stream());
+
 };
 // Gulp taks
 var log = {

@@ -1,265 +1,142 @@
 @import 'colors';
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    color: black;
-}
-
-#ssg-font {
+:root {
     font-size: 16px;
-}
-
-// Mixin
-@mixin hide {
-    visibility: hidden;
-    overflow: hidden;
-    height: 0;
-}
-
-@mixin show {
-    visibility: visible;
-    height: auto;
-}
-
-@mixin clearfix {
-    &:after {
-        display: block;
-        clear: both;
-        content: ' ';
-    }
-}
-
-// Base extends
-%ssg-base-font {
-    font-family: helvetica neuen, hevelvetica, arial, sans-serif;
-}
-
-%base-button {
-    margin: .25em !important;
-    color: #333;
-    border: 1px silver solid;
-    background-color: white;
-    &.active {
-        color: $blue;
-        border-color: $blue;
-    }
-}
-
-// Base modes
-.animate {
-    max-width: 100% !important;
-    transition: 1s;
-    &-start {
-        width: 100%;
-    }
-}
-
-// Design
-#ssg-toolbar {
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    width: 100%;
-    padding: 0 .25em;
-    border-bottom: 1px black solid;
-    background-color: white;
-    @extend %ssg-base-font;
-}
-
-.ssg-patterns {
-    box-sizing: border-box;
-    z-index: 0;
-    min-width: 320px;
-    margin: 0 auto;
-    padding: 3em 0 10em 0;
-    background-color: white;
-    min-height: 100%;
-    &-inner {
-        width: auto;
-        max-width: 1280px;
-        margin: 0 auto;
-    }
-}
-
-#ssg-wrapper {
-    position: absolute;
-    top: auto;
-    width: 100%;
-    background-color: whitesmoke;
-}
-
-// Base Section
-/// Default Button
-.ssg-btn {
-    margin: .25em !important;
-    border: 1px black solid;
-    background-color: white;
-    &.active {
-        @extend .active;
-    }
-}
-
-.ssg-input {
-    margin: 2px;
-    padding: 2px 6px 3px 6px;
-    border: 1px black solid;
-    veritcal-algin: baseline;
-    // Small button
-    &:focus {
-        outline: $blue;
-        border: 1px $red solid;
-    }
-    &-s {
-        width: 4em;
-        @extend .ssg-input;
-    }
-}
-
-/// Command Section
-.ssg-cmd-section {
-    display: inline-block;
-    padding: .25em;
-    &:hover,
-    &:focus * {
-        background-color: $blue;
-        color: white;
-        // handle button style on hover
-        .ssg-btn:hover,
-        .ssg-btn.active {
-            background-color: $blue;
-            border-color: white;
-            color: white;
-        }
-    }
-}
-
-.ssg-pattern-label,
-.ssg-pattern-name {
-    color: gray;
-    &:hover{
+    body {
+        overflow: auto !important;
+        height: 100%;
+        margin: 0;
+        padding: 0;
         color: black;
     }
+    #ssg-font {
+        font-size: 16px;
+    }
+    // Mixin
+    @mixin hide {
+        visibility: hidden;
+        overflow: hidden;
+        height: 0;
+    }
+    @mixin show {
+        visibility: visible;
+        height: auto;
+    }
+    @mixin clearfix {
+        &:after {
+            display: block;
+            clear: both;
+            content: ' ';
+        }
+    }
+    // Base extends
+    %ssg-base-font {
+        font-family: helvetica neuen, hevelvetica, arial, sans-serif;
+    }
+    %base-button {
+        margin: .25em !important;
+        padding: 2px 6px 3px 6px;
+        color: #333;
+        border: 1px silver solid;
+        background-color: white;
+        &.active {
+            color: $blue;
+            border-color: $blue;
+        }
+    }
+    // Base modes
+    .animate {
+        max-width: 100% !important;
+        transition: 1s;
+        &-start {
+            width: 100%;
+        }
+    }
+    // Design
+    #ssg-toolbar {
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        width: 100%;
+        padding: 0 .25em;
+        border-bottom: 1px black solid;
+        background-color: white;
+        @extend %ssg-base-font;
+    }
+    .ssg-patterns {
+        z-index: 0;
+        box-sizing: border-box;
+        min-width: 320px;
+        min-height: 100%;
+        margin: 0 auto;
+        padding: 3em 0 10em 0;
+        background-color: white;
+        &-inner {
+            width: auto;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+    }
+    #ssg-wrapper {
+        position: absolute;
+        top: auto;
+        width: 100%;
+        background-color: whitesmoke;
+    }
+    // Base Section
+    /// Default Button
+    .ssg-btn {
+        margin: .25em;
+        border: 1px black solid;
+        background-color: white;
+        padding: 2px 6px 3px 6px;
+        min-width: 0;
+        &.active {
+            @extend .active;
+        }
+    }
+    .ssg-input {
+        margin: 2px;
+        padding: 2px 6px 3px 6px;
+        border: 1px black solid;
+        veritcal-algin: baseline;
+        // Small button
+        &:focus {
+            border: 1px $red solid;
+            outline: $blue;
+        }
+        &-s {
+            width: 4em;
+            @extend .ssg-input;
+        }
+    }
+    /// Command Section
+    .ssg-cmd-section {
+        display: inline-block;
+        padding: .25em;
+        &:hover,
+        &:focus * {
+            color: white;
+            background-color: $blue;
+            // handle button style on hover
+            .ssg-btn:hover,
+            .ssg-btn.active {
+                color: white;
+                border-color: white;
+                background-color: $blue;
+            }
+        }
+    }
+    .ssg-pattern-label,
+    .ssg-pattern-name {
+        color: gray;
+        &:hover {
+            color: black;
+        }
+    }
+    .ssg-pattern-label {
+        padding-right: 10px;
+    }
+    @import 'ssgTocList';
+    @import 'ssgItem';
+    @import 'ssgStates';
 }
-.ssg-pattern-label{
-    padding-right: 10px;
-}
-
-// // Generic section
-// .ssg-cmd-section {
-//     padding: .25em 0;
-//     transition: .25s background-color;
-//     &:hover{
-//         background-color: #318eb1;
-//         .ssg-btn.active{
-//             border-color: white;
-//             background-color: #318eb1;
-//             color: white;
-//         }
-//     }
-// }
-// #ssg-vp-resizer {
-//     display: inline-block;
-//     float: right;
-//     width: auto;
-//     padding-left: 0.5em;
-//     padding-right: 0.5em;
-//     vertical-align: baseline;
-// }
-// #ssg-add-tools {
-//     display: inline-block;
-//     float: right;
-//     button {
-//         @extend %base-button;
-//     }
-// }
-// //
-// .ssg-btn{
-//     @extend %base-button;
-// }
-// // .ssg-vp-btn {
-// //     @extend %base-button;
-// // }
-// #ssg-vp-by {
-//     @extend %ssg-base-font;
-// }
-// .ssg-input-s {
-//     width: 3.5em;
-//     padding: 2px 2px 3px;
-//     text-align: center;
-//     @extend %base-button;
-// }
-// #ssg-vp-w,
-// #ssg-vp-h {
-//     text-align: right;
-// }
-// .ssg-btn {
-//     @extend %base-button;
-// }
-// .ssg-filter-button,
-// .ssg-toc-switch {
-//     @extend %base-button;
-// }
-// .ssg-item {
-//     margin: 2em 1em;
-//     padding: .25em 0;
-//     transition: 0.5s visibility;
-//     &.show {
-//         @include show;
-//     }
-//     &.hide {
-//         @include hide;
-//         padding: 0px;
-//         margin: 0px;
-//     }
-//     &.isolate{
-//         .ssg-item-header{
-//             @include hide;
-//         }
-//         .ssg-item-code{
-//             @include hide;
-//         }
-//     }
-//     &-header {
-//         &.hide {
-//             @include hide;
-//         }
-//     }
-//     &-title {
-//         font-size: .8em;
-//         font-weight: bold;
-//         margin: .25em 0;
-//         padding: .25em 0;
-//         text-transform: uppercase;
-//         border-bottom: 1px silver solid;
-//         @extend %ssg-base-font;
-//     }
-//     &-description {
-//         font-size: 1em;
-//         line-height: 125%;
-//         margin: 1em 0 2em;
-//         padding: .25em;
-//         background-color: whitesmoke;
-//         @extend %ssg-base-font;
-//         @include hide;
-//         &.show {
-//             @include show;
-//         }
-//     }
-//     .sample {
-//         margin: 1em 0 2em;
-//     }
-//     &-code {
-//         font-size: 80%;
-//         border-radius: 0 !important;
-//         whitespace: pre;
-//         display: none;
-//         margin: 1em 0;
-//         &.show {
-//             display: block;
-//         }
-//     }
-// }
-@import 'ssgTocList';
-@import 'ssgItem';
-@import 'ssgStates';
