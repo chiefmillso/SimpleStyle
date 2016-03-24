@@ -15,9 +15,13 @@ ssgCore.UIHelper.setCategoryFilter = function(filter) {
 
         currentItems.removeClass('hide');
         otherItems.addClass('hide');
-    } 
-    else {
-    	// remove filter
+
+        var filterButton = $('#ssg-btn' + filter);
+        if (filterButton.length !== 0) {
+            filterButton.addClass('active');
+        }
+    } else {
+        // remove filter
         $('.ssg-item').removeClass('hide');
     }
 

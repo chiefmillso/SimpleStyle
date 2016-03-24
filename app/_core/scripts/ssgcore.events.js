@@ -162,6 +162,9 @@ ssgCore.Events.enableAnnotation = function(event) {
     ssgCore.Events.sectionEnabler(curButton, affectedElement);
     $('#ssg-btnisolate').removeClass('active');
 
+    ssgCore.Session.uiOptions.add('annotation');
+    console.log('annotation');
+
 };
 
 // toggle to show source code
@@ -171,8 +174,12 @@ ssgCore.Events.enableCode = function(event) {
         affectedElement = $('.ssg-item-code');
 
     ssgCore.Events.sectionEnabler(curButton, affectedElement);
+
     $('.ssg-item').removeClass('isolate');
     $('#ssg-btnisolate').removeClass('active');
+
+    ssgCore.Session.uiOptions.add('code');
+    console.log('code');
 
 };
 
@@ -186,6 +193,8 @@ ssgCore.Events.isolate = function(event) {
         curButton.removeClass('active');
         $('.ssg-item').removeClass('isolate');
 
+        ssgCore.Session.uiOptions.remove();
+
     } else {
 
         curButton.addClass('active');
@@ -193,6 +202,9 @@ ssgCore.Events.isolate = function(event) {
         $('.ssg-item').addClass('isolate');
         $('#ssg-btnshowCode').removeClass('active');
         $('#ssg-btnshowAnnot').removeClass('active');
+
+        ssgCore.Session.uiOptions.remove();
+        ssgCore.Session.uiOptions.add('isolate');
 
     }
 

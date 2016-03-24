@@ -1,31 +1,27 @@
 .ssg-item {
-    margin: 4em 0;
+    // margin: 0 auto;
+    width: auto;
+    margin: 4em auto;
     &-header {
         font-size: .8em;
-
+        background-color: white;
         @extend %ssg-base-font;
     }
     &-title {
         font-weight: bold;
         line-height: 150%;
-
         text-transform: uppercase;
-
         border-bottom: 1px silver solid;
     }
     &-description {
         line-height: 150%;
-
         margin: .5em 0;
-        padding: .5em 0.5em;
-
+        padding: .5em .5em;
         background-color: whitesmoke;
         @include hide;
-
     }
     &-code {
         font-size: .8em;
-
         border-radius: 0 !important;
         @include hide;
     }
@@ -34,7 +30,6 @@
     }
     &.hide {
         margin: 0;
-
         @include hide;
     }
     &.isolate {
@@ -46,6 +41,22 @@
         }
         .sample {
             border: 1px #dcdcdc solid;
+        }
+    }
+    &[data-cat='atoms'],
+    &[data-cat='molecules'] {
+        max-width: 1280px;
+    }
+    &[data-cat='templates'] {
+        .ssg-item {
+            &-header {
+                position: sticky;
+                top: 36px;
+                padding-top: 10px;
+            }
+        }
+        .sample {
+            margin: 0px;
         }
     }
 }

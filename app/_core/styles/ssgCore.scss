@@ -16,6 +16,8 @@
         visibility: hidden;
         overflow: hidden;
         height: 0;
+        padding: 0px;
+        margin: 0px;
     }
     @mixin show {
         visibility: visible;
@@ -70,11 +72,7 @@
         margin: 0 auto;
         padding: 3em 0 10em 0;
         background-color: white;
-        &-inner {
-            width: auto;
-            max-width: 1280px;
-            margin: 0 auto;
-        }
+        &-inner {}
     }
     #ssg-wrapper {
         position: absolute;
