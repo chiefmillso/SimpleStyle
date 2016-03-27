@@ -35,6 +35,7 @@ ssgCore.Events.filterItems = function(event) {
     // Just in case table of content is filtered
     $('#ssg-btntoc').removeClass('active');
 
+    // Check if button is active
     if (curButton.hasClass('active')) {
 
         $('.ssg-filter-button').removeClass('active');
@@ -88,6 +89,8 @@ ssgCore.Events.filterItem = function(event) {
     // Select only the current one
     curFilter.addClass('selected');
 
+    console.log(curFilter);
+
     // filter items
     $('.ssg-item').addClass('hide');
     $('.ssg-item[data-file=' + curFilterValue + ']').removeClass('hide');
@@ -137,6 +140,7 @@ ssgCore.Events.enableDiscoMode = function(event) {
 
 };
 
+// enables different sections
 ssgCore.Events.sectionEnabler = function(curButton, affectedElement) {
 
     if (curButton.hasClass('active')) {
@@ -210,7 +214,34 @@ ssgCore.Events.isolate = function(event) {
 
 };
 
+// page and template next handler
+ssgCore.Events.prevPage = function(event) {
 
+    event.preventDefault();
+
+    var curIndex = $('#ssg-items').data('item-index');
+
+    $('#ssg-items').data('item-index', curIndex - 1);
+
+    ssgCore.components.addSelector(ssgCore.itemSelector, curIndex - 1);
+
+};
+
+// page and template next handler
+ssgCore.Events.nextPage = function(event) {
+
+    event.preventDefault();
+
+    //  return;
+    var curIndex = parseInt($('#ssg-items').data('item-index'));
+    
+    $('#ssg-items').data('item-index', curIndex + 1);
+
+    ssgCore.components.addSelector(ssgCore.itemSelector, curIndex + 1);
+
+};
+
+// init events
 ssgCore.Events.init = (function() {
 
     // start toggle Toc
@@ -232,8 +263,18 @@ ssgCore.Events.init = (function() {
     // Toggle Annotation
     $('#ssg-btnshowCode').on('click', ssgCore.Events.enableCode);
 
-    // 
+    // Toggle items to isolate
     $('#ssg-btnisolate').on('click', ssgCore.Events.isolate);
+
+    // // page previous page
+    // $('#ssg-item-selector').on('click', '.prev', ssgCore.Events.prevPage);
+
+    // // page next page
+    // $('#ssg-item-selector').on('click', '.next', ssgCore.Events.nextPage);
+
+
+    $('#ssg-item-selector').on('click', '.next', ssgCore.Events.nextPage);
+    $('#ssg-item-selector').on('click', '.prev', ssgCore.Events.prevPage);
 
 
 }());

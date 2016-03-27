@@ -26,7 +26,7 @@ ssgCore.Session.filter = {
 ssgCore.Session.uiOptions = {
 
     add: function(filterValue) {
-        
+
         if (typeof(Storage) !== undefined) {
             if (sessionStorage.getItem('uiOptions') === null) {
                 sessionStorage.setItem('uiOptions', '');

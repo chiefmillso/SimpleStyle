@@ -13,9 +13,8 @@
         display: inline-block;
         float: left;
         box-sizing: border-box;
-        width: 20%;
         height: auto;
-        margin: 0;
+        margin: 0 0 40px;
         padding: 0 20px;
         li {
             font-size: 1.1em;
@@ -31,7 +30,7 @@
         display: inline-block;
         width: 100%;
         padding: 0;
-        column-count: 1;
+        column-count: 5;
     }
     // Child elements of toc container
     .ssg-toc-item {

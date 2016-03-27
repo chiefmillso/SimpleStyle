@@ -23,6 +23,8 @@ var debug = (function() {
 // Core components
 ssgCore.components = {};
 
+ssgCore.itemSelector = null;
+
 ssgCore.components.addButton = function(item, target) {
 
     var button = Handlebars.partials.buttons;
@@ -200,12 +202,12 @@ ssgCore.components.viewPortResizer = function() {
     };
 
     var vpResizer = ssgCore.templates.vpresizer(curWindow);
-        
+
     $('#ssg-vp-resizer').append(vpResizer);
 };
 
 ssgCore.components.additionalTools = function() {
-    
+
     var btnFilter = baseComponents.additionalTools;
 
     for (var i = 0; i < btnFilter.items.length; i++) {
@@ -213,6 +215,58 @@ ssgCore.components.additionalTools = function() {
         this.addButton(btnFilter.items[i], btnFilter.target);
 
     }
+
+};
+
+ssgCore.components.addSelector = function(items, index) {
+
+
+    if (items.length === 0) {
+        return;
+    }
+
+    console.log(index);
+
+    console.log(index + ' - ' + items.length);
+    // console.log(index < 0 && index > items.length);
+    console.log(index <= 0);
+    console.log(index > items.length);
+
+    // if (index - 1 < 0 || index + 1 > items.length) {
+    //     console.log('I guess I reached the end');
+    // }
+
+    var curItem = {},
+        prev,
+        next;
+
+    if (index <= 0) {
+
+        curItem.prevEnabled = 'disabled';
+
+    }
+
+    if (index >= items.length - 1) {
+
+        curItem.nextEnabled = 'disabled';
+
+    }
+
+    curItem.title = items[index].title;
+    curItem.index = index;
+
+    var itemSelectorHtml = ssgCore.templates.itemselector(curItem);
+
+    $('#ssg-item-selector').html(itemSelectorHtml);
+
+    var patterns = $('.ssg-item[data-cat=templates]');
+    if (patterns.length !== 0) {
+
+        patterns.addClass('hide');
+        $(patterns[index]).removeClass('hide');
+
+    }
+
 
 };
 

@@ -69,6 +69,7 @@
         box-sizing: border-box;
         min-width: 320px;
         min-height: 100%;
+        height: inherit !important;
         margin: 0 auto;
         padding: 3em 0 10em 0;
         background-color: white;
@@ -78,6 +79,7 @@
         position: absolute;
         top: auto;
         width: 100%;
+        min-height: 100%;
         background-color: whitesmoke;
     }
     // Base Section
@@ -133,6 +135,9 @@
     }
     .ssg-pattern-label {
         padding-right: 10px;
+    }
+    #ssg-item-selector{
+        display: inline-block;
     }
     @import 'ssgTocList';
     @import 'ssgItem';
