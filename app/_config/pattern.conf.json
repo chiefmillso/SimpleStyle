@@ -145,7 +145,7 @@
             "filepath": "atoms/tables/ms-default-table-7.hbs"
         },
         {
-            "title": "template-02",
+            "title": "This is just a template with a really long title",
             "description": "",
             "filename": "template-02",
             "filepath": "templates/template-02.hbs"

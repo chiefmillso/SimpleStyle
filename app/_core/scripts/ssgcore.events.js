@@ -40,12 +40,14 @@ ssgCore.Events.filterItems = function(event) {
 
         $('.ssg-filter-button').removeClass('active');
         ssgCore.UIHelper.setCategoryFilter(null);
+        ssgCore.components.showAll();
 
     } else {
 
         $('.ssg-filter-button').removeClass('active');
         curButton.addClass('active');
         ssgCore.UIHelper.setCategoryFilter(filterMode);
+        ssgCore.components.showAll();
 
     }
 
@@ -89,8 +91,6 @@ ssgCore.Events.filterItem = function(event) {
     // Select only the current one
     curFilter.addClass('selected');
 
-    console.log(curFilter);
-
     // filter items
     $('.ssg-item').addClass('hide');
     $('.ssg-item[data-file=' + curFilterValue + ']').removeClass('hide');
@@ -117,8 +117,6 @@ ssgCore.Events.enableDiscoMode = function(event) {
     if (!discoBtn.hasClass('active')) {
 
         discoBtn.addClass('active');
-
-        console.log(curWidth);
 
         patternsCtrl.css('width', curWidth);
 
@@ -167,7 +165,6 @@ ssgCore.Events.enableAnnotation = function(event) {
     $('#ssg-btnisolate').removeClass('active');
 
     ssgCore.Session.uiOptions.add('annotation');
-    console.log('annotation');
 
 };
 
@@ -183,7 +180,6 @@ ssgCore.Events.enableCode = function(event) {
     $('#ssg-btnisolate').removeClass('active');
 
     ssgCore.Session.uiOptions.add('code');
-    console.log('code');
 
 };
 
@@ -234,7 +230,7 @@ ssgCore.Events.nextPage = function(event) {
 
     //  return;
     var curIndex = parseInt($('#ssg-items').data('item-index'));
-    
+
     $('#ssg-items').data('item-index', curIndex + 1);
 
     ssgCore.components.addSelector(ssgCore.itemSelector, curIndex + 1);

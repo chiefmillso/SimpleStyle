@@ -6,12 +6,6 @@ var curConfig;
 
 var debug = (function() {
 
-    // // SSG Core
-    // console.log(ssgCore);
-    // // SSG
-    // console.log(ssg);
-    // // Registered partials
-    // console.log(Handlebars.partials);
 
 }());
 
@@ -34,8 +28,8 @@ ssgCore.components.addButton = function(item, target) {
 
 ssgCore.components.toc = function() {
 
-    console.log(baseComponents.toc);
     this.addButton(baseComponents.toc, baseComponents.toc.target);
+
 };
 
 ssgCore.components.filter = function() {
@@ -76,13 +70,18 @@ ssgCore.components.renderPatterns = function() {
 
         var content = patternItem(curPattern);
 
-        // console.log(patternContent);
-        // console.log(curPattern);
-        // console.log(content);
-
         patternCont.append(content);
 
     }
+
+
+};
+
+ssgCore.components.showAll = function() {
+
+    $('.ssg-item[data-cat=\'templates\']').addClass('hide');
+    $('.ssg-item[data-cat=\'pages\']').addClass('hide');
+
 };
 
 ssgCore.components.tocBuilder = function(data) {
@@ -104,9 +103,6 @@ ssgCore.components.tocBuilder = function(data) {
     for (var j = 0; j < patterns.length; j++) {
 
         var folderpath = patterns[j].filepath.split('/')[0];
-
-        // console.log(folderpath);
-        // console.log('#ssg-' + folderpath + '-items');
 
         var patternTitle = '<li class=ssg-toc-item data-filter=\"' +
             patterns[j].filename + '\">' +
@@ -225,17 +221,6 @@ ssgCore.components.addSelector = function(items, index) {
         return;
     }
 
-    console.log(index);
-
-    console.log(index + ' - ' + items.length);
-    // console.log(index < 0 && index > items.length);
-    console.log(index <= 0);
-    console.log(index > items.length);
-
-    // if (index - 1 < 0 || index + 1 > items.length) {
-    //     console.log('I guess I reached the end');
-    // }
-
     var curItem = {},
         prev,
         next;
@@ -259,7 +244,8 @@ ssgCore.components.addSelector = function(items, index) {
 
     $('#ssg-item-selector').html(itemSelectorHtml);
 
-    var patterns = $('.ssg-item[data-cat=templates]');
+    var patterns = $('.ssg-item[data-cat=' + ssgCore.Session.filter.get() + ']');
+
     if (patterns.length !== 0) {
 
         patterns.addClass('hide');

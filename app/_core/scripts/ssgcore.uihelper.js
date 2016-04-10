@@ -5,7 +5,7 @@ ssgCore.UIHelper.setCategoryFilter = function(filter) {
     // setting correct button active
 
     ssgCore.Session.filter.add(filter);
-    console.log(ssgCore.Session.filter.get());
+    console.log('Set filter:  ' + filter);
 
     // regular filter behaviour
     if (filter !== null) {
@@ -14,27 +14,20 @@ ssgCore.UIHelper.setCategoryFilter = function(filter) {
         var currentItems,
             otherItems;
 
+        $('#ssg-item-selector').html('');
+
         if (filter === 'templates' || filter === 'pages') {
 
             var allElements = $('.ssg-item[data-cat=' + filter + ']');
             otherItems = $('.ssg-item');
-            currentItems = $('.ssg-item[data-cat=' + filter + ']:first');
-
-            console.log(currentItems);
-
-            var test = $('.ssg-item[data-cat=' + filter + ']');
-
-            console.log('________________________________');
-            console.log(test);
-            console.log($(test[0]).removeClass('hide'));
-            console.log('________________________________');
-
-            console.log(allElements);
-            this.enablePaging(allElements);
-
             otherItems.addClass('hide');
 
-            currentItems.removeClass('hide');
+            // var test = $('.ssg-item[data-cat=' + filter + ']');
+
+            this.enablePaging(allElements);
+
+            currentItems = $('.ssg-item[data-cat=' + filter + ']');
+            currentItems[0].removeClass('hide');
 
         } else {
 
@@ -47,9 +40,13 @@ ssgCore.UIHelper.setCategoryFilter = function(filter) {
         }
 
         var filterButton = $('#ssg-btn' + filter);
+
         if (filterButton.length !== 0) {
+
             filterButton.addClass('active');
+
         }
+
     } else {
         // remove filter
         $('.ssg-item').removeClass('hide');
