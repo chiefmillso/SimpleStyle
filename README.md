@@ -20,7 +20,9 @@ The following section should give you a brief overview how to use this style gui
 ### Add and maintain patterns
 To store new pattern to the style guide simply add them in the folder
 
-```app/_pattern```
+```
+app/_pattern
+```
 
 This style guide follows the atomic design pattern and all pattern are organized in folders:
 
