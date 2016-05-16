@@ -74,7 +74,7 @@
         },
         {
             "title": "Rich Text Editor - Headlines alternated",
-            "description": "",
+            "description": "Show second verions of headlines used in rich text editor",
             "filename": "ms-rte-headlines-alt",
             "filepath": "atoms/rtestyles/ms-rte-headlines-alt.hbs"
         },
