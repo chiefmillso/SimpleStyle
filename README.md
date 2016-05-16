@@ -1,4 +1,6 @@
 # Simple Style Guide for SharePoint and Office 365 Development
+![alt text][logo]
+
 This project aims to create a consisten Style Guide for SharePoint and Office 365 Development. It should sever as a documentation and development platform for every new SharePoint branding project.
 In future this aims to provide a Style Guide for the new SharePoint Framework too.
 
@@ -94,3 +96,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 
+[logo]: https://github.com/StfBauer/SimpleStyle/blob/dev/docs/assets/simple-style.png?raw=true "Simple Style"
