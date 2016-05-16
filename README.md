@@ -40,8 +40,7 @@ The pattern configuration is stored in the path:
 
 All patterns are stored in the following format:
 
-```
-{
+```{
     "patterns": [
         {
             "title": "Headings",
