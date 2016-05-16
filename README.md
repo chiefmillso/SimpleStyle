@@ -1,6 +1,11 @@
 # Simple Style Guide for SharePoint and Office 365 Development
 This project aims to create a consisten Style Guide for SharePoint and Office 365 Development. It should sever as a documentation and development platform for every new SharePoint branding project.
 In future this aims to provide a Style Guide for the new SharePoint Framework too.
+
+## History
+
+*Current Version:*   0.1
+
 ## Installation
 To create a new project simply clone this repository.
 
@@ -17,10 +22,6 @@ This will install all node packages and bower components. After that you are rea
 
 ## Usage
 The following section should give you a brief overview how to use this style guide.
-
-## History
-
-*Current Version:*   0.1
 
 ### Add and maintain patterns
 To store new pattern to the style guide simply add them in the folder
