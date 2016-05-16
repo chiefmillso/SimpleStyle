@@ -36,7 +36,9 @@ When the web server is running the files will be picked up by a gulp task and au
 
 The pattern configuration is stored in the path: 
 
-```app/_config/pattern.conf.json```
+```
+app/_config/pattern.conf.json
+```
 
 All patterns are stored in the following format:
 
