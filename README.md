@@ -35,8 +35,11 @@ To add new pattern simply add a new HTML File with the file extension ".hbs" the
 When the web server is running the files will be picked up by a gulp task and automatically added to the configuration.
 
 The pattern configuration is stored in the path: 
+
 ```app/_config/pattern.conf.json```
+
 All patterns are stored in the following format:
+
 ```
 {
     "patterns": [
@@ -48,6 +51,7 @@ All patterns are stored in the following format:
         },
         ...
 ```
+
 In ever pattern the title and description property can be change manually to a proper name.
 Filename and file path will be used to find the pattern corresponding with the file.
 ### Adding custom CSS
