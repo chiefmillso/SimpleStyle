@@ -74,6 +74,10 @@ Other files of interest:
 
 All changes of files will precompiled and browser will refresh automatically.
 
+
+## Credits
+Inspiration for this project came from [PatternLab.io](http://patternlab.io) and [Atomic Design](http://bradfrost.com/blog/post/atomic-web-design/) by Brad Frost.
+
 ## License
 
 The MIT License (MIT)
