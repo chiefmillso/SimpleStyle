@@ -7,42 +7,6 @@
             "filepath": "atoms/images/ms-rendition-id-1.hbs"
         },
         {
-            "title": "Image Rendition 3",
-            "description": "Display image renditions with ID 3",
-            "filename": "ms-rendition-id-3",
-            "filepath": "atoms/images/ms-rendition-id-3.hbs"
-        },
-        {
-            "title": "Image Rendition 4",
-            "description": "Display image renditions with ID 4",
-            "filename": "ms-rendition-id-4",
-            "filepath": "atoms/images/ms-rendition-id-4.hbs"
-        },
-        {
-            "title": "Headlines",
-            "description": "",
-            "filename": "h1",
-            "filepath": "atoms/rtestyles/h1.hbs"
-        },
-        {
-            "title": "Rich Text Editor - Ordered List",
-            "description": "",
-            "filename": "ms-rte-ordered-list",
-            "filepath": "atoms/rtestyles/ms-rte-ordered-list.hbs"
-        },
-        {
-            "title": "Rich Text Editor - Linked Headlines",
-            "description": "",
-            "filename": "ms-rte-headlines-linked",
-            "filepath": "atoms/rtestyles/ms-rte-headlines-linked.hbs"
-        },
-        {
-            "title": "Rich Text Editor - Styles ",
-            "description": "",
-            "filename": "ms-rte-text-styles",
-            "filepath": "atoms/rtestyles/ms-rte-text-styles.hbs"
-        },
-        {
             "title": "Rich Text Editor - Linked Headlines alternate",
             "description": "",
             "filename": "ms-rte-headlines-alt-linked",
@@ -53,6 +17,24 @@
             "description": "Display image renditions with ID 2",
             "filename": "ms-rendition-id-2",
             "filepath": "atoms/images/ms-rendition-id-2.hbs"
+        },
+        {
+            "title": "Image Rendition 4",
+            "description": "Display image renditions with ID 4",
+            "filename": "ms-rendition-id-4",
+            "filepath": "atoms/images/ms-rendition-id-4.hbs"
+        },
+        {
+            "title": "Image Rendition 3",
+            "description": "Display image renditions with ID 3",
+            "filename": "ms-rendition-id-3",
+            "filepath": "atoms/images/ms-rendition-id-3.hbs"
+        },
+        {
+            "title": "Rich Text Editor - Linked Headlines",
+            "description": "",
+            "filename": "ms-rte-headlines-linked",
+            "filepath": "atoms/rtestyles/ms-rte-headlines-linked.hbs"
         },
         {
             "title": "Rich Text Editor - Unordered List",
@@ -67,16 +49,16 @@
             "filepath": "atoms/rtestyles/ms-rte-headlines.hbs"
         },
         {
-            "title": "Table Style 10",
+            "title": "Rich Text Editor - Ordered List",
             "description": "",
-            "filename": "ms-default-table-10",
-            "filepath": "atoms/tables/ms-default-table-10.hbs"
+            "filename": "ms-rte-ordered-list",
+            "filepath": "atoms/rtestyles/ms-rte-ordered-list.hbs"
         },
         {
-            "title": "Table Style 9",
+            "title": "Rich Text Editor - Styles ",
             "description": "",
-            "filename": "ms-default-table-9",
-            "filepath": "atoms/tables/ms-default-table-9.hbs"
+            "filename": "ms-rte-text-styles",
+            "filepath": "atoms/rtestyles/ms-rte-text-styles.hbs"
         },
         {
             "title": "Default table style",
@@ -91,16 +73,10 @@
             "filepath": "atoms/tables/ms-default-table-5.hbs"
         },
         {
-            "title": "Table style light band",
+            "title": "Rich Text Editor - Headlines alternated",
             "description": "",
-            "filename": "ms-light-band-table",
-            "filepath": "atoms/tables/ms-light-band-table.hbs"
-        },
-        {
-            "title": "Table light line",
-            "description": "",
-            "filename": "ms-light-line-table",
-            "filepath": "atoms/tables/ms-light-line-table.hbs"
+            "filename": "ms-rte-headlines-alt",
+            "filepath": "atoms/rtestyles/ms-rte-headlines-alt.hbs"
         },
         {
             "title": "Table Style 6",
@@ -121,16 +97,40 @@
             "filepath": "atoms/tables/ms-clear-table.hbs"
         },
         {
-            "title": "test",
+            "title": "Headlines",
             "description": "",
-            "filename": "test",
-            "filepath": "molecules/test.hbs"
+            "filename": "h1",
+            "filepath": "atoms/rtestyles/h1.hbs"
         },
         {
-            "title": "Rich Text Editor - Headlines alternated",
+            "title": "Table Style 7",
             "description": "",
-            "filename": "ms-rte-headlines-alt",
-            "filepath": "atoms/rtestyles/ms-rte-headlines-alt.hbs"
+            "filename": "ms-default-table-7",
+            "filepath": "atoms/tables/ms-default-table-7.hbs"
+        },
+        {
+            "title": "Table Style 10",
+            "description": "",
+            "filename": "ms-default-table-10",
+            "filepath": "atoms/tables/ms-default-table-10.hbs"
+        },
+        {
+            "title": "Table light line",
+            "description": "",
+            "filename": "ms-light-line-table",
+            "filepath": "atoms/tables/ms-light-line-table.hbs"
+        },
+        {
+            "title": "Table Style 8",
+            "description": "",
+            "filename": "ms-default-table-8",
+            "filepath": "atoms/tables/ms-default-table-8.hbs"
+        },
+        {
+            "title": "Table Style 9",
+            "description": "",
+            "filename": "ms-default-table-9",
+            "filepath": "atoms/tables/ms-default-table-9.hbs"
         },
         {
             "title": "test12",
@@ -139,10 +139,10 @@
             "filepath": "organism/test12.hbs"
         },
         {
-            "title": "Table Style 7",
+            "title": "test",
             "description": "",
-            "filename": "ms-default-table-7",
-            "filepath": "atoms/tables/ms-default-table-7.hbs"
+            "filename": "test",
+            "filepath": "molecules/test.hbs"
         },
         {
             "title": "This is just a template with a really long title",
@@ -175,10 +175,16 @@
             "filepath": "templates/template-03.hbs"
         },
         {
-            "title": "Table Style 8",
+            "title": "test-template",
             "description": "",
-            "filename": "ms-default-table-8",
-            "filepath": "atoms/tables/ms-default-table-8.hbs"
+            "filename": "test-template",
+            "filepath": "atoms/tables/test-template.hbs"
+        },
+        {
+            "title": "Table style light band",
+            "description": "",
+            "filename": "ms-light-band-table",
+            "filepath": "atoms/tables/ms-light-band-table.hbs"
         }
     ],
     "folder": [
