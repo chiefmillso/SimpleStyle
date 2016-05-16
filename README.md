@@ -22,6 +22,8 @@ npm install && bower install
 This will install all node packages and bower components. After that you are ready to use it. To start the web server simply run .
 ```gulp serve```
 
+![Screenshot 1][screenshot 1]
+
 ## Usage
 The following section should give you a brief overview how to use this style guide.
 
@@ -97,3 +99,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 [logo]: https://github.com/StfBauer/SimpleStyle/blob/dev/docs/assets/simple-style.png?raw=true "Simple Style"
+[screenshot]: https://github.com/StfBauer/SimpleStyle/blob/dev/docs/assets/screenshot-simple-style.png?raw=true "Screen Shot"
