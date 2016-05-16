@@ -245,11 +245,14 @@ ssgCore.components.addSelector = function(items, index) {
     $('#ssg-item-selector').html(itemSelectorHtml);
 
     var patterns = $('.ssg-item[data-cat=' + ssgCore.Session.filter.get() + ']');
+    console.log(patterns);
 
     if (patterns.length !== 0) {
 
         patterns.addClass('hide');
-        $(patterns[index]).removeClass('hide');
+        var curPattern = $(patterns[index]);
+        curPattern.removeClass('hide');
+        curPattern.find('.ssg-item-code').addClass('show');
 
     }
 

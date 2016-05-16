@@ -8,9 +8,12 @@ ssgCore.UIHelper.setCategoryFilter = function(filter) {
     console.log('Set filter:  ' + filter);
 
     // regular filter behaviour
-    if (filter !== null) {
-        // filter items
+    console.log(typeof filter);
+    console.log(filter);
 
+    if (filter != null) {
+
+        // filter items
         var currentItems,
             otherItems;
 
@@ -48,8 +51,17 @@ ssgCore.UIHelper.setCategoryFilter = function(filter) {
         }
 
     } else {
-        // remove filter
+
+        console.log('------___________-------');
+        // show all elements
         $('.ssg-item').removeClass('hide');
+        console.log($('.ssg-item'));
+        // hide templates and pages
+        $('.ssg-item[data-cat=pages]').addClass('hide');
+        console.log($('.ssg-item'));
+        $('.ssg-item[data-cat=templates]').addClass('hide');
+        console.log($('.ssg-item'));
+    
     }
 
 };

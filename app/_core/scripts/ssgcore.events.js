@@ -139,17 +139,27 @@ ssgCore.Events.enableDiscoMode = function(event) {
 };
 
 // enables different sections
-ssgCore.Events.sectionEnabler = function(curButton, affectedElement) {
+ssgCore.Events.sectionEnabler = function(curButton, affectedElement, noCode) {
+
+    console.log('noCode');
+    console.log(noCode);
+    console.log('/noCode');
 
     if (curButton.hasClass('active')) {
 
         curButton.removeClass('active');
-        affectedElement.removeClass('show');
+
+        if (noCode === undefined) {
+            affectedElement.removeClass('show');
+        }
 
     } else {
 
         curButton.addClass('active');
-        affectedElement.addClass('show');
+        
+        if (noCode === undefined) {
+            affectedElement.addClass('show');
+        }
 
     }
 
@@ -165,6 +175,7 @@ ssgCore.Events.enableAnnotation = function(event) {
     $('#ssg-btnisolate').removeClass('active');
 
     ssgCore.Session.uiOptions.add('annotation');
+    console.log(sessionStorage);
 
 };
 
@@ -174,12 +185,44 @@ ssgCore.Events.enableCode = function(event) {
     var curButton = $(this),
         affectedElement = $('.ssg-item-code');
 
-    ssgCore.Events.sectionEnabler(curButton, affectedElement);
-
     $('.ssg-item').removeClass('isolate');
     $('#ssg-btnisolate').removeClass('active');
 
-    ssgCore.Session.uiOptions.add('code');
+    var currentFilter = ssgCore.Session.filter.get();
+    var curIndex = $('#ssg-items').data('item-index');
+
+    // check if current template selection is not template or page
+    if (currentFilter !== 'templates' && currentFilter !== 'pages') {
+
+        ssgCore.Events.sectionEnabler(curButton, affectedElement);
+        affectedElement.addClass('show');
+
+    } else {
+        // when templates or pages are currently selectd
+        ssgCore.Events.sectionEnabler(curButton, affectedElement, true);
+        console.log($('#ssg-items').data('item-index'));
+    }
+
+    if (curButton.hasClass('active')) {
+
+        ssgCore.Session.uiOptions.add('code');
+
+        console.log('need to enable the code here');
+        console.log('currently active');
+
+    } else {
+
+        ssgCore.Session.uiOptions.remove('code');
+
+        $('.ssg-item-code').removeClass('show');
+        
+        // remove all code elements
+        console.log('remove SHOW here');
+        console.log('currently de-active');
+
+    }
+
+    console.log(sessionStorage);
 
 };
 
@@ -215,6 +258,8 @@ ssgCore.Events.prevPage = function(event) {
 
     event.preventDefault();
 
+    console.log('Move Next');
+
     var curIndex = $('#ssg-items').data('item-index');
 
     $('#ssg-items').data('item-index', curIndex - 1);
@@ -231,7 +276,11 @@ ssgCore.Events.nextPage = function(event) {
     //  return;
     var curIndex = parseInt($('#ssg-items').data('item-index'));
 
+    $('.ssg-item-code').removeClass('show');
+
     $('#ssg-items').data('item-index', curIndex + 1);
+
+    console.log('Move Next');
 
     ssgCore.components.addSelector(ssgCore.itemSelector, curIndex + 1);
 
