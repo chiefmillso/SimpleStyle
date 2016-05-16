@@ -19,6 +19,7 @@ This will install all node packages and bower components. After that you are rea
 The following section should give you a brief overview how to use this style guide.
 
 ## History
+
 ------------------------
 | Current Version: | 0.1 |
 ------------------------
