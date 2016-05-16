@@ -17,6 +17,12 @@ This will install all node packages and bower components. After that you are rea
 
 ## Usage
 The following section should give you a brief overview how to use this style guide.
+
+## History
+------------------------
+| Current Version: | 0.1 |
+------------------------
+
 ### Add and maintain patterns
 To store new pattern to the style guide simply add them in the folder
 
