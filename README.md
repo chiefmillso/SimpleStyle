@@ -44,7 +44,8 @@ app/_config/pattern.conf.json
 
 All patterns are stored in the following format:
 
-```{
+```
+{
     "patterns": [
         {
             "title": "Headings",
@@ -52,12 +53,13 @@ All patterns are stored in the following format:
             "filename": "00-headings",
             "filepath": "atoms/00-headings.hbs"
         },
-        ...
 ```
 
 In ever pattern the title and description property can be change manually to a proper name.
 Filename and file path will be used to find the pattern corresponding with the file.
+
 ### Adding custom CSS
+
 All custom CSS use SASS as a preprocessor. The main file of the style guide is stored in the folder ```styles```.
 Other files of interest:
 
@@ -67,6 +69,7 @@ Other files of interest:
 All changes of files will precompiled and browser will refresh automatically.
 
 ## License
+
 The MIT License (MIT)
 Copyright (c) 2016 Stefan Bauer - N8D
 
