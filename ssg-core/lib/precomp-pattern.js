@@ -28,7 +28,7 @@ module.exports = function(patternConfig) {
         // handlebars
         .pipe(handlebars(hbOptions))
         // wrap inline javascript
-        .pipe(wrap('Handlebars.registerPartial(<%= processPartialName(file.relative) %>,' +
+        .pipe(wrap('Handlebars.registerPartial(<%= imports.processPartialName(file.relative) %>,' +
             'Handlebars.template(<%= contents %>));', {}, {
                 imports: {
                     processPartialName: function(fileName) {
