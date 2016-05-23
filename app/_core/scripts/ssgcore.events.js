@@ -141,9 +141,7 @@ ssgCore.Events.enableDiscoMode = function(event) {
 // enables different sections
 ssgCore.Events.sectionEnabler = function(curButton, affectedElement, noCode) {
 
-    console.log('noCode');
-    console.log(noCode);
-    console.log('/noCode');
+    console.log(affectedElement);
 
     if (curButton.hasClass('active')) {
 
@@ -156,7 +154,7 @@ ssgCore.Events.sectionEnabler = function(curButton, affectedElement, noCode) {
     } else {
 
         curButton.addClass('active');
-        
+
         if (noCode === undefined) {
             affectedElement.addClass('show');
         }
@@ -175,7 +173,6 @@ ssgCore.Events.enableAnnotation = function(event) {
     $('#ssg-btnisolate').removeClass('active');
 
     ssgCore.Session.uiOptions.add('annotation');
-    console.log(sessionStorage);
 
 };
 
@@ -183,13 +180,14 @@ ssgCore.Events.enableAnnotation = function(event) {
 ssgCore.Events.enableCode = function(event) {
 
     var curButton = $(this),
-        affectedElement = $('.ssg-item-code');
+        affectedElement;
 
     $('.ssg-item').removeClass('isolate');
     $('#ssg-btnisolate').removeClass('active');
 
     var currentFilter = ssgCore.Session.filter.get();
     var curIndex = $('#ssg-items').data('item-index');
+    affectedElement = $('div[data-cat=' + currentFilter + '] .ssg-item-code');
 
     // check if current template selection is not template or page
     if (currentFilter !== 'templates' && currentFilter !== 'pages') {
@@ -215,7 +213,7 @@ ssgCore.Events.enableCode = function(event) {
         ssgCore.Session.uiOptions.remove('code');
 
         $('.ssg-item-code').removeClass('show');
-        
+
         // remove all code elements
         console.log('remove SHOW here');
         console.log('currently de-active');

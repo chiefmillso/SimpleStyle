@@ -27,6 +27,9 @@
     }
     .sample {
         margin: 2em 0;
+        > * {
+            float: none !important;
+        }
     }
     &.hide {
         margin: 0;
@@ -43,6 +46,19 @@
             border: 1px #dcdcdc solid;
         }
     }
+    .ssg-label {
+        font-size: .9em;
+        margin: 1em 0;
+        padding: .25em 0;
+        color: #999;
+        border-bottom: 1px #ccc solid;
+        display: block;
+        &:hover{
+            border-color: #000;
+            color: #000;
+            cursor: default;
+        }
+    }
     &[data-cat='atoms'],
     &[data-cat='molecules'],
     &[data-cat='organism'] {
@@ -53,21 +69,21 @@
             &-header {
                 position: fixed;
                 top: 36px;
-                width: 100%;
                 box-sizing: border-box;
+                width: 100%;
             }
             &-title {
-                padding: 0.5em 1em;
+                padding: .5em 1em;
             }
             &-description {
-                padding: 0.5em 1em;
+                padding: .5em 1em;
             }
-            &-code.show{
+            &-code.show {
                 position: absolute;
-                bottom: 0px;
+                bottom: 0;
                 width: 100%;
-                padding: 1em;
                 min-height: 300px;
+                padding: 1em;
             }
         }
         .sample {
