@@ -108,7 +108,8 @@
         margin: 2px;
         padding: 2px 6px 3px 6px;
         border: 1px black solid;
-        veritcal-algin: baseline;
+        vertical-align: baseline;
+        font-size: 12px;
         // Small button
         &:focus {
             border: 1px $red solid;

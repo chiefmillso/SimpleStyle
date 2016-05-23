@@ -70,6 +70,17 @@ module.exports = {
 
         var writeConfigToFile = function() {
 
+            console.log('pattern sort');
+            patternsData = patternsData.sort(function(a, b) {
+                if (a.filepath < b.filepath)
+                    return -1;
+                else if (a.filepath > b.filepath)
+                    return 1;
+                else
+                    return 0;
+            });
+            console.log('pattern sort');
+
             var patternConfig = {
                 patterns: patternsData,
                 folder: [{
@@ -199,11 +210,7 @@ module.exports = {
             );
 
             precompile(config.ssg)
-                .on('error', function(a,b,c) {
-                    
-                    console.log(a);
-                    console.log(b);
-                    console.log(c);
+                .on('error', function(a, b, c) {
 
                     plugins.util.log(
                         plugins.util.colors.green('Precompilation failed.')
@@ -229,9 +236,25 @@ module.exports = {
                 cause = '';
             }
 
-            newConfig.patterns.sort(function(a, b) {
-                return a.filepath > b.filepath ? 0 : -1;
+            var currentPatterns = newConfig.patterns;
+
+            var sortedPatterns = currentPatterns.sort(function(a, b) {
+
+                if (a.filepath < b.filepath) {
+                    return -1;
+                }
+                if (a.filepath > b.filepath) {
+                    return 1;
+                }
+
+                // names must be equal
+                return 0;
             });
+
+            newConfig.patterns = sortedPatterns;
+            // console.log('Hello world');
+            // console.log(test);
+            // console.log('Hello world');
 
             var patterns = JSON.stringify(newConfig, null, 4);
 

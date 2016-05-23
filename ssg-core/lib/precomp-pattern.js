@@ -20,7 +20,9 @@ module.exports = function(patternConfig) {
     var config = require('../../gulp.config.js');
 
 
+    console.log("-------------");
     console.log(patternConfig.partials);
+    console.log("-------------");
 
     // partials stream
     var partials = gulp.src(patternConfig.partials)
@@ -35,8 +37,6 @@ module.exports = function(patternConfig) {
                         var patternName = path.basename(fileName, '.js');
                         if (patternName.indexOf("_") === 0) {
                             patternName = patternName.substr(1);
-                            console.log("patternName");
-                            console.log(patternName);
                         }
                         return JSON.stringify(patternName);
                     }
