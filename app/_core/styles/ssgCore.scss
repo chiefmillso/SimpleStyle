@@ -21,8 +21,8 @@
         content: ' ';
     }
 }
+
 :root {
-    
     body {
         overflow: auto !important;
         height: 100%;
@@ -66,7 +66,7 @@
     // Design
     #ssg-toolbar {
         position: fixed;
-        z-index: 100;
+        z-index: 10000;
         top: 0;
         width: 100%;
         padding: 0 .25em;

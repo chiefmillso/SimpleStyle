@@ -1,5 +1,11 @@
 {
     "patterns": [{
+            "title": "Office Fabric - Button",
+            "description": "",
+            "filename": "02-fabric-button",
+            "filepath": "atoms/fabric/02-fabric-button.hbs"
+        },
+        {
             "title": "Figure Caption",
             "description": "",
             "filename": "01-figure-caption",
@@ -256,6 +262,18 @@
             "description": "",
             "filename": "06-ms-site-title",
             "filepath": "atoms/text/06-ms-site-title.hbs"
+        },
+        {
+            "title": "Office UI Fabric Breadcrumb",
+            "description": "",
+            "filename": "01-fabric-breadcrumb",
+            "filepath": "molecules/fabric/01-fabric-breadcrumb.hbs"
+        },
+        {
+            "title": "Office UI Fabric Callouts",
+            "description": "",
+            "filename": "03-fabric-callout",
+            "filepath": "molecules/fabric/03-fabric-callout.hbs"
         },
         {
             "title": "figure-with-caption-below",

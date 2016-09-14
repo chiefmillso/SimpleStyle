@@ -17,6 +17,7 @@ var debug = (function() {
 // Constructor
 // Core components
 ssgCore.components = {};
+ssgCore.onLoad = ssgCore.onLoad || [];
 
 ssgCore.itemSelector = null;
 
@@ -191,7 +192,6 @@ ssgCore.components.resize = function() {
         setTimeout(function() {
 
             patternsCtrl.removeAttr('style').delay(1000).removeClass('animate');
-
             patternsInnerCtrl.removeAttr('style').delay(1000).removeClass('animate');
 
         }, 1000);
@@ -295,7 +295,10 @@ ssgCore.initUi = (function() {
 
         // apply category filter
         ssgCore.UIHelper.setCategoryFilter(curFilter);
-
+        
+        for (var i = 0; i < ssgCore.onLoad.length; i++) {
+            ssgCore.onLoad[i]();
+        }
     });
 
     // init filter button
@@ -309,5 +312,4 @@ ssgCore.initUi = (function() {
 
     //
     ssgCore.components.additionalTools();
-
 }());
