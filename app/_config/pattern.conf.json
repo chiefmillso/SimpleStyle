@@ -33,31 +33,36 @@
             "title": "SharePoint List Form - Choice Fill in",
             "description": "",
             "filename": "04-ms-list-forms-choice-fill-in",
-            "filepath": "atoms/forms/04-ms-list-forms-choice-fill-in.hbs"
+            "filepath": "atoms/forms/04-ms-list-forms-choice-fill-in.hbs",
+            "framework": "o365_forms.hbs"
         },
         {
             "title": "SharePoint List Form - Choice",
             "description": "",
             "filename": "05-ms-list-forms-choice",
-            "filepath": "atoms/forms/05-ms-list-forms-choice.hbs"
+            "filepath": "atoms/forms/05-ms-list-forms-choice.hbs",
+            "framework": "o365_forms.hbs"
         },
         {
             "title": "SharePoint List - Form Date",
             "description": "",
             "filename": "06-ms-list-forms-date",
-            "filepath": "atoms/forms/06-ms-list-forms-date.hbs"
+            "filepath": "atoms/forms/06-ms-list-forms-date.hbs",
+            "framework": "o365_forms.hbs"
         },
         {
             "title": "SharePoint List Form - Form Multiline of Text",
             "description": "",
             "filename": "07-ms-list-forms-multi-line-text",
-            "filepath": "atoms/forms/07-ms-list-forms-multi-line-text.hbs"
+            "filepath": "atoms/forms/07-ms-list-forms-multi-line-text.hbs",
+            "framework": "o365_forms.hbs"
         },
         {
             "title": "SharePoint List Form - Single Line of Text",
             "description": "",
             "filename": "08-ms-list-forms-single-line-text",
-            "filepath": "atoms/forms/08-ms-list-forms-single-line-text.hbs"
+            "filepath": "atoms/forms/08-ms-list-forms-single-line-text.hbs",
+            "framework": "o365_forms.hbs"
         },
         {
             "title": "HTML Input Controls",
@@ -105,43 +110,50 @@
             "title": "Rich Text Editor - Headlines",
             "description": "",
             "filename": "01-ms-rte-headlines",
-            "filepath": "atoms/rtestyles/01-ms-rte-headlines.hbs"
+            "filepath": "atoms/rtestyles/01-ms-rte-headlines.hbs",
+            "framework": "o365_rte.hbs"
         },
         {
             "title": "Rich Text Editor - Headlines alternated",
             "description": "Show second verions of headlines used in rich text editor",
             "filename": "02-ms-rte-headlines-alt",
-            "filepath": "atoms/rtestyles/02-ms-rte-headlines-alt.hbs"
+            "filepath": "atoms/rtestyles/02-ms-rte-headlines-alt.hbs",
+            "framework": "o365_rte.hbs"
         },
         {
             "title": "Rich Text Editor - Linked Headlines",
             "description": "",
             "filename": "03-ms-rte-headlines-linked",
-            "filepath": "atoms/rtestyles/03-ms-rte-headlines-linked.hbs"
+            "filepath": "atoms/rtestyles/03-ms-rte-headlines-linked.hbs",
+            "framework": "o365_rte.hbs"
         },
         {
             "title": "Rich Text Editor - Linked Headlines alternate",
             "description": "",
             "filename": "04-ms-rte-headlines-alt-linked",
-            "filepath": "atoms/rtestyles/04-ms-rte-headlines-alt-linked.hbs"
+            "filepath": "atoms/rtestyles/04-ms-rte-headlines-alt-linked.hbs",
+            "framework": "o365_rte.hbs"
         },
         {
             "title": "Rich Text Editor - Ordered List",
             "description": "",
             "filename": "05-ms-rte-ordered-list",
-            "filepath": "atoms/rtestyles/05-ms-rte-ordered-list.hbs"
+            "filepath": "atoms/rtestyles/05-ms-rte-ordered-list.hbs",
+            "framework": "o365_rte.hbs"
         },
         {
             "title": "Rich Text Editor - Unordered List",
             "description": "",
             "filename": "06-ms-rte-unordered-list",
-            "filepath": "atoms/rtestyles/06-ms-rte-unordered-list.hbs"
+            "filepath": "atoms/rtestyles/06-ms-rte-unordered-list.hbs",
+            "framework": "o365_rte.hbs"
         },
         {
             "title": "Rich Text Editor - Styles ",
             "description": "",
             "filename": "07-ms-rte-text-styles",
-            "filepath": "atoms/rtestyles/07-ms-rte-text-styles.hbs"
+            "filepath": "atoms/rtestyles/07-ms-rte-text-styles.hbs",
+            "framework": "o365_rte.hbs"
         },
         {
             "title": "Clear table style",

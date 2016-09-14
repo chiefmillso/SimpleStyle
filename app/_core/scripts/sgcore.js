@@ -67,9 +67,17 @@ ssgCore.components.renderPatterns = function() {
             patternContent = patternContent();
         }
 
-        // todo: wrap the sample with the appropriate boilerplate
+        // the following section wraps the sample code with framework code - e.g. o365 forms / o365 rte
+        var sample = patternContent;
+        if (curPattern.framework !== undefined) {
+            var wrapperName = curPattern.framework.split('.')[0];
+            var wrapper = ssgCore.templates[wrapperName];
+            if (wrapper !== undefined && patternContent !== undefined) {
+                sample = wrapper({ 'body': sample });
+            }
+        }
 
-        curPattern.sample = patternContent;
+        curPattern.sample = sample;
         curPattern.rawContent = patternContent;
 
         var content = patternItem(curPattern);
