@@ -67,7 +67,10 @@ ssgCore.components.renderPatterns = function() {
             patternContent = patternContent();
         }
 
+        // todo: wrap the sample with the appropriate boilerplate
+
         curPattern.sample = patternContent;
+        curPattern.rawContent = patternContent;
 
         var content = patternItem(curPattern);
 
