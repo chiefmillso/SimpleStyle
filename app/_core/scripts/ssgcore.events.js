@@ -205,6 +205,8 @@ ssgCore.Events.enableCode = function(event) {
 
         ssgCore.Session.uiOptions.add('code');
 
+        $('.ssg-item-code').addClass('show');
+
         console.log('need to enable the code here');
         console.log('currently active');
 

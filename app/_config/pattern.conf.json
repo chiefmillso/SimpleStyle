@@ -1,6 +1,5 @@
 {
-    "patterns": [
-        {
+    "patterns": [{
             "title": "Figure Caption",
             "description": "",
             "filename": "01-figure-caption",
@@ -217,7 +216,7 @@
             "filepath": "atoms/text/01-fonts.hbs"
         },
         {
-            "title": "01-paragraph",
+            "title": "02-paragraph",
             "description": "",
             "filename": "02-paragraph",
             "filepath": "atoms/text/02-paragraph.hbs"
@@ -265,8 +264,7 @@
             "filepath": "molecules/ms-site-logo.hbs"
         }
     ],
-    "folder": [
-        {
+    "folder": [{
             "name": "atoms",
             "description": "Contains all atom elements"
         },

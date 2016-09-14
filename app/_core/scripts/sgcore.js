@@ -3,6 +3,7 @@
 // var ssgCore = ssgCore || {};
 
 var curConfig;
+var baseComponents = window.baseComponents;
 
 var debug = (function() {
 
@@ -245,7 +246,6 @@ ssgCore.components.addSelector = function(items, index) {
     $('#ssg-item-selector').html(itemSelectorHtml);
 
     var patterns = $('.ssg-item[data-cat=' + ssgCore.Session.filter.get() + ']');
-    console.log(patterns);
 
     if (patterns.length !== 0) {
 
@@ -253,7 +253,6 @@ ssgCore.components.addSelector = function(items, index) {
         var curPattern = $(patterns[index]);
         curPattern.removeClass('hide');
         curPattern.find('.ssg-item-code').addClass('show');
-
     }
 
 
