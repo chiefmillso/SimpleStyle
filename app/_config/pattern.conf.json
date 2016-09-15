@@ -265,10 +265,46 @@
             "filepath": "atoms/text/06-ms-site-title.hbs"
         },
         {
+            "title": "atoms\\forms\\01-figure-caption",
+            "description": "",
+            "filename": "atoms\\forms\\01-figure-caption",
+            "filepath": "atoms\\forms\\01-figure-caption.hbs"
+        },
+        {
             "title": "atoms\\forms\\01-html5-inputs",
             "description": "",
             "filename": "atoms\\forms\\01-html5-inputs",
             "filepath": "atoms\\forms\\01-html5-inputs.hbs"
+        },
+        {
+            "title": "atoms\\forms\\02-ms-command-link",
+            "description": "",
+            "filename": "atoms\\forms\\02-ms-command-link",
+            "filepath": "atoms\\forms\\02-ms-command-link.hbs"
+        },
+        {
+            "title": "atoms\\forms\\04-ms-list-forms-choice-fill-in",
+            "description": "",
+            "filename": "atoms\\forms\\04-ms-list-forms-choice-fill-in",
+            "filepath": "atoms\\forms\\04-ms-list-forms-choice-fill-in.hbs"
+        },
+        {
+            "title": "atoms\\forms\\06-ms-list-forms-date",
+            "description": "",
+            "filename": "atoms\\forms\\06-ms-list-forms-date",
+            "filepath": "atoms\\forms\\06-ms-list-forms-date.hbs"
+        },
+        {
+            "title": "atoms\\forms\\07-ms-list-forms-multi-line-text",
+            "description": "",
+            "filename": "atoms\\forms\\07-ms-list-forms-multi-line-text",
+            "filepath": "atoms\\forms\\07-ms-list-forms-multi-line-text.hbs"
+        },
+        {
+            "title": "atoms\\images\\ms-site-icon",
+            "description": "",
+            "filename": "atoms\\images\\ms-site-icon",
+            "filepath": "atoms\\images\\ms-site-icon.hbs"
         },
         {
             "title": "Office Chrome - Suite Bar",
