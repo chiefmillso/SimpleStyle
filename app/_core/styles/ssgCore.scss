@@ -71,7 +71,7 @@
         width: 100%;
         padding: 0 .25em;
         border-bottom: 1px black solid;
-        background-color: white;
+        background-color: $color-grey-600;
         @extend %ssg-base-font;
     }
     .ssg-patterns {

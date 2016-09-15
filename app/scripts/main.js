@@ -1,3 +1,5 @@
+/* globals fabric */
+
 var ssgCore = ssgCore || {};
 (function($) {
     ssgCore.onLoad = ssgCore.onLoad || [];
@@ -6,7 +8,7 @@ var ssgCore = ssgCore || {};
         // File Picker demo fixes
         if ($('.ms-FilePicker').length > 0) {
             $('.ms-FilePicker').css({
-                "position": "absolute !important"
+                'position': 'absolute !important'
             });
 
             $('.ms-Panel').FilePicker();
@@ -14,13 +16,18 @@ var ssgCore = ssgCore || {};
             if ($.fn.Breadcrumb) {
                 $('.ms-Breadcrumb').Breadcrumb();
             }
+            if ($.fn.CommandBar) {
+                $('.ms-CommandBar').CommandBar();
+            }
         }
 
         // Vanilla JS Components
-        if (typeof fabric === "object") {
+        if (typeof fabric === 'object') {
             if ('Breadcrumb' in fabric) {
-                var element = document.querySelector('.ms-Breadcrumb');
-                var component = new fabric['Breadcrumb'](element);
+                new fabric['Breadcrumb'](document.querySelector('.ms-Breadcrumb'));
+            }
+            if ('CommandBar' in fabric) {
+                new fabric['CommandBar'](document.querySelector('.ms-CommandBar'));
             }
         }
 

@@ -1,10 +1,15 @@
 {
-    "patterns": [
-        {
+    "patterns": [{
             "title": "Office Fabric - Button",
             "description": "",
             "filename": "02-fabric-button",
             "filepath": "atoms/fabric/02-fabric-button.hbs"
+        },
+        {
+            "title": "Office Fabric - Choice Fields",
+            "description": "",
+            "filename": "04-fabric-choicefield",
+            "filepath": "atoms/fabric/04-fabric-choicefield.hbs"
         },
         {
             "title": "Figure Caption",
@@ -105,7 +110,8 @@
             "title": "SharePoint Site Icon",
             "description": "",
             "filename": "ms-site-icon",
-            "filepath": "atoms/images/ms-site-icon.hbs"
+            "filepath": "atoms/images/ms-site-icon.hbs",
+            "framework": "o365_titlearea.hbs"
         },
         {
             "title": "Definition List",
@@ -265,58 +271,10 @@
             "filepath": "atoms/text/06-ms-site-title.hbs"
         },
         {
-            "title": "atoms\\forms\\01-figure-caption",
-            "description": "",
-            "filename": "atoms\\forms\\01-figure-caption",
-            "filepath": "atoms\\forms\\01-figure-caption.hbs"
-        },
-        {
-            "title": "atoms\\forms\\01-html5-inputs",
-            "description": "",
-            "filename": "atoms\\forms\\01-html5-inputs",
-            "filepath": "atoms\\forms\\01-html5-inputs.hbs"
-        },
-        {
-            "title": "atoms\\forms\\02-ms-command-link",
-            "description": "",
-            "filename": "atoms\\forms\\02-ms-command-link",
-            "filepath": "atoms\\forms\\02-ms-command-link.hbs"
-        },
-        {
-            "title": "atoms\\forms\\04-ms-list-forms-choice-fill-in",
-            "description": "",
-            "filename": "atoms\\forms\\04-ms-list-forms-choice-fill-in",
-            "filepath": "atoms\\forms\\04-ms-list-forms-choice-fill-in.hbs"
-        },
-        {
-            "title": "atoms\\forms\\06-ms-list-forms-date",
-            "description": "",
-            "filename": "atoms\\forms\\06-ms-list-forms-date",
-            "filepath": "atoms\\forms\\06-ms-list-forms-date.hbs"
-        },
-        {
-            "title": "atoms\\forms\\07-ms-list-forms-multi-line-text",
-            "description": "",
-            "filename": "atoms\\forms\\07-ms-list-forms-multi-line-text",
-            "filepath": "atoms\\forms\\07-ms-list-forms-multi-line-text.hbs"
-        },
-        {
-            "title": "atoms\\images\\ms-site-icon",
-            "description": "",
-            "filename": "atoms\\images\\ms-site-icon",
-            "filepath": "atoms\\images\\ms-site-icon.hbs"
-        },
-        {
             "title": "Office Chrome - Suite Bar",
             "description": "",
             "filename": "chrome-01-suitebar",
             "filepath": "molecules/chrome/chrome-01-suitebar.hbs"
-        },
-        {
-            "title": "Woods Bagot - Header",
-            "description": "",
-            "filename": "woodsbagot-01-header",
-            "filepath": "molecules/client/woodsbagot-01-header.hbs"
         },
         {
             "title": "Office UI Fabric Breadcrumb",
@@ -347,10 +305,15 @@
             "description": "",
             "filename": "ms-site-logo",
             "filepath": "molecules/ms-site-logo.hbs"
+        },
+        {
+            "title": "Office Fabric - CommandBar",
+            "description": "",
+            "filename": "05-fabric-comandbar",
+            "filepath": "molecules/fabric/05-fabric-comandbar.hbs"
         }
     ],
-    "folder": [
-        {
+    "folder": [{
             "name": "atoms",
             "description": "Contains all atom elements"
         },

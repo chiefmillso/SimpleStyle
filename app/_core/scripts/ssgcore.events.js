@@ -101,9 +101,8 @@ ssgCore.Events.filterItem = function(event) {
 };
 
 ssgCore.Events.setSize = function(event) {
-
     event.preventDefault();
-}
+};
 
 // Enable disco mode through automatic resizing
 ssgCore.Events.enableDiscoMode = function(event) {

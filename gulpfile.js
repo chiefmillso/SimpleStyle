@@ -273,7 +273,8 @@ gulp.task('serve', ['ssgCore-update', 'styles', 'styles:core', 'precompile:core'
                 '/tmp': '/'
             }
         },
-        https: true
+        https: true,
+	open: false
     });
 
 
@@ -291,6 +292,10 @@ gulp.task('serve', ['ssgCore-update', 'styles', 'styles:core', 'precompile:core'
     ]).on('change', reload);
 
     gulp.watch('app/_core/**/*.js', ['ssgCore-update'], reload);
+
+    gulp.watch('app/_core/**/*.hbs')
+        // item was changed
+        .on('change', ssgCoreConfig.fsEvents);
 
     gulp.watch('app/_core/styles/*.scss', ['styles:core'], reload);
     gulp.watch('app/styles/**/*.scss', ['styles'], reload);
