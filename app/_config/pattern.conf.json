@@ -1,5 +1,6 @@
 {
-    "patterns": [{
+    "patterns": [
+        {
             "title": "Office Fabric - Button",
             "description": "",
             "filename": "02-fabric-button",
@@ -264,6 +265,24 @@
             "filepath": "atoms/text/06-ms-site-title.hbs"
         },
         {
+            "title": "atoms\\forms\\01-html5-inputs",
+            "description": "",
+            "filename": "atoms\\forms\\01-html5-inputs",
+            "filepath": "atoms\\forms\\01-html5-inputs.hbs"
+        },
+        {
+            "title": "Office Chrome - Suite Bar",
+            "description": "",
+            "filename": "chrome-01-suitebar",
+            "filepath": "molecules/chrome/chrome-01-suitebar.hbs"
+        },
+        {
+            "title": "Woods Bagot - Header",
+            "description": "",
+            "filename": "woodsbagot-01-header",
+            "filepath": "molecules/client/woodsbagot-01-header.hbs"
+        },
+        {
             "title": "Office UI Fabric Breadcrumb",
             "description": "",
             "filename": "01-fabric-breadcrumb",
@@ -294,7 +313,8 @@
             "filepath": "molecules/ms-site-logo.hbs"
         }
     ],
-    "folder": [{
+    "folder": [
+        {
             "name": "atoms",
             "description": "Contains all atom elements"
         },
