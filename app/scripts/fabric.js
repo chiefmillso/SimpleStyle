@@ -40,6 +40,8 @@ fabric.Breadcrumb.prototype = (function() {
     //medium breakpoint
     var MEDIUM = 639;
     var _createItemCollection, _onResize, _renderListOnResize, _addItemsToOverflow, _addBreadcrumbItems;
+    var _resetList, _openOverflow, _overflowKeyPress, _closeOverflow, _removeClass;
+    var _setListeners, _updateBreadcrumbs, _removeOutlinesOnClick;
 
     /**
      * initializes component
@@ -186,7 +188,7 @@ fabric.Breadcrumb.prototype = (function() {
     /**
      * resets a list by removing its children
      */
-    var _resetList = function(list) {
+    _resetList = function(list) {
         while (list.firstChild) {
             list.removeChild(list.firstChild);
         }
@@ -195,16 +197,16 @@ fabric.Breadcrumb.prototype = (function() {
     /**
      * opens the overflow menu
      */
-    var _openOverflow = function(event) {
+    _openOverflow = function(event) {
         if (this.overflowMenu.className.indexOf(' is-open') === -1) {
             this.overflowMenu.className += ' is-open';
-            removeOutlinesOnClick.call(this, event);
+            _removeOutlinesOnClick.call(this, event);
             // force focus rect onto overflow button
             this.overflowButton.focus();
         }
     };
 
-    var _overflowKeyPress = function(event) {
+    _overflowKeyPress = function(event) {
         if (event.keyCode === 13) {
             _openOverflow.call(this, event);
         }
@@ -213,7 +215,7 @@ fabric.Breadcrumb.prototype = (function() {
     /**
      * closes the overflow menu
      */
-    var _closeOverflow = function(event) {
+    _closeOverflow = function(event) {
         if (!event || event.target !== this.overflowButton) {
             _removeClass.call(this, this.overflowMenu, ' is-open');
         }
@@ -222,7 +224,7 @@ fabric.Breadcrumb.prototype = (function() {
     /**
      * utility that removes a class from an element
      */
-    var _removeClass = function(element, value) {
+    _removeClass = function(element, value) {
         var index = element.className.indexOf(value);
         if (index > -1) {
             element.className = element.className.substring(0, index);
@@ -232,25 +234,25 @@ fabric.Breadcrumb.prototype = (function() {
     /**
      * sets handlers for resize and button click events
      */
-    var _setListeners = function() {
+    _setListeners = function() {
         window.addEventListener('resize', _onResize.bind(this), false);
         document.addEventListener('click', _closeOverflow.bind(this), false);
         this.overflowButton.addEventListener('click', _openOverflow.bind(this), false);
         this.overflowButton.addEventListener('keypress', _overflowKeyPress.bind(this), false);
-        this.breadcrumbList.addEventListener('click', removeOutlinesOnClick.bind(this), false);
+        this.breadcrumbList.addEventListener('click', _removeOutlinesOnClick.bind(this), false);
     };
 
     /**
      * removes focus outlines so they don't linger after click
      */
-    var removeOutlinesOnClick = function(event) {
+    _removeOutlinesOnClick = function(event) {
         event.target.blur();
     };
 
     /**
      * updates the breadcrumbs and overflow menu
      */
-    var _updateBreadcrumbs = function() {
+    _updateBreadcrumbs = function() {
         var maxItems = window.innerWidth > MEDIUM ? 4 : 2;
         if (this.itemCollection.length > maxItems) {
             this.breadcrumb.className += ' is-overflow';

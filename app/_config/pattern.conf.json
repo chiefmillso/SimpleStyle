@@ -1,316 +1,225 @@
 {
     "patterns": [{
-            "title": "Office Fabric - Button",
+            "title": "Fabric UI - Buttons",
             "description": "",
             "filename": "02-fabric-button",
-            "filepath": "atoms/fabric/02-fabric-button.hbs"
+            "filepath": "atoms\\fabric\\02-fabric-button.hbs"
         },
         {
-            "title": "Office Fabric - Choice Fields",
+            "title": "Fabric UI - ChoiceField",
             "description": "",
             "filename": "04-fabric-choicefield",
-            "filepath": "atoms/fabric/04-fabric-choicefield.hbs"
+            "filepath": "atoms\\fabric\\04-fabric-choicefield.hbs"
         },
         {
-            "title": "Figure Caption",
+            "title": "Forms - Figure Caption",
             "description": "",
             "filename": "01-figure-caption",
-            "filepath": "atoms/figures/01-figure-caption.hbs"
+            "filepath": "atoms\\forms\\01-figure-caption.hbs"
         },
         {
-            "title": "Figure",
-            "description": "",
-            "filename": "figure",
-            "filepath": "atoms/figures/figure.hbs"
-        },
-        {
-            "title": "HTML5 Input Controls",
+            "title": "Forms - HTML5 Inputs",
             "description": "",
             "filename": "01-html5-inputs",
-            "filepath": "atoms/forms/01-html5-inputs.hbs"
+            "filepath": "atoms\\forms\\01-html5-inputs.hbs"
         },
         {
-            "title": "Command Link",
+            "title": "02-ms-command-link",
             "description": "",
             "filename": "02-ms-command-link",
-            "filepath": "atoms/forms/02-ms-command-link.hbs"
+            "filepath": "atoms\\forms\\02-ms-command-link.hbs"
         },
         {
-            "title": "Hero Button",
-            "description": "",
-            "filename": "03-ms-hero-button",
-            "filepath": "atoms/forms/03-ms-hero-button.hbs"
-        },
-        {
-            "title": "SharePoint List Form - Choice Fill in",
+            "title": "List Forms - Choice Field - Fill In",
             "description": "",
             "filename": "04-ms-list-forms-choice-fill-in",
-            "filepath": "atoms/forms/04-ms-list-forms-choice-fill-in.hbs",
-            "framework": "o365_forms.hbs"
+            "filepath": "atoms\\forms\\04-ms-list-forms-choice-fill-in.hbs"
         },
         {
-            "title": "SharePoint List Form - Choice",
+            "title": "List Forms - Choice Field",
             "description": "",
             "filename": "05-ms-list-forms-choice",
-            "filepath": "atoms/forms/05-ms-list-forms-choice.hbs",
-            "framework": "o365_forms.hbs"
+            "filepath": "atoms\\forms\\05-ms-list-forms-choice.hbs"
         },
         {
-            "title": "SharePoint List - Form Date",
+            "title": "List Forms - Date Field",
             "description": "",
             "filename": "06-ms-list-forms-date",
-            "filepath": "atoms/forms/06-ms-list-forms-date.hbs",
-            "framework": "o365_forms.hbs"
+            "filepath": "atoms\\forms\\06-ms-list-forms-date.hbs"
         },
         {
-            "title": "SharePoint List Form - Form Multiline of Text",
+            "title": "List Forms - Multiline Text Field",
             "description": "",
             "filename": "07-ms-list-forms-multi-line-text",
-            "filepath": "atoms/forms/07-ms-list-forms-multi-line-text.hbs",
-            "framework": "o365_forms.hbs"
+            "filepath": "atoms\\forms\\07-ms-list-forms-multi-line-text.hbs"
         },
         {
-            "title": "SharePoint List Form - Single Line of Text",
+            "title": "List Forms - Single Line Text Field",
             "description": "",
             "filename": "08-ms-list-forms-single-line-text",
-            "filepath": "atoms/forms/08-ms-list-forms-single-line-text.hbs",
-            "framework": "o365_forms.hbs"
+            "filepath": "atoms\\forms\\08-ms-list-forms-single-line-text.hbs"
         },
         {
-            "title": "HTML Input Controls",
+            "title": "ms-rendition-id-1",
             "description": "",
-            "filename": "html5-inputs",
-            "filepath": "atoms/forms/html5-inputs.hbs"
-        },
-        {
-            "title": "Image Rendition 1",
-            "description": "Display image renditions with ID 1",
             "filename": "ms-rendition-id-1",
-            "filepath": "atoms/images/ms-rendition-id-1.hbs"
+            "filepath": "atoms\\images\\ms-rendition-id-1.hbs"
         },
         {
-            "title": "Image Rendition 2",
-            "description": "Display image renditions with ID 2",
+            "title": "ms-rendition-id-2",
+            "description": "",
             "filename": "ms-rendition-id-2",
-            "filepath": "atoms/images/ms-rendition-id-2.hbs"
+            "filepath": "atoms\\images\\ms-rendition-id-2.hbs"
         },
         {
-            "title": "Image Rendition 3",
-            "description": "Display image renditions with ID 3",
+            "title": "ms-rendition-id-3",
+            "description": "",
             "filename": "ms-rendition-id-3",
-            "filepath": "atoms/images/ms-rendition-id-3.hbs"
+            "filepath": "atoms\\images\\ms-rendition-id-3.hbs"
         },
         {
-            "title": "Image Rendition 4",
-            "description": "Display image renditions with ID 4",
+            "title": "ms-rendition-id-4",
+            "description": "",
             "filename": "ms-rendition-id-4",
-            "filepath": "atoms/images/ms-rendition-id-4.hbs"
+            "filepath": "atoms\\images\\ms-rendition-id-4.hbs"
         },
         {
-            "title": "SharePoint Site Icon",
+            "title": "ms-site-icon",
             "description": "",
             "filename": "ms-site-icon",
-            "filepath": "atoms/images/ms-site-icon.hbs",
-            "framework": "o365_titlearea.hbs"
+            "filepath": "atoms\\images\\ms-site-icon.hbs"
         },
         {
-            "title": "Definition List",
+            "title": "01-lists-unordered",
             "description": "",
-            "filename": "03-definition",
-            "filepath": "atoms/lists/03-definition.hbs"
+            "filename": "01-lists-unordered",
+            "filepath": "atoms\\lists\\01-lists-unordered.hbs"
         },
         {
-            "title": "Rich Text Editor - Headlines",
+            "title": "02-lists-ordered",
+            "description": "",
+            "filename": "02-lists-ordered",
+            "filepath": "atoms\\lists\\02-lists-ordered.hbs"
+        },
+        {
+            "title": "03-lists-definition",
+            "description": "",
+            "filename": "03-lists-definition",
+            "filepath": "atoms\\lists\\03-lists-definition.hbs"
+        },
+        {
+            "title": "01-ms-rte-headlines",
             "description": "",
             "filename": "01-ms-rte-headlines",
-            "filepath": "atoms/rtestyles/01-ms-rte-headlines.hbs",
-            "framework": "o365_rte.hbs"
+            "filepath": "atoms\\rtestyles\\01-ms-rte-headlines.hbs"
         },
         {
-            "title": "Rich Text Editor - Headlines alternated",
-            "description": "Show second verions of headlines used in rich text editor",
+            "title": "02-ms-rte-headlines-alt",
+            "description": "",
             "filename": "02-ms-rte-headlines-alt",
-            "filepath": "atoms/rtestyles/02-ms-rte-headlines-alt.hbs",
-            "framework": "o365_rte.hbs"
+            "filepath": "atoms\\rtestyles\\02-ms-rte-headlines-alt.hbs"
         },
         {
-            "title": "Rich Text Editor - Linked Headlines",
-            "description": "",
-            "filename": "03-ms-rte-headlines-linked",
-            "filepath": "atoms/rtestyles/03-ms-rte-headlines-linked.hbs",
-            "framework": "o365_rte.hbs"
-        },
-        {
-            "title": "Rich Text Editor - Linked Headlines alternate",
-            "description": "",
-            "filename": "04-ms-rte-headlines-alt-linked",
-            "filepath": "atoms/rtestyles/04-ms-rte-headlines-alt-linked.hbs",
-            "framework": "o365_rte.hbs"
-        },
-        {
-            "title": "Rich Text Editor - Ordered List",
-            "description": "",
-            "filename": "05-ms-rte-ordered-list",
-            "filepath": "atoms/rtestyles/05-ms-rte-ordered-list.hbs",
-            "framework": "o365_rte.hbs"
-        },
-        {
-            "title": "Rich Text Editor - Unordered List",
-            "description": "",
-            "filename": "06-ms-rte-unordered-list",
-            "filepath": "atoms/rtestyles/06-ms-rte-unordered-list.hbs",
-            "framework": "o365_rte.hbs"
-        },
-        {
-            "title": "Rich Text Editor - Styles ",
-            "description": "",
-            "filename": "07-ms-rte-text-styles",
-            "filepath": "atoms/rtestyles/07-ms-rte-text-styles.hbs",
-            "framework": "o365_rte.hbs"
-        },
-        {
-            "title": "Clear table style",
+            "title": "ms-clear-table",
             "description": "",
             "filename": "ms-clear-table",
-            "filepath": "atoms/tables/ms-clear-table.hbs"
+            "filepath": "atoms\\tables\\ms-clear-table.hbs"
         },
         {
-            "title": "Default table style",
+            "title": "ms-default-table-0",
             "description": "",
             "filename": "ms-default-table-0",
-            "filepath": "atoms/tables/ms-default-table-0.hbs"
+            "filepath": "atoms\\tables\\ms-default-table-0.hbs"
         },
         {
-            "title": "Table Style 10",
+            "title": "ms-default-table-10",
             "description": "",
             "filename": "ms-default-table-10",
-            "filepath": "atoms/tables/ms-default-table-10.hbs"
+            "filepath": "atoms\\tables\\ms-default-table-10.hbs"
         },
         {
-            "title": "Table Style 4",
+            "title": "ms-default-table-4",
             "description": "",
             "filename": "ms-default-table-4",
-            "filepath": "atoms/tables/ms-default-table-4.hbs"
+            "filepath": "atoms\\tables\\ms-default-table-4.hbs"
         },
         {
-            "title": "Table Style 5",
+            "title": "ms-default-table-5",
             "description": "",
             "filename": "ms-default-table-5",
-            "filepath": "atoms/tables/ms-default-table-5.hbs"
+            "filepath": "atoms\\tables\\ms-default-table-5.hbs"
         },
         {
-            "title": "Table Style 6",
+            "title": "ms-default-table-6",
             "description": "",
             "filename": "ms-default-table-6",
-            "filepath": "atoms/tables/ms-default-table-6.hbs"
+            "filepath": "atoms\\tables\\ms-default-table-6.hbs"
         },
         {
-            "title": "Table Style 7",
+            "title": "ms-default-table-7",
             "description": "",
             "filename": "ms-default-table-7",
-            "filepath": "atoms/tables/ms-default-table-7.hbs"
+            "filepath": "atoms\\tables\\ms-default-table-7.hbs"
         },
         {
-            "title": "Table Style 8",
+            "title": "ms-default-table-8",
             "description": "",
             "filename": "ms-default-table-8",
-            "filepath": "atoms/tables/ms-default-table-8.hbs"
+            "filepath": "atoms\\tables\\ms-default-table-8.hbs"
         },
         {
-            "title": "Table Style 9",
+            "title": "ms-default-table-9",
             "description": "",
             "filename": "ms-default-table-9",
-            "filepath": "atoms/tables/ms-default-table-9.hbs"
+            "filepath": "atoms\\tables\\ms-default-table-9.hbs"
         },
         {
-            "title": "Table style light band",
+            "title": "ms-light-band-table",
             "description": "",
             "filename": "ms-light-band-table",
-            "filepath": "atoms/tables/ms-light-band-table.hbs"
+            "filepath": "atoms\\tables\\ms-light-band-table.hbs"
         },
         {
-            "title": "Table light line",
+            "title": "ms-light-line-table",
             "description": "",
             "filename": "ms-light-line-table",
-            "filepath": "atoms/tables/ms-light-line-table.hbs"
+            "filepath": "atoms\\tables\\ms-light-line-table.hbs"
         },
         {
-            "title": "Fonts",
+            "title": "01-fonts",
             "description": "",
             "filename": "01-fonts",
-            "filepath": "atoms/text/01-fonts.hbs"
+            "filepath": "atoms\\text\\01-fonts.hbs"
         },
         {
             "title": "02-paragraph",
             "description": "",
             "filename": "02-paragraph",
-            "filepath": "atoms/text/02-paragraph.hbs"
+            "filepath": "atoms\\text\\02-paragraph.hbs"
         },
         {
-            "title": "03-blockquote",
-            "description": "",
-            "filename": "03-blockquote",
-            "filepath": "atoms/text/03-blockquote.hbs"
-        },
-        {
-            "title": "inline-elements",
-            "description": "",
-            "filename": "04-inline-elements",
-            "filepath": "atoms/text/04-inline-elements.hbs"
-        },
-        {
-            "title": "preformated-text",
-            "description": "",
-            "filename": "05-preformated-text",
-            "filepath": "atoms/text/05-preformated-text.hbs"
-        },
-        {
-            "title": "ms-site-title",
-            "description": "",
-            "filename": "06-ms-site-title",
-            "filepath": "atoms/text/06-ms-site-title.hbs"
-        },
-        {
-            "title": "Office Chrome - Suite Bar",
+            "title": "chrome-01-suitebar",
             "description": "",
             "filename": "chrome-01-suitebar",
-            "filepath": "molecules/chrome/chrome-01-suitebar.hbs"
+            "filepath": "molecules\\chrome\\chrome-01-suitebar.hbs"
         },
         {
-            "title": "Office UI Fabric Breadcrumb",
+            "title": "Fabric UI - Breadcrumb",
             "description": "",
             "filename": "01-fabric-breadcrumb",
-            "filepath": "molecules/fabric/01-fabric-breadcrumb.hbs"
+            "filepath": "molecules\\fabric\\01-fabric-breadcrumb.hbs"
         },
         {
-            "title": "Office UI Fabric Callouts",
+            "title": "Fabric UI - Callout",
             "description": "",
             "filename": "03-fabric-callout",
-            "filepath": "molecules/fabric/03-fabric-callout.hbs"
+            "filepath": "molecules\\fabric\\03-fabric-callout.hbs"
         },
         {
-            "title": "figure-with-caption-below",
+            "title": "Fabric UI - Command Bar",
             "description": "",
-            "filename": "figure-with-caption-below",
-            "filepath": "molecules/figure-with-caption-below.hbs"
-        },
-        {
-            "title": "ms-search-box",
-            "description": "",
-            "filename": "ms-search-box",
-            "filepath": "molecules/ms-search-box.hbs"
-        },
-        {
-            "title": "ms-site-logo",
-            "description": "",
-            "filename": "ms-site-logo",
-            "filepath": "molecules/ms-site-logo.hbs"
-        },
-        {
-            "title": "Office Fabric - CommandBar",
-            "description": "",
-            "filename": "05-fabric-comandbar",
-            "filepath": "molecules/fabric/05-fabric-comandbar.hbs"
+            "filename": "05-fabric-commandbar",
+            "filepath": "molecules\\fabric\\05-fabric-commandbar.hbs"
         }
     ],
     "folder": [{

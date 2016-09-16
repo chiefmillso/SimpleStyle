@@ -59,13 +59,14 @@ ssgCore.components.renderPatterns = function() {
 
         var patternContent = ssg.templates[curPattern.filename];
 
-        var baseContainer = curPattern.filepath.split('/')[0];
+        var baseContainer = curPattern.filepath.split('\\')[0];
 
         curPattern.baseFilter = baseContainer;
 
         // Check if can be compiled
         if (patternContent !== undefined) {
-            patternContent = patternContent();
+            var elementId = "element-" + i;
+            patternContent = patternContent({ 'id': elementId });
         }
 
         // the following section wraps the sample code with framework code - e.g. o365 forms / o365 rte
@@ -115,7 +116,7 @@ ssgCore.components.tocBuilder = function(data) {
 
     for (var j = 0; j < patterns.length; j++) {
 
-        var folderpath = patterns[j].filepath.split('/')[0];
+        var folderpath = patterns[j].filepath.split('\\')[0];
 
         var patternTitle = '<li class=ssg-toc-item data-filter=\"' +
             patterns[j].filename + '\">' +
@@ -295,7 +296,7 @@ ssgCore.initUi = (function() {
 
         // apply category filter
         ssgCore.UIHelper.setCategoryFilter(curFilter);
-        
+
         for (var i = 0; i < ssgCore.onLoad.length; i++) {
             ssgCore.onLoad[i]();
         }

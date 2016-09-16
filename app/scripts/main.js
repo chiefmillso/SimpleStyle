@@ -22,12 +22,13 @@ var ssgCore = ssgCore || {};
         }
 
         // Vanilla JS Components
+        var component;
         if (typeof fabric === 'object') {
             if ('Breadcrumb' in fabric) {
-                new fabric['Breadcrumb'](document.querySelector('.ms-Breadcrumb'));
+                component = new fabric['Breadcrumb'](document.querySelector('.ms-Breadcrumb'));
             }
             if ('CommandBar' in fabric) {
-                new fabric['CommandBar'](document.querySelector('.ms-CommandBar'));
+                component = new fabric['CommandBar'](document.querySelector('.ms-CommandBar'));
             }
         }
 

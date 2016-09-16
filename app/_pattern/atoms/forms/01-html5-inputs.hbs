@@ -1,3 +1,26 @@
-<button>Hello</button><br />
-<label><span>Text Input:</span><input type="text"></label><br />
-<label><span>Multiline Text Input:</span><textarea>Lorem Ipsum</textarea></label>
+<fieldset>
+    <div>
+        <label for="{{id}}-color">input color</label><input id="{{id}}-color" type="color" placeholder="color input" value="#000000">
+    </div>
+    <div>
+        <label for="{{id}}-number">input number</label><input id="{{id}}-number" type="number">
+    </div>
+    <div>
+        <label for="{{id}}-range">input range</label><input id="{{id}}-range" type="range" min="0" max="10">
+    </div>
+    <div>
+        <label for="{{id}}-date">input date</label><input id="{{id}}-date" type="date" placeholder="Date" value="1970-01-01">
+    </div>
+    <div>
+        <label for="{{id}}-month">input month</label><input id="{{id}}-month" type="month" placeholder="Month" value="1970-01">
+    </div>
+    <div>
+        <label for="{{id}}-week">input week</label><input id="{{id}}-week" type="week" placeholder="Week" value="1970-W01">
+    </div>
+    <div>
+        <label for="{{id}}-datetime">input datetime</label><input id="{{id}}-datetime" type="datetime" placeholder="DateTime" value="1970-01-01T00:00:00Z">
+    </div>
+    <div>
+        <label for="{{id}}-datetimelocal">input datetime local</label><input id="{{id}}-datetimelocal" type="datetimelocal" placeholder="DateTime Local" value="1970-01-01T00:00">
+    </div>
+</fieldset>
