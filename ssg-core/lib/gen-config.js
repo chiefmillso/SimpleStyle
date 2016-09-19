@@ -10,6 +10,27 @@ var gulp = require('gulp'),
 
 var reload = browserSync.reload;
 
+
+var getFramework = function(title, patternpath) {
+    var framework = null;
+    var subPath = patternpath.split('/')[1];
+    switch (subPath) {
+        case "rtestyles":
+            framework = "o365_rte.hbs";
+            break;
+    }
+
+    switch (true) {
+        case /^\d\d-ms-list-forms/.test(title):
+            framework = "o365_forms.hbs";
+            break;
+        case /^\d\d-ms-site-/.test(title):
+            framework = "o365_titlearea.hbs";
+            break;
+    }
+    return framework;
+};
+
 module.exports = {
 
     createConfig: function(options) {
@@ -43,6 +64,7 @@ module.exports = {
             }
         };
 
+
         var createItem = function(file, enc, callback) {
 
             var path = require('path');
@@ -62,6 +84,10 @@ module.exports = {
                 filepath: file.relative
             };
 
+            var framework = getFramework(title, patternpath);
+            if (framework !== null) {
+                data.framework = framework;
+            }
             this.push(data);
 
             callback();
@@ -121,10 +147,10 @@ module.exports = {
         };
 
         var logData = function() {
-
             console.log(statistics);
-            console.log(patternsData.length);
-            console.log(patternsData);
+
+            //            console.log(patternsData.length);
+            //            console.log(patternsData);
             writeConfigToFile();
         };
 
@@ -301,6 +327,11 @@ module.exports = {
                 filename: basename,
                 filepath: file
             };
+
+            var framework = getFramework(title, patternpath);
+            if (framework !== null) {
+                data.framework = framework;
+            }
 
             // check if item exists
             var itemExits = currentConfig.patterns.filter(function(obj) {

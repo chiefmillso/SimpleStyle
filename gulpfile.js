@@ -298,8 +298,7 @@ gulp.task('serve', ['ssgCore-update', 'styles', 'styles:core', 'precompile:core'
         // item was changed
         .on('change', ssgCoreConfig.fsEvents);
 
-    // gulp.watch('app/_pattern/**/*.hbs', ['gen-config'], reload);
-
+    gulp.watch('ssg-core/lib/gen-config.js', ['gen-config'], reload);
 
     gulp.watch('app/_core/styles/*.scss', ['styles:core'], reload);
     gulp.watch('app/styles/**/*.scss', ['styles'], reload);

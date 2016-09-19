@@ -1,5 +1,6 @@
 {
-    "patterns": [{
+    "patterns": [
+        {
             "title": "Fabric UI - Buttons",
             "description": "",
             "filename": "02-fabric-button",
@@ -24,6 +25,24 @@
             "filepath": "atoms\\forms\\01-html5-inputs.hbs"
         },
         {
+            "title": "Forms - Select",
+            "description": "",
+            "filename": "01-input-select",
+            "filepath": "atoms\\forms\\01-input-select.hbs"
+        },
+        {
+            "title": "Forms - Text Inputs",
+            "description": "",
+            "filename": "01-input-text",
+            "filepath": "atoms\\forms\\01-input-text.hbs"
+        },
+        {
+            "title": "01-input-textarea",
+            "description": "",
+            "filename": "01-input-textarea",
+            "filepath": "atoms\\forms\\01-input-textarea.hbs"
+        },
+        {
             "title": "02-ms-command-link",
             "description": "",
             "filename": "02-ms-command-link",
@@ -32,32 +51,37 @@
         {
             "title": "List Forms - Choice Field - Fill In",
             "description": "",
-            "filename": "04-ms-list-forms-choice-fill-in",
-            "filepath": "atoms\\forms\\04-ms-list-forms-choice-fill-in.hbs"
+            "filename": "04-ms-list-forms-choice-fillin",
+            "filepath": "atoms\\forms\\04-ms-list-forms-choice-fillin.hbs",
+            "framework": "o365_forms.hbs"
         },
         {
             "title": "List Forms - Choice Field",
             "description": "",
             "filename": "05-ms-list-forms-choice",
-            "filepath": "atoms\\forms\\05-ms-list-forms-choice.hbs"
+            "filepath": "atoms\\forms\\05-ms-list-forms-choice.hbs",
+            "framework": "o365_forms.hbs"
         },
         {
             "title": "List Forms - Date Field",
             "description": "",
             "filename": "06-ms-list-forms-date",
-            "filepath": "atoms\\forms\\06-ms-list-forms-date.hbs"
+            "filepath": "atoms\\forms\\06-ms-list-forms-date.hbs",
+            "framework": "o365_forms.hbs"
         },
         {
             "title": "List Forms - Multiline Text Field",
             "description": "",
             "filename": "07-ms-list-forms-multi-line-text",
-            "filepath": "atoms\\forms\\07-ms-list-forms-multi-line-text.hbs"
+            "filepath": "atoms\\forms\\07-ms-list-forms-multi-line-text.hbs",
+            "framework": "o365_forms.hbs"
         },
         {
             "title": "List Forms - Single Line Text Field",
             "description": "",
             "filename": "08-ms-list-forms-single-line-text",
-            "filepath": "atoms\\forms\\08-ms-list-forms-single-line-text.hbs"
+            "filepath": "atoms\\forms\\08-ms-list-forms-single-line-text.hbs",
+            "framework": "o365_forms.hbs"
         },
         {
             "title": "ms-rendition-id-1",
@@ -111,13 +135,15 @@
             "title": "01-ms-rte-headlines",
             "description": "",
             "filename": "01-ms-rte-headlines",
-            "filepath": "atoms\\rtestyles\\01-ms-rte-headlines.hbs"
+            "filepath": "atoms\\rtestyles\\01-ms-rte-headlines.hbs",
+            "framework": "o365_rte.hbs"
         },
         {
             "title": "02-ms-rte-headlines-alt",
             "description": "",
             "filename": "02-ms-rte-headlines-alt",
-            "filepath": "atoms\\rtestyles\\02-ms-rte-headlines-alt.hbs"
+            "filepath": "atoms\\rtestyles\\02-ms-rte-headlines-alt.hbs",
+            "framework": "o365_rte.hbs"
         },
         {
             "title": "ms-clear-table",
@@ -186,16 +212,22 @@
             "filepath": "atoms\\tables\\ms-light-line-table.hbs"
         },
         {
-            "title": "01-fonts",
+            "title": "Text - Headings",
             "description": "",
             "filename": "01-fonts",
             "filepath": "atoms\\text\\01-fonts.hbs"
         },
         {
-            "title": "02-paragraph",
+            "title": "Text - Paragraph Elements",
             "description": "",
             "filename": "02-paragraph",
             "filepath": "atoms\\text\\02-paragraph.hbs"
+        },
+        {
+            "title": "Text - Inline Elements",
+            "description": "",
+            "filename": "03-inline",
+            "filepath": "atoms\\text\\03-inline.hbs"
         },
         {
             "title": "chrome-01-suitebar",
@@ -204,13 +236,13 @@
             "filepath": "molecules\\chrome\\chrome-01-suitebar.hbs"
         },
         {
-            "title": "Fabric UI - Breadcrumb",
+            "title": "01-fabric-breadcrumb",
             "description": "",
             "filename": "01-fabric-breadcrumb",
             "filepath": "molecules\\fabric\\01-fabric-breadcrumb.hbs"
         },
         {
-            "title": "Fabric UI - Callout",
+            "title": "03-fabric-callout",
             "description": "",
             "filename": "03-fabric-callout",
             "filepath": "molecules\\fabric\\03-fabric-callout.hbs"
@@ -222,7 +254,8 @@
             "filepath": "molecules\\fabric\\05-fabric-commandbar.hbs"
         }
     ],
-    "folder": [{
+    "folder": [
+        {
             "name": "atoms",
             "description": "Contains all atom elements"
         },
