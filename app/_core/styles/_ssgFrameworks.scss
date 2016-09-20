@@ -42,12 +42,9 @@
         cursor: pointer;
         color: $color-light;
         break-inside: avoid;
-        &.selected {
-            color: $color-alt;
-            font-weight: bold;
-        }
-        &:hover {
-            color: $color-alt;
+
+        label {
+            cursor: pointer;
         }
     }
 }

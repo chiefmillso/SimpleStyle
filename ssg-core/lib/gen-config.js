@@ -51,9 +51,7 @@ module.exports = {
             var filepath = data.filepath.split('/')[0];
 
             if (found.length === 0) {
-
                 patternsData.push(data);
-
             }
 
         };

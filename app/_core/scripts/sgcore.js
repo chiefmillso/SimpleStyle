@@ -122,6 +122,8 @@ ssgCore.components.tocBuilder = function(data) {
     for (var j = 0; j < patterns.length; j++) {
 
         var folderpath = patterns[j].filepath.split('\\')[0];
+        if (folderpath == "..")
+            continue;
 
         var patternTitle = '<li class=ssg-toc-item data-filter=\"' +
             patterns[j].filename + '\">' +

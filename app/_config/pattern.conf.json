@@ -1,6 +1,42 @@
 {
     "patterns": [
         {
+            "title": "..\\_core\\patterns\\framework_bootstrap",
+            "description": "",
+            "filename": "..\\_core\\patterns\\framework_bootstrap",
+            "filepath": "..\\_core\\patterns\\framework_bootstrap.hbs"
+        },
+        {
+            "title": "..\\_core\\patterns\\framework_fabric",
+            "description": "",
+            "filename": "..\\_core\\patterns\\framework_fabric",
+            "filepath": "..\\_core\\patterns\\framework_fabric.hbs"
+        },
+        {
+            "title": "..\\_core\\patterns\\framework_foundation",
+            "description": "",
+            "filename": "..\\_core\\patterns\\framework_foundation",
+            "filepath": "..\\_core\\patterns\\framework_foundation.hbs"
+        },
+        {
+            "title": "..\\_core\\patterns\\framework_jqueryui",
+            "description": "",
+            "filename": "..\\_core\\patterns\\framework_jqueryui",
+            "filepath": "..\\_core\\patterns\\framework_jqueryui.hbs"
+        },
+        {
+            "title": "..\\_core\\patterns\\framework_kendo",
+            "description": "",
+            "filename": "..\\_core\\patterns\\framework_kendo",
+            "filepath": "..\\_core\\patterns\\framework_kendo.hbs"
+        },
+        {
+            "title": "..\\_core\\patterns\\framework-office-365",
+            "description": "",
+            "filename": "framework_office_365",
+            "filepath": "..\\_core\\patterns\\framework_office_365.hbs"
+        },
+        {
             "title": "Fabric UI - Buttons",
             "description": "",
             "filename": "02-fabric-button",
@@ -212,19 +248,19 @@
             "filepath": "atoms\\tables\\ms-light-line-table.hbs"
         },
         {
-            "title": "Text - Headings",
+            "title": "01-fonts",
             "description": "",
             "filename": "01-fonts",
             "filepath": "atoms\\text\\01-fonts.hbs"
         },
         {
-            "title": "Text - Paragraph Elements",
+            "title": "02-paragraph",
             "description": "",
             "filename": "02-paragraph",
             "filepath": "atoms\\text\\02-paragraph.hbs"
         },
         {
-            "title": "Text - Inline Elements",
+            "title": "03-inline",
             "description": "",
             "filename": "03-inline",
             "filepath": "atoms\\text\\03-inline.hbs"

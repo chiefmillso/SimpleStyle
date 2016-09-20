@@ -189,6 +189,29 @@ ssgCore.Events.sectionEnabler = function(curButton, affectedElement, noCode) {
 
 };
 
+ssgCore.Events.enableFramework = function(event) {
+    var curButton = $(this);
+    var frameworkId = curButton.attr('data-link');
+    if (curButton.is(":checked")) {
+        var frameworkName = frameworkId.replace(/\-/g, '_');
+        var framework = ssgCore.templates[frameworkName];
+        if (framework != null) {
+            var html = framework();
+            var content = $(html);
+            content.filter('link').attr('data-id', frameworkId);
+            content.filter('script').attr('data-id', frameworkId);
+            $('head').append(content);
+            console.log('ssgCore.Events - Enabling framework: ' + frameworkName);
+
+            ssgCore.Session.frameworks.add(frameworkId);
+        }
+    } else {
+        $('head link[data-id="' + frameworkId + '"]').remove();
+        $('head script[data-id="' + frameworkId + '"]').remove();
+        ssgCore.Session.frameworks.remove(frameworkId);
+    }
+};
+
 // toggle description text
 ssgCore.Events.enableAnnotation = function(event) {
 
@@ -320,7 +343,7 @@ ssgCore.Events.init = (function() {
 
     // start toggle Toc
     $('.' + baseComponents.toc.class).bind('click', ssgCore.Events.toggleToc);
-    
+
     $('.' + baseComponents.css.class).bind('click', ssgCore.Events.toggleCss);
 
     // Core filter items for atoms, molecules, organism, tempalte and pages
@@ -341,15 +364,10 @@ ssgCore.Events.init = (function() {
     // Toggle items to isolate
     $('#ssg-btnisolate').on('click', ssgCore.Events.isolate);
 
-    // // page previous page
-    // $('#ssg-item-selector').on('click', '.prev', ssgCore.Events.prevPage);
-
-    // // page next page
-    // $('#ssg-item-selector').on('click', '.next', ssgCore.Events.nextPage);
-
-
+    // Events for Next / Previous
     $('#ssg-item-selector').on('click', '.next', ssgCore.Events.nextPage);
     $('#ssg-item-selector').on('click', '.prev', ssgCore.Events.prevPage);
 
+    $("#ssg-css").on('change', 'input', ssgCore.Events.enableFramework);
 
 }());
