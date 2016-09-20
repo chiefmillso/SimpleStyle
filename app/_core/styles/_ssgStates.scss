@@ -1,9 +1,14 @@
 // States
-.active{
-	background-color: $red;
-    border-color: $red;
-    color: white;
+.active {
+    background-color: $color-mid;
+    border-color: $color-mid-200;
+    color: $text-color-light;
 }
-.show{
+
+.show {
     @include show;
+}
+
+.isolate-background {
+    background-color: $color-grey-600!important;
 }

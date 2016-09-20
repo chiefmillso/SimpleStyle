@@ -34,6 +34,11 @@ ssgCore.components.toc = function() {
 
 };
 
+ssgCore.components.css = function() {
+
+    this.addButton(baseComponents.css, baseComponents.css.target);
+}
+
 ssgCore.components.filter = function() {
 
     var btnFilter = baseComponents.filterButtons;
@@ -285,6 +290,7 @@ ssgCore.initUi = (function() {
 
         ssgCore.curConfig = data;
         ssgCore.components.tocBuilder(data);
+        ssgCore.components.cssBuilder();
 
         // render patterns
         ssgCore.components.renderPatterns();
@@ -307,6 +313,9 @@ ssgCore.initUi = (function() {
 
     // init table of contents
     ssgCore.components.toc();
+
+    // init framework selector
+    ssgCore.components.css();
 
     // init view port resizer
     ssgCore.components.viewPortResizer();

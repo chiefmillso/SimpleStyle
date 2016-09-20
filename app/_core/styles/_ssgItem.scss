@@ -27,7 +27,7 @@
     }
     .sample {
         margin: 2em 0;
-        > * {
+        >* {
             float: none !important;
         }
     }
@@ -43,7 +43,9 @@
             @include hide;
         }
         .sample {
-            border: 1px #dcdcdc solid;
+            border: 3px $color-grey-200 solid;
+            background-color: $bg-color;
+            padding: 5px 10px 5px 10px;
         }
     }
     .ssg-label {
@@ -53,7 +55,7 @@
         color: #999;
         border-bottom: 1px #ccc solid;
         display: block;
-        &:hover{
+        &:hover {
             border-color: #000;
             color: #000;
             cursor: default;

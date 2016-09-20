@@ -28,13 +28,14 @@
         height: 100%;
         margin: 0;
         padding: 0;
-        color: black;
+        color: $text-color;
     }
 }
 
 .ssg-body {
     font-size: 16px;
     @import 'ssgTocList';
+    @import 'ssgFrameworks';
     @import 'ssgItem';
     @import 'ssgStates';
     #ssg-font {
@@ -71,7 +72,7 @@
         width: 100%;
         padding: 0 .25em;
         border-bottom: 1px black solid;
-        background-color: $color-grey-600;
+        background-color: $color-grey;
         @extend %ssg-base-font;
     }
     .ssg-patterns {
@@ -89,7 +90,7 @@
         top: auto;
         width: 100%;
         min-height: 100%;
-        background-color: whitesmoke;
+        background-color: $bg-color;
     }
     // Base Section
     /// Default Button
@@ -130,15 +131,20 @@
         &:hover,
         &:focus * {
             color: white;
-            background-color: $blue;
+            background-color: $color-mid;
             // handle button style on hover
             .ssg-btn:hover,
             .ssg-btn.active {
                 color: white;
                 border-color: white;
-                background-color: $blue;
+                background-color: $color-mid-300;
+                cursor: pointer;
             }
         }
+    }
+    #ssg-vp-by {
+        text-transform: lowercase;
+        font-size: 0.8em;
     }
     .ssg-pattern-label,
     .ssg-pattern-name {

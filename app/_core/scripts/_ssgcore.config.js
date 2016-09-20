@@ -5,6 +5,12 @@ var baseComponents = {
         title: 'TOC',
         class: 'ssg-toc-switch'
     },
+    css: {
+        target: '#ssg-toolbar',
+        action: 'css',
+        title: 'Frameworks',
+        class: 'ssg-css-switch'
+    },
     additionalTools: {
         target: '#ssg-add-tools',
         items: [{

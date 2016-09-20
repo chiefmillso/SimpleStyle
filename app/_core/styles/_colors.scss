@@ -1,7 +1,19 @@
 $red: #dd314d;
 $blue: #318eb1;
+$bg-color: whitesmoke;
 $text-color: black;
-
-$color-grey: #999;
-$color-grey-600: #333;
-$color-grey-200: #ccc;
+$text-color-light: white;
+$color-grey: #515751;
+$color-grey-600: darken($color-grey, 30%);
+$color-grey-200: lighten($color-grey, 30%);
+$color-dark: #36452b;
+$color-dark-600: darken($color-dark, 30%);
+$color-dark-200: lighten($color-dark, 30%);
+$color-mid: #596869;
+$color-mid-600: darken($color-mid, 30%);
+$color-mid-300: lighten($color-mid, 15%);
+$color-mid-200: lighten($color-mid, 30%);
+$color-light: #f5f9e9;
+$color-alt: #c2c1a5;
+$color-alt-600: darken($color-alt, 30%);
+$color-alt-200: lighten($color-alt, 30%);

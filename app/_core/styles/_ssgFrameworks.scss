@@ -1,4 +1,4 @@
-.ssg-toc-list {
+.ssg-css-list {
     max-width: 1280px;
     @include hide;
     @extend %ssg-base-font;
@@ -24,7 +24,7 @@
         }
     }
     // TOC Item Container
-    .ssg-toc-items {
+    .ssg-css-items {
         font-size: .9em;
         line-height: 1.8em;
         display: inline-block;
@@ -33,7 +33,7 @@
         column-count: 5;
     }
     // Child elements of toc container
-    .ssg-toc-item {
+    .ssg-css-item {
         font-weight: normal;
         line-height: 1.5em;
         display: block;

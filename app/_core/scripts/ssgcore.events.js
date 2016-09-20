@@ -23,6 +23,28 @@ ssgCore.Events.closeToc = function() {
 
 };
 
+ssgCore.Events.toggleCss = function(event) {
+
+    event.preventDefault();
+
+    var cssSection = $('#ssg-css');
+
+    if (cssSection.length !== 0) {
+        cssSection.toggleClass('show');
+    }
+
+};
+
+ssgCore.Events.closeCss = function() {
+
+    var cssSection = $('#ssg-css');
+
+    if (cssSection.hasClass('show')) {
+        cssSection.removeClass('show');
+    }
+
+};
+
 // Fitler for multiple items
 ssgCore.Events.filterItems = function(event) {
 
@@ -188,6 +210,7 @@ ssgCore.Events.enableCode = function(event) {
 
     $('.ssg-item').removeClass('isolate');
     $('#ssg-btnisolate').removeClass('active');
+    $('#ssg-patterns, #ssg-wrapper').removeClass('isolate-background');
 
     var currentFilter = ssgCore.Session.filter.get();
     var curIndex = $('#ssg-items').data('item-index');
@@ -239,6 +262,7 @@ ssgCore.Events.isolate = function(event) {
 
         curButton.removeClass('active');
         $('.ssg-item').removeClass('isolate');
+        $('#ssg-patterns, #ssg-wrapper').removeClass('isolate-background');
 
         ssgCore.Session.uiOptions.remove();
 
@@ -247,6 +271,7 @@ ssgCore.Events.isolate = function(event) {
         curButton.addClass('active');
 
         $('.ssg-item').addClass('isolate');
+        $('#ssg-patterns, #ssg-wrapper').addClass('isolate-background');
         $('#ssg-btnshowCode').removeClass('active');
         $('#ssg-btnshowAnnot').removeClass('active');
 
@@ -295,13 +320,14 @@ ssgCore.Events.init = (function() {
 
     // start toggle Toc
     $('.' + baseComponents.toc.class).bind('click', ssgCore.Events.toggleToc);
+    
+    $('.' + baseComponents.css.class).bind('click', ssgCore.Events.toggleCss);
 
     // Core filter items for atoms, molecules, organism, tempalte and pages
     $('.ssg-filter-button').bind('click', ssgCore.Events.filterItems);
 
     // Single item filter
     $('#ssg-toc').on('click', '.ssg-toc-item', ssgCore.Events.filterItem);
-
 
     // Viewport resizer: Disco mode
     $('#ssg-btn-disco').bind('click', ssgCore.Events.enableDiscoMode);

@@ -11,11 +11,10 @@ ssgCore.UIHelper.setCategoryFilter = function(filter) {
     console.log(typeof filter);
     console.log(filter);
 
-    if (filter != null) {
+    if (filter !== null) {
 
         // filter items
-        var currentItems,
-            otherItems;
+        var currentItems, otherItems;
 
         $('#ssg-item-selector').html('');
 
@@ -24,8 +23,6 @@ ssgCore.UIHelper.setCategoryFilter = function(filter) {
             var allElements = $('.ssg-item[data-cat=' + filter + ']');
             otherItems = $('.ssg-item');
             otherItems.addClass('hide');
-
-            // var test = $('.ssg-item[data-cat=' + filter + ']');
 
             this.enablePaging(allElements);
 
@@ -43,11 +40,8 @@ ssgCore.UIHelper.setCategoryFilter = function(filter) {
         }
 
         var filterButton = $('#ssg-btn' + filter);
-
         if (filterButton.length !== 0) {
-
             filterButton.addClass('active');
-
         }
 
     } else {
@@ -61,27 +55,22 @@ ssgCore.UIHelper.setCategoryFilter = function(filter) {
         console.log($('.ssg-item'));
         $('.ssg-item[data-cat=templates]').addClass('hide');
         console.log($('.ssg-item'));
-    
+        
     }
-
 };
 
 
 ssgCore.UIHelper.enablePaging = function(elements) {
 
     var items = [];
-
     for (var i = 0; i < elements.length; i++) {
-
         var curItem = $(elements[i]);
         var curTitle = curItem.find('.ssg-item-title').text();
-
         var item = {
             title: curTitle
         };
 
         items.push(item);
-
     }
 
     ssgCore.itemSelector = items;
