@@ -7,8 +7,8 @@
     ssgCore.components.cssBuilder = function(data) {
 
         var folder = [
-            { "name": "Office 365", "id": "framework-office-365", "enabled": true },
-            { "name": "Office UI Fabric", "id": "framework-fabric", "enabled": true },
+            { "name": "Office 365", "id": "framework-office-365", "enabled": false },
+            { "name": "Office UI Fabric", "id": "framework-fabric", "enabled": false },
             { "name": "Foundation", "id": "framework-foundation", "enabled": false },
             { "name": "Bootstrap", "id": "framework-bootstrap", "enabled": false },
             { "name": "Kendo UI", "id": "framework-kendoui", "enabled": false },

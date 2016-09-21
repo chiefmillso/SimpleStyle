@@ -1,42 +1,6 @@
 {
     "patterns": [
         {
-            "title": "..\\_core\\patterns\\framework_bootstrap",
-            "description": "",
-            "filename": "..\\_core\\patterns\\framework_bootstrap",
-            "filepath": "..\\_core\\patterns\\framework_bootstrap.hbs"
-        },
-        {
-            "title": "..\\_core\\patterns\\framework_fabric",
-            "description": "",
-            "filename": "..\\_core\\patterns\\framework_fabric",
-            "filepath": "..\\_core\\patterns\\framework_fabric.hbs"
-        },
-        {
-            "title": "..\\_core\\patterns\\framework_foundation",
-            "description": "",
-            "filename": "..\\_core\\patterns\\framework_foundation",
-            "filepath": "..\\_core\\patterns\\framework_foundation.hbs"
-        },
-        {
-            "title": "..\\_core\\patterns\\framework_jqueryui",
-            "description": "",
-            "filename": "..\\_core\\patterns\\framework_jqueryui",
-            "filepath": "..\\_core\\patterns\\framework_jqueryui.hbs"
-        },
-        {
-            "title": "..\\_core\\patterns\\framework_kendo",
-            "description": "",
-            "filename": "..\\_core\\patterns\\framework_kendo",
-            "filepath": "..\\_core\\patterns\\framework_kendo.hbs"
-        },
-        {
-            "title": "..\\_core\\patterns\\framework-office-365",
-            "description": "",
-            "filename": "framework_office_365",
-            "filepath": "..\\_core\\patterns\\framework_office_365.hbs"
-        },
-        {
             "title": "Fabric UI - Buttons",
             "description": "",
             "filename": "02-fabric-button",
@@ -47,6 +11,12 @@
             "description": "",
             "filename": "04-fabric-choicefield",
             "filepath": "atoms\\fabric\\04-fabric-choicefield.hbs"
+        },
+        {
+            "title": "Fabric UI - DatePicker",
+            "description": "",
+            "filename": "07-fabric-datepicker",
+            "filepath": "atoms\\fabric\\07-fabric-datepicker.hbs"
         },
         {
             "title": "Forms - Figure Caption",

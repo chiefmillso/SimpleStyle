@@ -219,7 +219,7 @@ gulp.task('wiredep', function() {
 gulp.task('inject:scripts', function() {
 
     var options = {
-        source: [config.tempFiles + '**/*.js'],
+        source: [config.tempFiles + '**/*.js']
     };
 
     return inject(options);
@@ -229,7 +229,7 @@ gulp.task('inject:scripts', function() {
 gulp.task('inject:styles', function() {
 
     var options = {
-        source: [config.js],
+        source: [config.js]
     };
 
     helper.log('Inject Style Sheets', helper.logType.info);

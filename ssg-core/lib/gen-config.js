@@ -68,8 +68,12 @@ module.exports = {
             var path = require('path');
 
             // init pattern configs
-            var filename = path.basename(file.relative),
-                extension = path.extname(file.relative),
+            var filename = path.basename(file.relative);
+            if (filename.indexOf('\\') != -1) {
+                filename = filename.split('\\').pop();
+            }
+
+            var extension = path.extname(file.relative),
                 basename = filename.replace(extension, ''),
                 patternpath = path.dirname(file.relative),
                 title = basename.indexOf('_') === 0 ? basename.substr(1) : basename;
@@ -86,10 +90,13 @@ module.exports = {
             if (framework !== null) {
                 data.framework = framework;
             }
-            this.push(data);
+
+            if (patternpath.indexOf('..') !== -1) {
+                // ignores _core pattern files
+                this.push(data);
+            }
 
             callback();
-
         };
 
         var writeConfigToFile = function() {

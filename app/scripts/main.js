@@ -19,6 +19,10 @@ var ssgCore = ssgCore || {};
             if ($.fn.CommandBar) {
                 $('.ms-CommandBar').CommandBar();
             }
+            if ($.fn.DatePicker) {
+                $('.ms-DatePicker').DatePicker();
+            }
+
         }
 
         // Vanilla JS Components
@@ -29,6 +33,9 @@ var ssgCore = ssgCore || {};
             }
             if ('CommandBar' in fabric) {
                 component = new fabric['CommandBar'](document.querySelector('.ms-CommandBar'));
+            }
+            if ('DatePicker' in fabric) {
+                component = new fabric['DatePicker'](document.querySelector('.ms-DatePicker'));
             }
         }
 
