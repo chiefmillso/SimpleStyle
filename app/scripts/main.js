@@ -25,6 +25,15 @@ var ssgCore = ssgCore || {};
             if ($.fn.Dropdown) {
                 $('.ms-Dropdown').Dropdown();
             }
+            if ($.fn.FacePile) {
+                $('.ms-FacePile').FacePile();
+            }
+            if ($.fn.MessageBanner) {
+                $('.ms-MessageBanner').MessageBanner();
+            }
+            if ($.fn.PeoplePicker) {
+                $('.ms-PeoplePicker').PeoplePicker();
+            }
         }
 
         // Vanilla JS Components
@@ -41,6 +50,15 @@ var ssgCore = ssgCore || {};
             }
             if ('Dropdown' in fabric) {
                 component = new fabric['Dropdown'](document.querySelector('.ms-Dropdown'));
+            }
+            if ('FacePile' in fabric) {
+                component = new fabric['FacePile'](document.querySelector('.ms-FacePile'));
+            }
+            if ('MessageBanner' in fabric) {
+                component = new fabric['MessageBanner'](document.querySelector('.ms-MessageBanner'));
+            }
+            if ('PeoplePicker' in fabric) {
+                component = new fabric['PeoplePicker'](document.querySelector('.ms-PeoplePicker'));
             }
         }
 

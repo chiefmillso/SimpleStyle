@@ -946,3 +946,1025 @@ fabric.Breadcrumb.prototype = (function() {
         });
     };
 })(jQuery);
+
+// Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
+
+/**
+ * Facepile Plugin
+ *
+ * Adds basic demonstration functionality to .ms-Facepile components.
+ *
+ * @param  {jQuery Object}  One or more .ms-Facepile components
+ * @return {jQuery Object}  The same components (allows for chaining)
+ */
+(function($) {
+    $.fn.Facepile = function() {
+
+        /** Iterate through each Facepile provided. */
+        return this.each(function() {
+            $('.ms-PeoplePicker').PeoplePicker();
+            $('.ms-Panel').Panel();
+
+            var $Facepile = $(this);
+            var $membersList = $(".ms-Facepile-members");
+            var $membersCount = $(".ms-Facepile-members > .ms-Facepile-itemBtn").length;
+            var $panel = $('.ms-Facepile-panel.ms-Panel');
+            var $panelMain = $panel.find(".ms-Panel-main");
+            var $picker = $('.ms-PeoplePicker.ms-PeoplePicker--Facepile');
+            var $pickerMembers = $picker.find('.ms-PeoplePicker-selectedPeople');
+            var $personaCard = $('.ms-Facepile').find('.ms-PersonaCard');
+
+
+            /** Increment member count and show/hide overflow text */
+            var incrementMembers = function() {
+                /** Increment person count by one */
+                $membersCount += 1;
+
+                /** Display a maxiumum of 5 people */
+                $(".ms-Facepile-members").children(":gt(4)").hide();
+
+                /** Display counter after 5 people are present */
+                if ($membersCount > 5) {
+                    $(".ms-Facepile-itemBtn--overflow").addClass("is-active");
+
+                    var remainingMembers = $membersCount - 5;
+                    $(".ms-Facepile-overflowText").text("+" + remainingMembers);
+                }
+            };
+
+            /** Open panel with people picker */
+            $Facepile.on("click", ".js-addPerson", function() {
+                $panelMain.css({ display: "block" });
+                $panel.toggleClass("is-open")
+                    .addClass("ms-Panel-animateIn")
+                    .removeClass('ms-Facepile-panel--overflow ms-Panel--right')
+                    .addClass('ms-Facepile-panel--addPerson');
+
+                /** Close any open persona cards */
+                $personaCard.removeClass('is-active').hide();
+            });
+
+            $panel.on("click", ".js-togglePanel", function() {
+                $panel.toggleClass("is-open")
+                    .addClass("ms-Panel-animateIn");
+            });
+
+            /** Open oveflow panel with list of members */
+            $Facepile.on("click", ".js-overflowPanel", function() {
+                $panelMain.css({ display: "block" });
+                $panel.toggleClass("is-open")
+                    .addClass("ms-Panel-animateIn")
+                    .removeClass('ms-Facepile-panel--addPerson')
+                    .addClass('ms-Facepile-panel--overflow ms-Panel--right');
+            });
+
+            /** Display person count on page load */
+            $(document).ready(function() {
+                $(".ms-Facepile-overflowText").text("+" + $membersCount);
+            });
+
+            /** Show selected members from PeoplePicker in the Facepile */
+            $('.ms-PeoplePicker-result').on('click', function() {
+                var $this = $(this);
+                var name = $this.find(".ms-Persona-primaryText").html();
+                var title = $this.find(".ms-Persona-secondaryText").html();
+                var selectedInitials = (function() {
+                    var nameArray = name.split(' ');
+                    var nameInitials = '';
+                    for (var i = 0; i < nameArray.length; i++) {
+                        nameInitials += nameArray[i].charAt(0);
+                    }
+
+                    return nameInitials.substring(0, 2);
+                })();
+                var selectedClasses = $this.find('.ms-Persona-initials').attr('class');
+                var selectedImage = (function() {
+                    if ($this.find('.ms-Persona-image').length) {
+                        var selectedImageSrc = $this.find('.ms-Persona-image').attr('src');
+                        return '<img class="ms-Persona-image" src="' + selectedImageSrc + '" alt="Persona image">';
+                    } else {
+                        return '';
+                    }
+                })();
+
+                var FacepileItem =
+                    '<button class="ms-Facepile-itemBtn ms-Facepile-itemBtn--member" title="' + name + '">' +
+                    '<div class="ms-Persona ms-Persona--xs">' +
+                    '<div class="ms-Persona-imageArea">' +
+                    '<div class="' + selectedClasses + '">' + selectedInitials + '</div>' +
+                    selectedImage +
+                    '</div>' +
+                    '<div class="ms-Persona-presence"></div>' +
+                    '<div class="ms-Persona-details">' +
+                    '<div class="ms-Persona-primaryText">' + name + '</div>' +
+                    '<div class="ms-Persona-secondaryText">' + title + '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</button>';
+
+                /** Add new item to members list in Facepile */
+                $membersList.prepend(FacepileItem);
+
+                /** Increment member count */
+                incrementMembers();
+            });
+
+            /** Remove members in panel people picker */
+            $pickerMembers.on('click', '.js-selectedRemove', function() {
+                var memberText = $(this).parent().find('.ms-Persona-primaryText').text();
+
+                var $FacepileMember = $membersList.find(".ms-Persona-primaryText:contains(" + memberText + ")").first();
+
+                if ($FacepileMember) {
+                    $FacepileMember.parent().closest('.ms-Facepile-itemBtn').remove();
+
+                    $membersCount -= 1;
+
+                    /** Display a maxiumum of 5 people */
+                    $(".ms-Facepile-members").children(":lt(5)").show();
+
+                    /** Display counter after 5 people are present */
+                    if ($membersCount <= 5) {
+                        $(".ms-Facepile-itemBtn--overflow").removeClass("is-active");
+                    } else {
+                        var remainingMembers = $membersCount - 5;
+                        $(".ms-Facepile-overflowText").text("+" + remainingMembers);
+                    }
+                }
+            });
+
+            /** Show persona card when selecting a Facepile item */
+            $membersList.on('click', '.ms-Facepile-itemBtn', function() {
+                var selectedName = $(this).find(".ms-Persona-primaryText").html();
+                var selectedTitle = $(this).find(".ms-Persona-secondaryText").html();
+                var selectedInitials = (function() {
+                    var name = selectedName.split(' ');
+                    var nameInitials = '';
+                    for (var i = 0; i < name.length; i++) {
+                        nameInitials += name[i].charAt(0);
+                    }
+
+                    return nameInitials.substring(0, 2);
+                })();
+                var selectedClasses = $(this).find('.ms-Persona-initials').attr('class');
+                var selectedImage = $(this).find('.ms-Persona-image').attr('src');
+                var $card = $('.ms-PersonaCard');
+                var $cardName = $card.find('.ms-Persona-primaryText');
+                var $cardTitle = $card.find('.ms-Persona-secondaryText');
+                var $cardInitials = $card.find('.ms-Persona-initials');
+                var $cardImage = $card.find('.ms-Persona-image');
+
+                /** Close any open persona cards */
+                $personaCard.removeClass('is-active');
+
+                /** Add data to persona card */
+                $cardName.text(selectedName);
+                $cardTitle.text(selectedTitle);
+                $cardInitials.text(selectedInitials);
+                $cardInitials.removeClass();
+                $cardInitials.addClass(selectedClasses);
+                $cardImage.attr('src', selectedImage);
+
+                /** Show persona card */
+                setTimeout(function() { $personaCard.addClass('is-active'); }, 100);
+
+                /** Align persona card on md and above screens */
+                if ($(window).width() > 480) {
+                    var itemPosition = $(this).offset().left;
+                    var correctedPosition = itemPosition - 26;
+
+                    $personaCard.css({ 'left': correctedPosition });
+                } else {
+                    $personaCard.css({ 'left': 0, 'top': 'auto', 'position': 'fixed' });
+                }
+            });
+
+            /** Dismiss persona card when clicking on the document */
+            $(document).on('click', function(e) {
+                var $memberBtn = $('.ms-Facepile-itemBtn--member');
+
+                if (!$memberBtn.is(e.target) && $memberBtn.has(e.target).length === 0 && !$personaCard.is(e.target) && $personaCard.has(e.target).length === 0) {
+                    $personaCard.removeClass('is-active');
+                    $personaCard.removeAttr('style');
+                } else {
+                    $personaCard.addClass('is-active');
+                }
+            });
+
+        });
+    };
+})(jQuery);
+
+
+// Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
+
+/**
+ * Panel Plugin
+ *
+ * Adds basic demonstration functionality to .ms-Panel components.
+ *
+ * @param  {jQuery Object}  One or more .ms-Panel components
+ * @return {jQuery Object}  The same components (allows for chaining)
+ */
+(function($) {
+    $.fn.Panel = function() {
+
+        var pfx = ["webkit", "moz", "MS", "o", ""];
+
+        // Prefix function
+        function prefixedEvent(element, type, callback) {
+            for (var p = 0; p < pfx.length; p++) {
+                if (!pfx[p]) { type = type.toLowerCase(); }
+                element.addEventListener(pfx[p] + type, callback, false);
+            }
+        }
+
+        /** Go through each panel we've been given. */
+        return this.each(function() {
+
+            var $panel = $(this);
+            var $panelMain = $panel.find(".ms-Panel-main");
+
+            /** Hook to open the panel. */
+            $(".ms-PanelAction-close").on("click", function() {
+
+                // Display Panel first, to allow animations
+                $panel.addClass("ms-Panel-animateOut");
+
+            });
+
+            $(".ms-PanelAction-open").on("click", function() {
+
+                // Display Panel first, to allow animations
+                $panel.addClass("is-open");
+
+                // Add animation class
+                $panel.addClass("ms-Panel-animateIn");
+
+            });
+
+            prefixedEvent($panelMain[0], 'AnimationEnd', function(event) {
+                if (event.animationName.indexOf('Out') > -1) {
+
+                    // Hide and Prevent ms-Panel-main from being interactive
+                    $panel.removeClass('is-open');
+
+                    // Remove animating classes for the next time we open panel
+                    $panel.removeClass('ms-Panel-animateIn ms-Panel-animateOut');
+
+                }
+            });
+
+            // Pivots for sample page to show variant panel sizes
+            $(".panelVariant-item").on("click", function() {
+                var className = $(this).find('span').attr('class');
+
+                $(".panelVariant-item").removeClass('is-selected');
+                $(this).addClass('is-selected');
+
+                switch (className) {
+                    case 'is-default':
+                        $('.ms-Panel').removeClass().addClass('ms-Panel');
+                        break;
+                    case 'is-left':
+                        $('.ms-Panel').removeClass().addClass('ms-Panel ms-Panel--left');
+                        break;
+                    case 'is-lightDismiss':
+                        $('.ms-Panel').removeClass().addClass('ms-Panel ms-Panel--lightDismiss');
+                        break;
+                    case 'is-md':
+                        $('.ms-Panel').removeClass().addClass('ms-Panel ms-Panel--md');
+                        break;
+                    case 'is-lgFixed':
+                        $('.ms-Panel').removeClass().addClass('ms-Panel ms-Panel--lg ms-Panel--fixed');
+                        break;
+                    case 'is-lg':
+                        $('.ms-Panel').removeClass().addClass('ms-Panel ms-Panel--lg');
+                        break;
+                    case 'is-xl':
+                        $('.ms-Panel').removeClass().addClass('ms-Panel ms-Panel--xl');
+                        break;
+                }
+            });
+        });
+
+    };
+})(jQuery);
+
+
+// Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
+
+/**
+ * Spinner Component
+ *
+ * An animating activity indicator.
+ *
+ */
+
+/**
+ * @namespace fabric
+ */
+var fabric = fabric || {};
+
+/**
+ * @param {HTMLDOMElement} target - The element the Spinner will attach itself to.
+ */
+
+fabric.Spinner = function(target) {
+
+    var _target = target;
+    var eightSize = 0.2;
+    var circleObjects = [];
+    var animationSpeed = 90;
+    var interval;
+    var spinner;
+    var numCircles;
+    var offsetSize;
+    var fadeIncrement = 0;
+    var parentSize = 20;
+
+    /**
+     * @function start - starts or restarts the animation sequence
+     * @memberOf fabric.Spinner
+     */
+    function start() {
+        stop();
+        interval = setInterval(function() {
+            var i = circleObjects.length;
+            while (i--) {
+                _fade(circleObjects[i]);
+            }
+        }, animationSpeed);
+    }
+
+    /**
+     * @function stop - stops the animation sequence
+     * @memberOf fabric.Spinner
+     */
+    function stop() {
+        clearInterval(interval);
+    }
+
+    //private methods
+
+    function _init() {
+        _setTargetElement();
+        _setPropertiesForSize();
+        _createCirclesAndArrange();
+        _initializeOpacities();
+        start();
+    }
+
+    function _initializeOpacities() {
+        var i = 0;
+        var j = 1;
+        var opacity;
+        fadeIncrement = 1 / numCircles;
+
+        for (i; i < numCircles; i++) {
+            var circleObject = circleObjects[i];
+            opacity = (fadeIncrement * j++);
+            _setOpacity(circleObject.element, opacity);
+        }
+    }
+
+    function _fade(circleObject) {
+        var opacity = _getOpacity(circleObject.element) - fadeIncrement;
+
+        if (opacity <= 0) {
+            opacity = 1;
+        }
+
+        _setOpacity(circleObject.element, opacity);
+    }
+
+    function _getOpacity(element) {
+        return parseFloat(window.getComputedStyle(element).getPropertyValue("opacity"));
+    }
+
+    function _setOpacity(element, opacity) {
+        element.style.opacity = opacity;
+    }
+
+    function _createCircle() {
+        var circle = document.createElement('div');
+        circle.className = "ms-Spinner-circle";
+        circle.style.width = circle.style.height = parentSize * offsetSize + "px";
+        return circle;
+    }
+
+    function _createCirclesAndArrange() {
+
+        var angle = 0;
+        var offset = parentSize * offsetSize;
+        var step = (2 * Math.PI) / numCircles;
+        var i = numCircles;
+        var circleObject;
+        var radius = (parentSize - offset) * 0.5;
+
+        while (i--) {
+            var circle = _createCircle();
+            var x = Math.round(parentSize * 0.5 + radius * Math.cos(angle) - circle.clientWidth * 0.5) - offset * 0.5;
+            var y = Math.round(parentSize * 0.5 + radius * Math.sin(angle) - circle.clientHeight * 0.5) - offset * 0.5;
+            spinner.appendChild(circle);
+            circle.style.left = x + 'px';
+            circle.style.top = y + 'px';
+            angle += step;
+            circleObject = { element: circle, j: i };
+            circleObjects.push(circleObject);
+        }
+    }
+
+    function _setPropertiesForSize() {
+        if (spinner.className.indexOf("large") > -1) {
+            parentSize = 28;
+            eightSize = 0.179;
+        }
+
+        offsetSize = eightSize;
+        numCircles = 8;
+    }
+
+    function _setTargetElement() {
+        //for backwards compatibility
+        if (_target.className.indexOf("ms-Spinner") === -1) {
+            spinner = document.createElement("div");
+            spinner.className = "ms-Spinner";
+            _target.appendChild(spinner);
+        } else {
+            spinner = _target;
+        }
+    }
+
+    _init();
+
+    return {
+        start: start,
+        stop: stop
+    };
+};
+
+// Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
+
+var fabric = fabric || {};
+
+/**
+ * People Picker Plugin
+ *
+ * Adds basic demonstration functionality to .ms-PeoplePicker components.
+ * 
+ * @param  {jQuery Object}  One or more .ms-PeoplePicker components
+ * @return {jQuery Object}  The same components (allows for chaining)
+ */
+
+(function($) {
+    $.fn.PeoplePicker = function() {
+
+        /** Iterate through each people picker provided. */
+        return this.each(function() {
+
+            var $peoplePicker = $(this);
+            var $searchField = $peoplePicker.find(".ms-PeoplePicker-searchField");
+            var $results = $peoplePicker.find(".ms-PeoplePicker-results");
+            var $selected = $peoplePicker.find('.ms-PeoplePicker-selected');
+            var $selectedPeople = $peoplePicker.find(".ms-PeoplePicker-selectedPeople");
+            var $selectedCount = $peoplePicker.find(".ms-PeoplePicker-selectedCount");
+            var $peopleList = $peoplePicker.find(".ms-PeoplePicker-peopleList");
+            var isActive = false;
+            var spinner;
+            var $personaCard = $('.ms-PeoplePicker').find('.ms-PersonaCard');
+
+            // Run when focused or clicked
+            function peoplePickerActive(event) {
+                /** Scroll the view so that the people picker is at the top. */
+                $('html, body').animate({
+                    scrollTop: $peoplePicker.offset().top
+                }, 367);
+
+                /** Start by closing any open people pickers. */
+                if ($peoplePicker.hasClass('is-active')) {
+                    $peoplePicker.removeClass("is-active");
+                }
+
+                /** Display a maxiumum of 5 people in Facepile variant */
+                if ($peoplePicker.hasClass('ms-PeoplePicker--Facepile') && $searchField.val() === "") {
+                    $peopleList.children(":gt(4)").hide();
+                }
+
+                /** Animate results and members in Facepile variant. */
+                if ($peoplePicker.hasClass('ms-PeoplePicker--Facepile')) {
+                    // $results.addClass('ms-u-slideDownIn20');
+                    $selectedPeople.addClass('ms-u-slideDownIn20');
+                    setTimeout(function() {
+                        $results.removeClass('ms-u-slideDownIn20');
+                        $selectedPeople.removeClass('ms-u-slideDownIn20');
+                    }, 1000);
+                }
+
+                isActive = true;
+
+                /** Stop the click event from propagating, which would just close the dropdown immediately. */
+                event.stopPropagation();
+
+                /** Before opening, size the results panel to match the people picker. */
+                if (!$peoplePicker.hasClass('ms-PeoplePicker--Facepile')) {
+                    $results.width($peoplePicker.width() - 2);
+                }
+
+                /** Show the $results by setting the people picker to active. */
+                $peoplePicker.addClass("is-active");
+
+                /** Temporarily bind an event to the document that will close the people picker when clicking anywhere. */
+                $(document).bind("click.peoplepicker", function() {
+                    $peoplePicker.removeClass('is-active');
+                    if ($peoplePicker.hasClass('ms-PeoplePicker--Facepile')) {
+                        $peoplePicker.removeClass('is-searching');
+                        $('.ms-PeoplePicker-selected').show();
+                        $('.ms-PeoplePicker-searchMore').removeClass('is-active');
+                        $searchField.val("");
+                    }
+                    $(document).unbind('click.peoplepicker');
+                    isActive = false;
+                });
+            }
+
+            /** Set to active when focusing on the input. */
+            $peoplePicker.on('focus', '.ms-PeoplePicker-searchField', function(event) {
+                peoplePickerActive(event);
+            });
+
+            /** Set to active when clicking on the input. */
+            $peoplePicker.on('click', '.ms-PeoplePicker-searchField', function(event) {
+                peoplePickerActive(event);
+            });
+
+            /** Keep the people picker active when clicking within it. */
+            $(this).click(function(event) {
+                event.stopPropagation();
+            });
+
+            /** Add the selected person to the text field or selected list and close the people picker. */
+            $results.on('click', '.ms-PeoplePicker-result', function() {
+                var $this = $(this);
+                var selectedName = $this.find(".ms-Persona-primaryText").html();
+                var selectedTitle = $this.find(".ms-Persona-secondaryText").html();
+                var selectedInitials = (function() {
+                    var name = selectedName.split(' ');
+                    var nameInitials = '';
+
+                    for (var i = 0; i < name.length; i++) {
+                        nameInitials += name[i].charAt(0);
+                    }
+
+                    return nameInitials.substring(0, 2);
+                })();
+                var selectedClasses = $this.find('.ms-Persona-initials').attr('class');
+                var selectedImage = (function() {
+                    if ($this.find('.ms-Persona-image').length) {
+                        var selectedImageSrc = $this.find('.ms-Persona-image').attr('src');
+                        return '<img class="ms-Persona-image" src="' + selectedImageSrc + '" alt="Persona image">';
+                    } else {
+                        return '';
+                    }
+                })();
+
+                /** Token html */
+                var personaHTML = '<div class="ms-PeoplePicker-persona">' +
+                    '<div class="ms-Persona ms-Persona--xs ms-Persona--square">' +
+                    '<div class="ms-Persona-imageArea">' +
+                    '<div class="' + selectedClasses + '">' + selectedInitials + '</div>' +
+                    selectedImage +
+                    '</div>' +
+                    '<div class="ms-Persona-presence"></div>' +
+                    '<div class="ms-Persona-details">' +
+                    '<div class="ms-Persona-primaryText">' + selectedName + '</div>' +
+                    ' </div>' +
+                    '</div>' +
+                    '<button class="ms-PeoplePicker-personaRemove">' +
+                    '<i class="ms-Icon ms-Icon--x"></i>' +
+                    ' </button>' +
+                    '</div>';
+                /** List item html */
+                var personaListItem = '<li class="ms-PeoplePicker-selectedPerson">' +
+                    '<div class="ms-Persona ms-Persona--sm">' +
+                    '<div class="ms-Persona-imageArea">' +
+                    '<div class="' + selectedClasses + '">' + selectedInitials + '</div>' +
+                    selectedImage +
+                    '</div>' +
+                    '<div class="ms-Persona-presence"></div>' +
+                    '<div class="ms-Persona-details">' +
+                    '<div class="ms-Persona-primaryText">' + selectedName + '</div>' +
+                    '<div class="ms-Persona-secondaryText">' + selectedTitle + '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<button class="ms-PeoplePicker-resultAction js-selectedRemove"><i class="ms-Icon ms-Icon--x"></i></button>' +
+                    '</li>';
+                /** Tokenize selected persona if not Facepile or memberslist variants */
+                if (!$peoplePicker.hasClass('ms-PeoplePicker--Facepile') && !$peoplePicker.hasClass('ms-PeoplePicker--membersList')) {
+                    $searchField.before(personaHTML);
+                    $peoplePicker.removeClass("is-active");
+                    resizeSearchField($peoplePicker);
+                }
+                /** Add selected persona to a list if Facepile or memberslist variants */
+                else {
+                    if (!$selected.hasClass('is-active')) {
+                        $selected.addClass('is-active');
+                    }
+                    /** Prepend persona list item html to selected people list */
+                    $selectedPeople.prepend(personaListItem);
+                    /** Close the picker */
+                    $peoplePicker.removeClass("is-active");
+                    /** Get the total amount of selected personas and display that number */
+                    var count = $peoplePicker.find('.ms-PeoplePicker-selectedPerson').length;
+                    $selectedCount.html(count);
+                    /** Return picker back to default state:
+                    - Show only the first five results in the people list for when the picker is reopened
+                    - Make searchMore inactive
+                    - Clear any search field text 
+                    */
+                    $peopleList.children().show();
+                    $peopleList.children(":gt(4)").hide();
+
+                    $('.ms-PeoplePicker-searchMore').removeClass('is-active');
+                    $searchField.val("");
+                }
+            });
+
+            /** Remove the persona when clicking the personaRemove button. */
+            $peoplePicker.on('click', '.ms-PeoplePicker-personaRemove', function() {
+                $(this).parents('.ms-PeoplePicker-persona').remove();
+
+                /** Make the search field 100% width if all personas have been removed */
+                if ($('.ms-PeoplePicker-persona').length === 0) {
+                    $peoplePicker.find('.ms-PeoplePicker-searchField').outerWidth('100%');
+                } else {
+                    resizeSearchField($peoplePicker);
+                }
+            });
+
+            /** Trigger additional searching when clicking the search more area. */
+            $results.on('click', '.js-searchMore', function() {
+                var $searchMore = $(this);
+                var primaryLabel = $searchMore.find(".ms-PeoplePicker-searchMorePrimary");
+                var originalPrimaryLabelText = primaryLabel.html();
+                var searchFieldText = $searchField.val();
+
+                /** Change to searching state. */
+                $searchMore.addClass("is-searching");
+                primaryLabel.html("Searching for " + searchFieldText);
+
+                /** Attach Spinner */
+                if (!spinner) {
+                    spinner = new fabric.Spinner($searchMore.get(0));
+                } else {
+                    spinner.start();
+                }
+
+                /** Show all results in Facepile variant */
+                if ($peoplePicker.hasClass('ms-PeoplePicker--Facepile')) {
+                    setTimeout(function() { $peopleList.children().show(); }, 1500);
+                }
+
+                /** Return the original state. */
+                setTimeout(function() {
+                    $searchMore.removeClass("is-searching");
+                    primaryLabel.html(originalPrimaryLabelText);
+                    spinner.stop();
+                }, 1500);
+            });
+
+            /** Remove a result using the action icon. */
+            $results.on('click', '.js-resultRemove', function(event) {
+                event.stopPropagation();
+                $(this).parent(".ms-PeoplePicker-result").remove();
+            });
+
+            /** Expand a result if more details are available. */
+            $results.on('click', '.js-resultExpand', function(event) {
+                event.stopPropagation();
+                $(this).parent(".ms-PeoplePicker-result").toggleClass("is-expanded");
+            });
+
+            /** Remove a selected person using the action icon. */
+            $selectedPeople.on('click', '.js-selectedRemove', function(event) {
+                event.stopPropagation();
+                $(this).parent(".ms-PeoplePicker-selectedPerson").remove();
+                var count = $peoplePicker.find('.ms-PeoplePicker-selectedPerson').length;
+                $selectedCount.html(count);
+                if ($peoplePicker.find('.ms-PeoplePicker-selectedPerson').length === 0) {
+                    $selected.removeClass('is-active');
+                }
+            });
+
+            var filterResults = function(results, currentSuggestion, currentValueExists) {
+                return results.find('.ms-Persona-primaryText').filter(function() {
+                    if (currentValueExists) {
+                        return $(this).text().toLowerCase() === currentSuggestion;
+                    } else {
+                        return $(this).text().toLowerCase() !== currentSuggestion;
+                    }
+                }).parents('.ms-PeoplePicker-peopleListItem');
+            };
+
+            /** Search people picker items */
+            $peoplePicker.on('keyup', '.ms-PeoplePicker-searchField', function(evt) {
+                var suggested = [];
+                var newSuggestions = [];
+                var $pickerResult = $results.find('.ms-Persona-primaryText');
+
+                $peoplePicker.addClass('is-searching');
+
+                /** Hide members */
+                $selected.hide();
+
+                /** Show 5 results */
+                $peopleList.children(":lt(5)").show();
+
+                /** Show searchMore button */
+                $('.ms-PeoplePicker-searchMore').addClass('is-active');
+
+                /** Get array of suggested people */
+                $pickerResult.each(function() { suggested.push($(this).text()); });
+
+                /** Iterate over array to find matches and show matching items */
+                for (var i = 0; i < suggested.length; i++) {
+                    var currentPersona = suggested[i].toLowerCase();
+                    var currentValue = evt.target.value.toLowerCase();
+                    var currentSuggestion;
+
+                    if (currentPersona.indexOf(currentValue) > -1) {
+                        currentSuggestion = suggested[i].toLowerCase();
+
+                        newSuggestions.push(suggested[i]);
+
+                        filterResults($results, currentSuggestion, true).show();
+                    } else {
+                        filterResults($results, currentSuggestion, false).hide();
+                    }
+                }
+
+                /** Show members and hide searchmore when field is empty */
+                if ($(this).val() === "") {
+                    $peoplePicker.removeClass('is-searching');
+                    $selected.show();
+                    $('.ms-PeoplePicker-searchMore').removeClass('is-active');
+                    $selectedPeople.addClass('ms-u-slideDownIn20');
+                    setTimeout(function() { $selectedPeople.removeClass('ms-u-slideDownIn20'); }, 1000);
+                    $peopleList.children(":gt(4)").hide();
+                }
+            });
+
+            /** Show persona card when clicking a persona in the members list */
+            $selectedPeople.on('click', '.ms-Persona', function() {
+                var selectedName = $(this).find(".ms-Persona-primaryText").html();
+                var selectedTitle = $(this).find(".ms-Persona-secondaryText").html();
+                var selectedInitials = (function() {
+                    var name = selectedName.split(' ');
+                    var nameInitials = '';
+
+                    for (var i = 0; i < name.length; i++) {
+                        nameInitials += name[i].charAt(0);
+                    }
+
+                    return nameInitials.substring(0, 2);
+                })();
+                var selectedClasses = $(this).find('.ms-Persona-initials').attr('class');
+                var selectedImage = $(this).find('.ms-Persona-image').attr('src');
+                var $card = $('.ms-PersonaCard');
+                var $cardName = $card.find('.ms-Persona-primaryText');
+                var $cardTitle = $card.find('.ms-Persona-secondaryText');
+                var $cardInitials = $card.find('.ms-Persona-initials');
+                var $cardImage = $card.find('.ms-Persona-image');
+
+                /** Close any open persona cards */
+                $personaCard.removeClass('is-active');
+
+                /** Add data to persona card */
+                $cardName.text(selectedName);
+                $cardTitle.text(selectedTitle);
+                $cardInitials.text(selectedInitials);
+                $cardInitials.removeClass();
+                $cardInitials.addClass(selectedClasses);
+                $cardImage.attr('src', selectedImage);
+
+                /** Show persona card */
+                setTimeout(function() {
+                    $personaCard.addClass('is-active');
+                    setTimeout(function() { $personaCard.css({ 'animation-name': 'none' }); }, 300);
+                }, 100);
+
+                /** Align persona card on md and above screens */
+                if ($(window).width() > 480) {
+                    var itemPositionTop = $(this).offset().top;
+                    var correctedPositionTop = itemPositionTop + 10;
+
+                    $personaCard.css({ 'top': correctedPositionTop, 'left': 0 });
+                } else {
+                    $personaCard.css({ 'top': 'auto' });
+                }
+            });
+
+            /** Dismiss persona card when clicking on the document */
+            $(document).on('click', function(e) {
+                var $memberBtn = $('.ms-PeoplePicker-selectedPerson').find('.ms-Persona');
+
+                if (!$memberBtn.is(e.target) && !$personaCard.is(e.target) && $personaCard.has(e.target).length === 0) {
+                    $personaCard.removeClass('is-active');
+                    setTimeout(function() { $personaCard.removeAttr('style'); }, 300);
+                } else {
+                    $personaCard.addClass('is-active');
+                }
+            });
+        });
+    };
+
+    /** Resize the search field to match the search box */
+    function resizeSearchField($peoplePicker) {
+        var $searchBox = $peoplePicker.find('.ms-PeoplePicker-searchBox');
+
+        // Where is the right edge of the search box?
+        var searchBoxLeftEdge = $searchBox.position().left;
+        var searchBoxWidth = $searchBox.outerWidth();
+        var searchBoxRightEdge = searchBoxLeftEdge + searchBoxWidth;
+
+        // Where is the right edge of the last persona component?
+        var $lastPersona = $searchBox.find('.ms-PeoplePicker-persona:last');
+        var lastPersonaLeftEdge = $lastPersona.offset().left;
+        var lastPersonaWidth = $lastPersona.outerWidth();
+        var lastPersonaRightEdge = lastPersonaLeftEdge + lastPersonaWidth;
+
+        // Adjust the width of the field to fit the remaining space.
+        var newFieldWidth = searchBoxRightEdge - lastPersonaRightEdge - 7;
+
+        // Don't let the field get too tiny.
+        if (newFieldWidth < 100) {
+            newFieldWidth = "100%";
+        }
+
+        // Set the width of the search field
+        $peoplePicker.find('.ms-PeoplePicker-searchField').outerWidth(newFieldWidth);
+    }
+})(jQuery);
+
+// Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
+
+/**
+ * MessageBanner component
+ *
+ * A component to display error messages
+ *
+ */
+
+/**
+ * @namespace fabric
+ */
+var fabric = fabric || {};
+/**
+ *
+ * @param {HTMLElement} container - the target container for an instance of MessageBanner
+ * @constructor
+ */
+fabric.MessageBanner = function(container) {
+    this.container = container;
+    this.init();
+};
+
+fabric.MessageBanner.prototype = (function() {
+
+    var _clipper;
+    var _bufferSize;
+    var _textContainerMaxWidth = 700;
+    var _clientWidth;
+    var _textWidth;
+    var _initTextWidth;
+    var _chevronButton;
+    var _errorBanner;
+    var _actionButton;
+    var _closeButton;
+    var _bufferElementsWidth = 88;
+    var _bufferElementsWidthSmall = 35;
+    var SMALL_BREAK_POINT = 480;
+
+    /**
+     * sets styles on resize
+     */
+    var _onResize = function() {
+        _clientWidth = _errorBanner.offsetWidth;
+        if (window.innerWidth >= SMALL_BREAK_POINT) {
+            _resizeRegular();
+        } else {
+            _resizeSmall();
+        }
+    };
+
+    /**
+     * resize above 480 pixel breakpoint
+     */
+    var _resizeRegular = function() {
+        if ((_clientWidth - _bufferSize) > _initTextWidth && _initTextWidth < _textContainerMaxWidth) {
+            _textWidth = "auto";
+            _chevronButton.className = "ms-MessageBanner-expand";
+            _collapse();
+        } else {
+            _textWidth = Math.min((_clientWidth - _bufferSize), _textContainerMaxWidth) + "px";
+            if (_chevronButton.className.indexOf("is-visible") === -1) {
+                _chevronButton.className += " is-visible";
+            }
+        }
+        _clipper.style.width = _textWidth;
+    };
+
+    /**
+     * resize below 480 pixel breakpoint
+     */
+    var _resizeSmall = function() {
+        if (_clientWidth - (_bufferElementsWidthSmall + _closeButton.offsetWidth) > _initTextWidth) {
+            _textWidth = "auto";
+            _collapse();
+        } else {
+            _textWidth = (_clientWidth - (_bufferElementsWidthSmall + _closeButton.offsetWidth)) + "px";
+        }
+        _clipper.style.width = _textWidth;
+    };
+    /**
+     * caches elements and values of the component
+     */
+    var _cacheDOM = function(context) {
+        _errorBanner = context.container;
+        _clipper = context.container.querySelector('.ms-MessageBanner-clipper');
+        _chevronButton = context.container.querySelector('.ms-MessageBanner-expand');
+        _actionButton = context.container.querySelector('.ms-MessageBanner-action');
+        _bufferSize = _actionButton.offsetWidth + _bufferElementsWidth;
+        _closeButton = context.container.querySelector('.ms-MessageBanner-close');
+    };
+
+    /**
+     * expands component to show full error message
+     */
+    var _expand = function() {
+        var icon = _chevronButton.querySelector('.ms-Icon');
+        _errorBanner.className += " is-expanded";
+        icon.className = "ms-Icon ms-Icon--chevronsUp";
+    };
+
+    /**
+     * collapses component to only show truncated message
+     */
+    var _collapse = function() {
+        var icon = _chevronButton.querySelector('.ms-Icon');
+        _errorBanner.className = "ms-MessageBanner";
+        icon.className = "ms-Icon ms-Icon--chevronsDown";
+    };
+
+    var _toggleExpansion = function() {
+        if (_errorBanner.className.indexOf("is-expanded") > -1) {
+            _collapse();
+        } else {
+            _expand();
+        }
+    };
+
+    /**
+     * hides banner when close button is clicked
+     */
+    var _hideBanner = function() {
+        if (_errorBanner.className.indexOf("hide") === -1) {
+            _errorBanner.className += " hide";
+            setTimeout(function() {
+                _errorBanner.className = "ms-MessageBanner is-hidden";
+            }, 500);
+        }
+    };
+
+    /**
+     * shows banner if the banner is hidden
+     */
+    var _showBanner = function() {
+        _errorBanner.className = "ms-MessageBanner";
+    };
+
+    /**
+     * sets handlers for resize and button click events
+     */
+    var _setListeners = function() {
+        window.addEventListener('resize', _onResize, false);
+        _chevronButton.addEventListener("click", _toggleExpansion, false);
+        _closeButton.addEventListener("click", _hideBanner, false);
+    };
+
+    /**
+     * initializes component
+     */
+    var init = function() {
+        _cacheDOM(this);
+        _setListeners();
+        _clientWidth = _errorBanner.offsetWidth;
+        _initTextWidth = _clipper.offsetWidth;
+        _onResize(null);
+    };
+
+    return {
+        init: init,
+        showBanner: _showBanner
+    };
+}());

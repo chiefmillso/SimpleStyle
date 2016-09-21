@@ -25,6 +25,18 @@
             "filepath": "atoms\\fabric\\09-fabric-dropdown.hbs"
         },
         {
+            "title": "11-fabric-label",
+            "description": "",
+            "filename": "11-fabric-label",
+            "filepath": "atoms\\fabric\\11-fabric-label.hbs"
+        },
+        {
+            "title": "12-fabric-link",
+            "description": "",
+            "filename": "12-fabric-link",
+            "filepath": "atoms\\fabric\\12-fabric-link.hbs"
+        },
+        {
             "title": "Forms - Figure Caption",
             "description": "",
             "filename": "01-figure-caption",
@@ -270,6 +282,24 @@
             "description": "",
             "filename": "08-fabric-dialog",
             "filepath": "molecules\\fabric\\08-fabric-dialog.hbs"
+        },
+        {
+            "title": "10-fabric-facepile",
+            "description": "",
+            "filename": "10-fabric-facepile",
+            "filepath": "molecules\\fabric\\10-fabric-facepile.hbs"
+        },
+        {
+            "title": "13-fabric-list",
+            "description": "",
+            "filename": "13-fabric-list",
+            "filepath": "molecules\\fabric\\13-fabric-list.hbs"
+        },
+        {
+            "title": "14-fabric-messagebanner",
+            "description": "",
+            "filename": "14-fabric-messagebanner",
+            "filepath": "molecules\\fabric\\14-fabric-messagebanner.hbs"
         }
     ],
     "folder": [
