@@ -69,10 +69,6 @@ module.exports = {
 
             // init pattern configs
             var filename = path.basename(file.relative);
-            if (filename.indexOf('\\') != -1) {
-                filename = filename.split('\\').pop();
-            }
-
             var extension = path.extname(file.relative),
                 basename = filename.replace(extension, ''),
                 patternpath = path.dirname(file.relative),
@@ -80,15 +76,15 @@ module.exports = {
 
             // create pattern object
             var data = {
-                title: title,
+                title: title, // 02-fabric-button
                 description: '',
-                filename: basename,
-                filepath: file.relative
+                filename: basename, // 02-fabric-button
+                filepath: file.relative // atoms\fabric\02-fabric-button.hbs
             };
 
             var framework = getFramework(title, patternpath);
             if (framework !== null) {
-                data.framework = framework;
+                data.framework = framework; // 'o365_forms'
             }
 
             if (patternpath.indexOf('..') !== -1) {
@@ -101,7 +97,6 @@ module.exports = {
 
         var writeConfigToFile = function() {
 
-            console.log('pattern sort');
             patternsData = patternsData.sort(function(a, b) {
                 if (a.filepath < b.filepath)
                     return -1;
@@ -110,7 +105,6 @@ module.exports = {
                 else
                     return 0;
             });
-            console.log('pattern sort');
 
             var patternConfig = {
                 patterns: patternsData,
@@ -153,9 +147,6 @@ module.exports = {
 
         var logData = function() {
             console.log(statistics);
-
-            //            console.log(patternsData.length);
-            //            console.log(patternsData);
             writeConfigToFile();
         };
 
@@ -283,9 +274,6 @@ module.exports = {
             });
 
             newConfig.patterns = sortedPatterns;
-            // console.log('Hello world');
-            // console.log(test);
-            // console.log('Hello world');
 
             var patterns = JSON.stringify(newConfig, null, 4);
 
@@ -322,7 +310,7 @@ module.exports = {
             // init pattern configs
             var extension = path.extname(file),
                 patternpath = path.dirname(file),
-                basename = file.replace(extension, '').replace(patternpath + '/', ''),
+                basename = file.replace(extension, '').replace(patternpath + '\\', ''),
                 title = basename.indexOf('_') === 0 ? basename.substr(1) : basename;
 
             // create pattern object
@@ -344,6 +332,8 @@ module.exports = {
             });
 
             if (itemExits.length === 0) {
+
+                console.log('adding: ' + item.title);
 
                 currentConfig.patterns.push(item);
                 currentConfig.patterns = cleanup(currentConfig.patterns);
@@ -368,8 +358,6 @@ module.exports = {
                 return obj.filepath !== oldFile;
             });
 
-            console.log(oldPathToFile);
-
             if (oldItem.length !== 0) {
 
                 // unmark delete property
@@ -386,6 +374,8 @@ module.exports = {
                 oldItem[0].filepath = curFile;
 
                 newPatterns.push(oldItem[0]);
+
+                console.log('renaming: ' + oldItem[0].title);
 
                 currentConfig.patterns = cleanup(newPatterns);
 

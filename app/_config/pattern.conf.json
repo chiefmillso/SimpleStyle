@@ -19,6 +19,12 @@
             "filepath": "atoms\\fabric\\07-fabric-datepicker.hbs"
         },
         {
+            "title": "09-fabric-dropdown",
+            "description": "",
+            "filename": "09-fabric-dropdown",
+            "filepath": "atoms\\fabric\\09-fabric-dropdown.hbs"
+        },
+        {
             "title": "Forms - Figure Caption",
             "description": "",
             "filename": "01-figure-caption",
@@ -258,6 +264,12 @@
             "description": "",
             "filename": "05-fabric-commandbar",
             "filepath": "molecules\\fabric\\05-fabric-commandbar.hbs"
+        },
+        {
+            "title": "Fabric UI - Dialog",
+            "description": "",
+            "filename": "08-fabric-dialog",
+            "filepath": "molecules\\fabric\\08-fabric-dialog.hbs"
         }
     ],
     "folder": [

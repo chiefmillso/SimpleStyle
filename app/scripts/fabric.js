@@ -505,287 +505,444 @@ fabric.Breadcrumb.prototype = (function() {
 
 // Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
 
-(function ($) {
+(function($) {
 
-  /**
-   * DatePicker Plugin
-   */
+    /**
+     * DatePicker Plugin
+     */
 
-  $.fn.DatePicker = function (options) {
+    $.fn.DatePicker = function(options) {
 
-    return this.each(function () {
+        return this.each(function() {
 
-      /** Set up variables and run the Pickadate plugin. */
-      var $datePicker = $(this);
-      var $dateField = $datePicker.find('.ms-TextField-field').pickadate($.extend({
-        // Strings and translations.
-        weekdaysShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+            /** Set up variables and run the Pickadate plugin. */
+            var $datePicker = $(this);
+            var $dateField = $datePicker.find('.ms-TextField-field').pickadate($.extend({
+                // Strings and translations.
+                weekdaysShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
 
-        // Don't render the buttons
-        today: '',
-        clear: '',
-        close: '',
+                // Don't render the buttons
+                today: '',
+                clear: '',
+                close: '',
 
-        // Events
-        onStart: function() {
-          initCustomView($datePicker);
-        },
+                // Events
+                onStart: function() {
+                    initCustomView($datePicker);
+                },
 
-        // Classes
-        klass: {
+                // Classes
+                klass: {
 
-          // The element states
-          input: 'ms-DatePicker-input',
-          active: 'ms-DatePicker-input--active',
+                    // The element states
+                    input: 'ms-DatePicker-input',
+                    active: 'ms-DatePicker-input--active',
 
-          // The root picker and states
-          picker: 'ms-DatePicker-picker',
-          opened: 'ms-DatePicker-picker--opened',
-          focused: 'ms-DatePicker-picker--focused',
+                    // The root picker and states
+                    picker: 'ms-DatePicker-picker',
+                    opened: 'ms-DatePicker-picker--opened',
+                    focused: 'ms-DatePicker-picker--focused',
 
-          // The picker holder
-          holder: 'ms-DatePicker-holder',
+                    // The picker holder
+                    holder: 'ms-DatePicker-holder',
 
-          // The picker frame, wrapper, and box
-          frame: 'ms-DatePicker-frame',
-          wrap: 'ms-DatePicker-wrap',
-          box: 'ms-DatePicker-dayPicker',
+                    // The picker frame, wrapper, and box
+                    frame: 'ms-DatePicker-frame',
+                    wrap: 'ms-DatePicker-wrap',
+                    box: 'ms-DatePicker-dayPicker',
 
-          // The picker header
-          header: 'ms-DatePicker-header',
+                    // The picker header
+                    header: 'ms-DatePicker-header',
 
-          // Month & year labels
-          month: 'ms-DatePicker-month',
-          year: 'ms-DatePicker-year',
+                    // Month & year labels
+                    month: 'ms-DatePicker-month',
+                    year: 'ms-DatePicker-year',
 
-          // Table of dates
-          table: 'ms-DatePicker-table',
+                    // Table of dates
+                    table: 'ms-DatePicker-table',
 
-          // Weekday labels
-          weekdays: 'ms-DatePicker-weekday',
+                    // Weekday labels
+                    weekdays: 'ms-DatePicker-weekday',
 
-          // Day states
-          day: 'ms-DatePicker-day',
-          disabled: 'ms-DatePicker-day--disabled',
-          selected: 'ms-DatePicker-day--selected',
-          highlighted: 'ms-DatePicker-day--highlighted',
-          now: 'ms-DatePicker-day--today',
-          infocus: 'ms-DatePicker-day--infocus',
-          outfocus: 'ms-DatePicker-day--outfocus',
+                    // Day states
+                    day: 'ms-DatePicker-day',
+                    disabled: 'ms-DatePicker-day--disabled',
+                    selected: 'ms-DatePicker-day--selected',
+                    highlighted: 'ms-DatePicker-day--highlighted',
+                    now: 'ms-DatePicker-day--today',
+                    infocus: 'ms-DatePicker-day--infocus',
+                    outfocus: 'ms-DatePicker-day--outfocus',
 
+                }
+            }, options || {}));
+            var $picker = $dateField.pickadate('picker');
+
+            /** Respond to built-in picker events. */
+            $picker.on({
+                render: function() {
+                    updateCustomView($datePicker);
+                },
+                open: function() {
+                    scrollUp($datePicker);
+                }
+            });
+
+        });
+    };
+
+    /**
+     * After the Pickadate plugin starts, this function
+     * adds additional controls to the picker view.
+     */
+    function initCustomView($datePicker) {
+
+        /** Get some variables ready. */
+        var $monthControls = $datePicker.find('.ms-DatePicker-monthComponents');
+        var $goToday = $datePicker.find('.ms-DatePicker-goToday');
+        var $monthPicker = $datePicker.find('.ms-DatePicker-monthPicker');
+        var $yearPicker = $datePicker.find('.ms-DatePicker-yearPicker');
+        var $pickerWrapper = $datePicker.find('.ms-DatePicker-wrap');
+        var $picker = $datePicker.find('.ms-TextField-field').pickadate('picker');
+
+        /** Move the month picker into position. */
+        $monthControls.appendTo($pickerWrapper);
+        $goToday.appendTo($pickerWrapper);
+        $monthPicker.appendTo($pickerWrapper);
+        $yearPicker.appendTo($pickerWrapper);
+
+        /** Update the custom view. */
+        updateCustomView($datePicker);
+
+        /** Move back one month. */
+        $monthControls.on('click', '.js-prevMonth', function(event) {
+            event.preventDefault();
+            var newMonth = $picker.get('highlight').month - 1;
+            changeHighlightedDate($picker, null, newMonth, null);
+        });
+
+        /** Move ahead one month. */
+        $monthControls.on('click', '.js-nextMonth', function(event) {
+            event.preventDefault();
+            var newMonth = $picker.get('highlight').month + 1;
+            changeHighlightedDate($picker, null, newMonth, null);
+        });
+
+        /** Move back one year. */
+        $monthPicker.on('click', '.js-prevYear', function(event) {
+            event.preventDefault();
+            var newYear = $picker.get('highlight').year - 1;
+            changeHighlightedDate($picker, newYear, null, null);
+        });
+
+        /** Move ahead one year. */
+        $monthPicker.on('click', '.js-nextYear', function(event) {
+            event.preventDefault();
+            var newYear = $picker.get('highlight').year + 1;
+            changeHighlightedDate($picker, newYear, null, null);
+        });
+
+        /** Move back one decade. */
+        $yearPicker.on('click', '.js-prevDecade', function(event) {
+            event.preventDefault();
+            var newYear = $picker.get('highlight').year - 10;
+            changeHighlightedDate($picker, newYear, null, null);
+        });
+
+        /** Move ahead one decade. */
+        $yearPicker.on('click', '.js-nextDecade', function(event) {
+            event.preventDefault();
+            var newYear = $picker.get('highlight').year + 10;
+            changeHighlightedDate($picker, newYear, null, null);
+        });
+
+        /** Go to the current date, shown in the day picking view. */
+        $goToday.click(function(event) {
+            event.preventDefault();
+
+            /** Select the current date, while keeping the picker open. */
+            var now = new Date();
+            $picker.set('select', [now.getFullYear(), now.getMonth(), now.getDate()]);
+
+            /** Switch to the default (calendar) view. */
+            $datePicker.removeClass('is-pickingMonths').removeClass('is-pickingYears');
+
+        });
+
+        /** Change the highlighted month. */
+        $monthPicker.on('click', '.js-changeDate', function(event) {
+            event.preventDefault();
+
+            /** Get the requested date from the data attributes. */
+            var newYear = $(this).attr('data-year');
+            var newMonth = $(this).attr('data-month');
+            var newDay = $(this).attr('data-day');
+
+            /** Update the date. */
+            changeHighlightedDate($picker, newYear, newMonth, newDay);
+
+            /** If we've been in the "picking months" state on mobile, remove that state so we show the calendar again. */
+            if ($datePicker.hasClass('is-pickingMonths')) {
+                $datePicker.removeClass('is-pickingMonths');
+            }
+        });
+
+        /** Change the highlighted year. */
+        $yearPicker.on('click', '.js-changeDate', function(event) {
+            event.preventDefault();
+
+            /** Get the requested date from the data attributes. */
+            var newYear = $(this).attr('data-year');
+            var newMonth = $(this).attr('data-month');
+            var newDay = $(this).attr('data-day');
+
+            /** Update the date. */
+            changeHighlightedDate($picker, newYear, newMonth, newDay);
+
+            /** If we've been in the "picking years" state on mobile, remove that state so we show the calendar again. */
+            if ($datePicker.hasClass('is-pickingYears')) {
+                $datePicker.removeClass('is-pickingYears');
+            }
+        });
+
+        /** Switch to the default state. */
+        $monthPicker.on('click', '.js-showDayPicker', function() {
+            $datePicker.removeClass('is-pickingMonths');
+            $datePicker.removeClass('is-pickingYears');
+        });
+
+        /** Switch to the is-pickingMonths state. */
+        $monthControls.on('click', '.js-showMonthPicker', function() {
+            $datePicker.toggleClass('is-pickingMonths');
+        });
+
+        /** Switch to the is-pickingYears state. */
+        $monthPicker.on('click', '.js-showYearPicker', function() {
+            $datePicker.toggleClass('is-pickingYears');
+        });
+
+    }
+
+    /** Change the highlighted date. */
+    function changeHighlightedDate($picker, newYear, newMonth, newDay) {
+
+        /** All letiables are optional. If not provided, default to the current value. */
+        if (typeof newYear === "undefined" || newYear === null) {
+            newYear = $picker.get("highlight").year;
         }
-      },options||{}));
-      var $picker = $dateField.pickadate('picker');
-
-      /** Respond to built-in picker events. */
-      $picker.on({
-        render: function() {
-          updateCustomView($datePicker);
-        },
-        open: function() {
-          scrollUp($datePicker);
+        if (typeof newMonth === "undefined" || newMonth === null) {
+            newMonth = $picker.get("highlight").month;
         }
-      });
+        if (typeof newDay === "undefined" || newDay === null) {
+            newDay = $picker.get("highlight").date;
+        }
 
-    });
-  };
+        /** Update it. */
+        $picker.set('highlight', [newYear, newMonth, newDay]);
 
-  /**
-   * After the Pickadate plugin starts, this function
-   * adds additional controls to the picker view.
-   */
-  function initCustomView($datePicker) {
-
-    /** Get some variables ready. */
-    var $monthControls = $datePicker.find('.ms-DatePicker-monthComponents');
-    var $goToday = $datePicker.find('.ms-DatePicker-goToday');
-    var $monthPicker = $datePicker.find('.ms-DatePicker-monthPicker');
-    var $yearPicker = $datePicker.find('.ms-DatePicker-yearPicker');
-    var $pickerWrapper = $datePicker.find('.ms-DatePicker-wrap');
-    var $picker = $datePicker.find('.ms-TextField-field').pickadate('picker');
-
-    /** Move the month picker into position. */
-    $monthControls.appendTo($pickerWrapper);
-    $goToday.appendTo($pickerWrapper);
-    $monthPicker.appendTo($pickerWrapper);
-    $yearPicker.appendTo($pickerWrapper);
-
-    /** Update the custom view. */
-    updateCustomView($datePicker);
-
-    /** Move back one month. */
-    $monthControls.on('click', '.js-prevMonth', function(event) {
-      event.preventDefault();
-      var newMonth = $picker.get('highlight').month - 1;
-      changeHighlightedDate($picker, null, newMonth, null);
-    });
-
-    /** Move ahead one month. */
-    $monthControls.on('click', '.js-nextMonth', function(event) {
-      event.preventDefault();
-      var newMonth = $picker.get('highlight').month + 1;
-      changeHighlightedDate($picker, null, newMonth, null);
-    });
-
-    /** Move back one year. */
-    $monthPicker.on('click', '.js-prevYear', function(event) {
-      event.preventDefault();
-      var newYear = $picker.get('highlight').year - 1;
-      changeHighlightedDate($picker, newYear, null, null);
-    });
-
-    /** Move ahead one year. */
-    $monthPicker.on('click', '.js-nextYear', function(event) {
-      event.preventDefault();
-      var newYear = $picker.get('highlight').year + 1;
-      changeHighlightedDate($picker, newYear, null, null);
-    });
-
-    /** Move back one decade. */
-    $yearPicker.on('click', '.js-prevDecade', function(event) {
-      event.preventDefault();
-      var newYear = $picker.get('highlight').year - 10;
-      changeHighlightedDate($picker, newYear, null, null);
-    });
-
-    /** Move ahead one decade. */
-    $yearPicker.on('click', '.js-nextDecade', function(event) {
-      event.preventDefault();
-      var newYear = $picker.get('highlight').year + 10;
-      changeHighlightedDate($picker, newYear, null, null);
-    });
-
-    /** Go to the current date, shown in the day picking view. */
-    $goToday.click(function(event) {
-      event.preventDefault();
-
-      /** Select the current date, while keeping the picker open. */
-      var now = new Date();
-      $picker.set('select', [now.getFullYear(), now.getMonth(), now.getDate()]);
-
-      /** Switch to the default (calendar) view. */
-      $datePicker.removeClass('is-pickingMonths').removeClass('is-pickingYears');
-
-    });
-
-    /** Change the highlighted month. */
-    $monthPicker.on('click', '.js-changeDate', function(event) {
-      event.preventDefault();
-
-      /** Get the requested date from the data attributes. */
-      var newYear = $(this).attr('data-year');
-      var newMonth = $(this).attr('data-month');
-      var newDay = $(this).attr('data-day');
-
-      /** Update the date. */
-      changeHighlightedDate($picker, newYear, newMonth, newDay);
-
-      /** If we've been in the "picking months" state on mobile, remove that state so we show the calendar again. */
-      if ($datePicker.hasClass('is-pickingMonths')) {
-        $datePicker.removeClass('is-pickingMonths');
-      }
-    });
-
-    /** Change the highlighted year. */
-    $yearPicker.on('click', '.js-changeDate', function(event) {
-      event.preventDefault();
-
-      /** Get the requested date from the data attributes. */
-      var newYear = $(this).attr('data-year');
-      var newMonth = $(this).attr('data-month');
-      var newDay = $(this).attr('data-day');
-
-      /** Update the date. */
-      changeHighlightedDate($picker, newYear, newMonth, newDay);
-
-      /** If we've been in the "picking years" state on mobile, remove that state so we show the calendar again. */
-      if ($datePicker.hasClass('is-pickingYears')) {
-        $datePicker.removeClass('is-pickingYears');
-      }
-    });
-
-    /** Switch to the default state. */
-    $monthPicker.on('click', '.js-showDayPicker', function() {
-      $datePicker.removeClass('is-pickingMonths');
-      $datePicker.removeClass('is-pickingYears');
-    });
-
-    /** Switch to the is-pickingMonths state. */
-    $monthControls.on('click', '.js-showMonthPicker', function() {
-      $datePicker.toggleClass('is-pickingMonths');
-    });
-
-    /** Switch to the is-pickingYears state. */
-    $monthPicker.on('click', '.js-showYearPicker', function() {
-      $datePicker.toggleClass('is-pickingYears');
-    });
-
-  }
-
-  /** Change the highlighted date. */
-  function changeHighlightedDate($picker, newYear, newMonth, newDay) {
-
-    /** All letiables are optional. If not provided, default to the current value. */
-    if (typeof newYear === "undefined" || newYear === null) {
-      newYear = $picker.get("highlight").year;
-    }
-    if (typeof newMonth === "undefined" || newMonth === null) {
-      newMonth = $picker.get("highlight").month;
-    }
-    if (typeof newDay === "undefined" || newDay === null) {
-      newDay = $picker.get("highlight").date;
     }
 
-    /** Update it. */
-    $picker.set('highlight', [newYear, newMonth, newDay]);
 
-  }
+    /** Whenever the picker renders, do our own rendering on the custom controls. */
+    function updateCustomView($datePicker) {
 
+        /** Get some variables ready. */
+        var $monthPicker = $datePicker.find('.ms-DatePicker-monthPicker');
+        var $yearPicker = $datePicker.find('.ms-DatePicker-yearPicker');
+        var $picker = $datePicker.find('.ms-TextField-field').pickadate('picker');
 
-  /** Whenever the picker renders, do our own rendering on the custom controls. */
-  function updateCustomView($datePicker) {
+        /** Set the correct year. */
+        $monthPicker.find('.ms-DatePicker-currentYear').text($picker.get('view').year);
 
-    /** Get some variables ready. */
-    var $monthPicker = $datePicker.find('.ms-DatePicker-monthPicker');
-    var $yearPicker = $datePicker.find('.ms-DatePicker-yearPicker');
-    var $picker = $datePicker.find('.ms-TextField-field').pickadate('picker');
+        /** Highlight the current month. */
+        $monthPicker.find('.ms-DatePicker-monthOption').removeClass('is-highlighted');
+        $monthPicker.find('.ms-DatePicker-monthOption[data-month="' + $picker.get('highlight').month + '"]').addClass('is-highlighted');
 
-    /** Set the correct year. */
-    $monthPicker.find('.ms-DatePicker-currentYear').text($picker.get('view').year);
+        /** Generate the grid of years for the year picker view. */
 
-    /** Highlight the current month. */
-    $monthPicker.find('.ms-DatePicker-monthOption').removeClass('is-highlighted');
-    $monthPicker.find('.ms-DatePicker-monthOption[data-month="' + $picker.get('highlight').month + '"]').addClass('is-highlighted');
+        // Start by removing any existing generated output. */
+        $yearPicker.find('.ms-DatePicker-currentDecade').remove();
+        $yearPicker.find('.ms-DatePicker-optionGrid').remove();
 
-    /** Generate the grid of years for the year picker view. */
+        // Generate the output by going through the years.
+        var startingYear = $picker.get('highlight').year - 11;
+        var decadeText = startingYear + " - " + (startingYear + 11);
+        var output = '<div class="ms-DatePicker-currentDecade">' + decadeText + '</div>';
+        output += '<div class="ms-DatePicker-optionGrid">';
+        for (var year = startingYear; year < (startingYear + 12); year++) {
+            output += '<span class="ms-DatePicker-yearOption js-changeDate" data-year="' + year + '">' + year + '</span>';
+        }
+        output += '</div>';
 
-      // Start by removing any existing generated output. */
-    $yearPicker.find('.ms-DatePicker-currentDecade').remove();
-    $yearPicker.find('.ms-DatePicker-optionGrid').remove();
+        // Output the title and grid of years generated above.
+        $yearPicker.append(output);
 
-    // Generate the output by going through the years.
-    var startingYear = $picker.get('highlight').year - 11;
-    var decadeText = startingYear + " - " + (startingYear + 11);
-    var output = '<div class="ms-DatePicker-currentDecade">' + decadeText + '</div>';
-    output += '<div class="ms-DatePicker-optionGrid">';
-    for (var year = startingYear; year < (startingYear + 12); year++) {
-      output += '<span class="ms-DatePicker-yearOption js-changeDate" data-year="' + year + '">' + year +'</span>';
+        /** Highlight the current year. */
+        $yearPicker.find('.ms-DatePicker-yearOption').removeClass('is-highlighted');
+        $yearPicker.find('.ms-DatePicker-yearOption[data-year="' + $picker.get('highlight').year + '"]').addClass('is-highlighted');
     }
-    output += '</div>';
 
-    // Output the title and grid of years generated above.
-    $yearPicker.append(output);
+    /** Scroll the page up so that the field the date picker is attached to is at the top. */
+    function scrollUp($datePicker) {
+        $('html, body').animate({
+            scrollTop: $datePicker.offset().top
+        }, 367);
+    }
 
-    /** Highlight the current year. */
-    $yearPicker.find('.ms-DatePicker-yearOption').removeClass('is-highlighted');
-    $yearPicker.find('.ms-DatePicker-yearOption[data-year="' + $picker.get('highlight').year + '"]').addClass('is-highlighted');
-  }
-  
-  /** Scroll the page up so that the field the date picker is attached to is at the top. */
-  function scrollUp($datePicker) {
-    $('html, body').animate({
-      scrollTop: $datePicker.offset().top
-    }, 367);
-  }
+})(jQuery);
 
+// Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information.
+
+/**
+ * Dropdown Plugin
+ *
+ * Given .ms-Dropdown containers with generic <select> elements inside, this plugin hides the original
+ * dropdown and creates a new "fake" dropdown that can more easily be styled across browsers.
+ *
+ * @param  {jQuery Object}  One or more .ms-Dropdown containers, each with a dropdown (.ms-Dropdown-select)
+ * @return {jQuery Object}  The same containers (allows for chaining)
+ */
+(function($) {
+    $.fn.Dropdown = function() {
+
+        /** Go through each dropdown we've been given. */
+        return this.each(function() {
+
+            var $dropdownWrapper = $(this),
+                $originalDropdown = $dropdownWrapper.children('.ms-Dropdown-select'),
+                $originalDropdownOptions = $originalDropdown.children('option'),
+                newDropdownTitle = '',
+                newDropdownItems = '',
+                newDropdownSource = '';
+
+            /** Go through the options to fill up newDropdownTitle and newDropdownItems. */
+            $originalDropdownOptions.each(function(index, option) {
+
+                /** If the option is selected, it should be the new dropdown's title. */
+                if (option.selected) {
+                    newDropdownTitle = option.text;
+                }
+
+                /** Add this option to the list of items. */
+                newDropdownItems += '<li class="ms-Dropdown-item' + ((option.disabled) ? ' is-disabled"' : '"') + '>' + option.text + '</li>';
+
+            });
+
+            /** Insert the replacement dropdown. */
+            newDropdownSource = '<span class="ms-Dropdown-title">' + newDropdownTitle + '</span><ul class="ms-Dropdown-items">' + newDropdownItems + '</ul>';
+            $dropdownWrapper.append(newDropdownSource);
+
+            function _openDropdown(evt) {
+                if (!$dropdownWrapper.hasClass('is-disabled')) {
+
+                    /** First, let's close any open dropdowns on this page. */
+                    $dropdownWrapper.find('.is-open').removeClass('is-open');
+
+                    /** Stop the click event from propagating, which would just close the dropdown immediately. */
+                    evt.stopPropagation();
+
+                    /** Before opening, size the items list to match the dropdown. */
+                    var dropdownWidth = $(this).parents(".ms-Dropdown").width();
+                    $(this).next(".ms-Dropdown-items").css('width', dropdownWidth + 'px');
+
+                    /** Go ahead and open that dropdown. */
+                    $dropdownWrapper.toggleClass('is-open');
+                    $('.ms-Dropdown').each(function() {
+                        if ($(this)[0] !== $dropdownWrapper[0]) {
+                            $(this).removeClass('is-open');
+                        }
+                    });
+
+                    /** Temporarily bind an event to the document that will close this dropdown when clicking anywhere. */
+                    $(document).bind("click.dropdown", function() {
+                        $dropdownWrapper.removeClass('is-open');
+                        $(document).unbind('click.dropdown');
+                    });
+                }
+            }
+
+            /** Toggle open/closed state of the dropdown when clicking its title. */
+            $dropdownWrapper.on('click', '.ms-Dropdown-title', function(event) {
+                _openDropdown(event);
+            });
+
+            /** Keyboard accessibility */
+            $dropdownWrapper.on('keyup', function(event) {
+                var keyCode = event.keyCode || event.which;
+                // Open dropdown on enter or arrow up or arrow down and focus on first option
+                if (!$(this).hasClass('is-open')) {
+                    if (keyCode === 13 || keyCode === 38 || keyCode === 40) {
+                        _openDropdown(event);
+                        if (!$(this).find('.ms-Dropdown-item').hasClass('is-selected')) {
+                            $(this).find('.ms-Dropdown-item:first').addClass('is-selected');
+                        }
+                    }
+                } else if ($(this).hasClass('is-open')) {
+                    // Up arrow focuses previous option
+                    if (keyCode === 38) {
+                        if ($(this).find('.ms-Dropdown-item.is-selected').prev().siblings().size() > 0) {
+                            $(this).find('.ms-Dropdown-item.is-selected').removeClass('is-selected').prev().addClass('is-selected');
+                        }
+                    }
+                    // Down arrow focuses next option
+                    if (keyCode === 40) {
+                        if ($(this).find('.ms-Dropdown-item.is-selected').next().siblings().size() > 0) {
+                            $(this).find('.ms-Dropdown-item.is-selected').removeClass('is-selected').next().addClass('is-selected');
+                        }
+                    }
+                    // Enter to select item
+                    if (keyCode === 13) {
+                        if (!$dropdownWrapper.hasClass('is-disabled')) {
+
+                            // Item text
+                            var selectedItemText = $(this).find('.ms-Dropdown-item.is-selected').text();
+
+                            $(this).find('.ms-Dropdown-title').html(selectedItemText);
+
+                            /** Update the original dropdown. */
+                            $originalDropdown.find("option").each(function(key, value) {
+                                if (value.text === selectedItemText) {
+                                    $(this).prop('selected', true);
+                                } else {
+                                    $(this).prop('selected', false);
+                                }
+                            });
+                            $originalDropdown.change();
+
+                            $(this).removeClass('is-open');
+                        }
+                    }
+                }
+
+                // Close dropdown on esc
+                if (keyCode === 27) {
+                    $(this).removeClass('is-open');
+                }
+            });
+
+            /** Select an option from the dropdown. */
+            $dropdownWrapper.on('click', '.ms-Dropdown-item', function() {
+                if (!$dropdownWrapper.hasClass('is-disabled') && !$(this).hasClass('is-disabled')) {
+
+                    /** Deselect all items and select this one. */
+                    $(this).siblings('.ms-Dropdown-item').removeClass('is-selected');
+                    $(this).addClass('is-selected');
+
+                    /** Update the replacement dropdown's title. */
+                    $(this).parents().siblings('.ms-Dropdown-title').html($(this).text());
+
+                    /** Update the original dropdown. */
+                    var selectedItemText = $(this).text();
+                    $originalDropdown.find("option").each(function(key, value) {
+                        if (value.text === selectedItemText) {
+                            $(this).prop('selected', true);
+                        } else {
+                            $(this).prop('selected', false);
+                        }
+                    });
+                    $originalDropdown.change();
+                }
+            });
+
+        });
+    };
 })(jQuery);

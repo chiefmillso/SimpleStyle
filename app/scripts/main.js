@@ -22,7 +22,9 @@ var ssgCore = ssgCore || {};
             if ($.fn.DatePicker) {
                 $('.ms-DatePicker').DatePicker();
             }
-
+            if ($.fn.Dropdown) {
+                $('.ms-Dropdown').Dropdown();
+            }
         }
 
         // Vanilla JS Components
@@ -36,6 +38,9 @@ var ssgCore = ssgCore || {};
             }
             if ('DatePicker' in fabric) {
                 component = new fabric['DatePicker'](document.querySelector('.ms-DatePicker'));
+            }
+            if ('Dropdown' in fabric) {
+                component = new fabric['Dropdown'](document.querySelector('.ms-Dropdown'));
             }
         }
 
