@@ -44,7 +44,11 @@
         }
         .sample {
             border: 3px $color-grey-200 solid;
+            border-style: inset;
             background-color: $bg-color;
+        }
+        .ssg-sample-padding {
+            padding: 5px;
         }
     }
     .ssg-label {

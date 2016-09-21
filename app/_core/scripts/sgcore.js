@@ -88,7 +88,6 @@ ssgCore.components.renderPatterns = function() {
         curPattern.rawContent = patternContent;
 
         var content = patternItem(curPattern);
-
         patternCont.append(content);
 
     }

@@ -3,6 +3,8 @@
 		<div class="ssg-item-title">{{title}}</div>
 		<div class="ssg-item-description">{{description}}&nbsp;<br><b class="ssg-pattern-label">Pattern name:</b><span class="ssg-pattern-name">{{filename}}</span></div>
 	</div>
+	{{#if sample}}
 	<div class="sample">{{{sample}}}</div>
+	{{/if}}
 	<pre class="ssg-item-code"><code class='language-markup'>{{rawContent}}</code></pre>
 </div>

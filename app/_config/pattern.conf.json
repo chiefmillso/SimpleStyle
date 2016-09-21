@@ -1,70 +1,80 @@
 {
-    "patterns": [
-        {
+    "patterns": [{
             "title": "Fabric UI - Buttons",
             "description": "",
             "filename": "02-fabric-button",
-            "filepath": "atoms\\fabric\\02-fabric-button.hbs"
+            "filepath": "atoms\\fabric\\02-fabric-button.hbs",
+            "framework": "padding.hbs"
         },
         {
             "title": "Fabric UI - ChoiceField",
             "description": "",
             "filename": "04-fabric-choicefield",
-            "filepath": "atoms\\fabric\\04-fabric-choicefield.hbs"
+            "filepath": "atoms\\fabric\\04-fabric-choicefield.hbs",
+            "framework": "padding.hbs"
         },
         {
             "title": "Fabric UI - DatePicker",
             "description": "",
             "filename": "07-fabric-datepicker",
-            "filepath": "atoms\\fabric\\07-fabric-datepicker.hbs"
+            "filepath": "atoms\\fabric\\07-fabric-datepicker.hbs",
+            "framework": "padding.hbs"
         },
         {
             "title": "09-fabric-dropdown",
             "description": "",
             "filename": "09-fabric-dropdown",
-            "filepath": "atoms\\fabric\\09-fabric-dropdown.hbs"
+            "filepath": "atoms\\fabric\\09-fabric-dropdown.hbs",
+            "framework": "padding.hbs"
         },
         {
             "title": "11-fabric-label",
             "description": "",
             "filename": "11-fabric-label",
-            "filepath": "atoms\\fabric\\11-fabric-label.hbs"
+            "filepath": "atoms\\fabric\\11-fabric-label.hbs",
+            "framework": "padding.hbs"
         },
         {
             "title": "12-fabric-link",
             "description": "",
             "filename": "12-fabric-link",
-            "filepath": "atoms\\fabric\\12-fabric-link.hbs"
+            "filepath": "atoms\\fabric\\12-fabric-link.hbs",
+            "framework": "padding.hbs"
         },
         {
             "title": "Forms - Figure Caption",
             "description": "",
             "filename": "01-figure-caption",
-            "filepath": "atoms\\forms\\01-figure-caption.hbs"
+            "filepath": "atoms\\forms\\01-figure-caption.hbs",
+            "framework": "padding.hbs"
         },
         {
             "title": "Forms - HTML5 Inputs",
             "description": "",
             "filename": "01-html5-inputs",
-            "filepath": "atoms\\forms\\01-html5-inputs.hbs"
+            "filepath": "atoms\\forms\\01-html5-inputs.hbs",
+            "framework": "padding.hbs"
         },
         {
             "title": "Forms - Select",
             "description": "",
             "filename": "01-input-select",
-            "filepath": "atoms\\forms\\01-input-select.hbs"
+            "filepath": "atoms\\forms\\01-input-select.hbs",
+            "framework": "padding.hbs"
         },
         {
             "title": "Forms - Text Inputs",
             "description": "",
             "filename": "01-input-text",
-            "filepath": "atoms\\forms\\01-input-text.hbs"
+            "filepath": "atoms\\forms\\01-input-text.hbs",
+            "framework": "padding.hbs"
         },
         {
             "title": "01-input-textarea",
             "description": "",
             "filename": "01-input-textarea",
-            "filepath": "atoms\\forms\\01-input-textarea.hbs"
+            "filepath": "atoms\\forms\\01-input-textarea.hbs",
+            "framework": "padding.hbs"
         },
         {
             "title": "02-ms-command-link",
@@ -302,8 +312,7 @@
             "filepath": "molecules\\fabric\\14-fabric-messagebanner.hbs"
         }
     ],
-    "folder": [
-        {
+    "folder": [{
             "name": "atoms",
             "description": "Contains all atom elements"
         },
